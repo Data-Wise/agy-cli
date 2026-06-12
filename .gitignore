@@ -1,0 +1,22 @@
+# OS files
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Node
+node_modules/
+dist/
+npm-debug.log*
+
+# Local Config
+.env
+.claude/guard-session-counts
+.claude/settings.local.json

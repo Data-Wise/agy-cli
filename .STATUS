@@ -1,0 +1,26 @@
+## Project: agy-cli
+## Type: mixed
+## Status: active
+## Phase: v0.1.0 PLANNING
+## Priority: 1
+## Progress: 10
+
+## Focus: Initialize repository, design system, and draft migration spec
+## Next: Implement core Python/Node CLI structure and ZSH/flow-cli integration
+
+## Quick Context
+agy-cli is the core engine for Antigravity, providing domain-specific Plugins,
+context-activated Skills, interactive Artifacts, and parallel validation Agents.
+Optimized for ADHD statistics researchers with a clean, low-clutter terminal presentation.
+
+## Features
+- **Context-Aware Skills**: Dynamic workflow loading for causal inference (Positivity, Exchangeability, SUTVA).
+- **Parallel Agent Orchestration**: Background execution in dedicated worktrees.
+- **Artifact-Driven UI**: Live-updating markdown output panels to reduce terminal scrollback.
+- **Atlas/Flow-CLI Sync**: Bidirectional session tracking and local caching.
+
+## Test Stats
+- Total: 0 passing
+
+## Links
+- **Spec**: file:///Users/dt/.gemini/antigravity-cli/brain/2fbd0449-e27c-4028-906a-8495b76c17e1/agy_cli_optimization_spec.md
