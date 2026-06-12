@@ -3,10 +3,10 @@
 ## Status: active
 ## Phase: v0.1.0 DEVELOPMENT
 ## Priority: 1
-## Progress: 50
+## Progress: 60
 
-## Focus: Core Causal Inference Engine (Positivity, Exchangeability, SUTVA) & R Bridge CLI
-## Next: Implement agy-obs (Obsidian knowledge bridge) and Atlas state synchronisation
+## Focus: Core Causal Inference Engine integrated. Moving to Plugins (Obsidian & Atlas)
+## Next: Create specification for agy-obs and Atlas integration
 
 ## Quick Context
 agy-cli is the core engine for Antigravity, providing domain-specific Plugins,
@@ -26,4 +26,3 @@ Optimized for ADHD statistics researchers with a clean, low-clutter terminal pre
 - **Spec**: file:///Users/dt/projects/dev-tools/agy-cli/docs/specs/SPEC-agy-cli-optimization.md
 - **Roadmap**: file:///Users/dt/projects/dev-tools/agy-cli/docs/specs/SPEC-agy-cli-roadmap.md
 - **Worktree Rules**: file:///Users/dt/projects/dev-tools/agy-cli/docs/specs/SPEC-worktree-rules.md
-- **Active Worktree**: file:///Users/dt/.git-worktrees/agy-cli-causal-engine
