@@ -13,15 +13,19 @@
 ```text
 main (protected) ← PR only, never direct commits
   ↑
+dev (integration) ← Plan here, branch from here
+  ↑
 feature/* (worktrees) ← All implementation work
 ```
 
 ### Constraints
 
-- **CRITICAL**: Never commit directly to `main`
-- **Always** branch from `main` to `feature/*`
+- **CRITICAL**: Always start work from `dev` branch (`git checkout dev`)
+- **Never** commit directly to `main`
+- **Never** write feature code on `dev` (specs and planning only)
 - **Always** verify branch: `git branch --show-current`
-- Use git worktrees for development: `git worktree add ~/.git-worktrees/agy-cli/<feature> -b feature/<feature> main`
+- Use git worktrees for development off `dev`: `git worktree add ~/.git-worktrees/agy-cli/<feature> -b feature/<feature> dev`
+
 
 ## Execution and Development
 
