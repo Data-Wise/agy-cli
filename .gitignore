@@ -20,3 +20,19 @@ npm-debug.log*
 .env
 .claude/guard-session-counts
 .claude/settings.local.json
+
+# Packaging
+*.egg-info/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+

@@ -1,16 +1,16 @@
 ## Project: agy-cli
 ## Type: mixed
 ## Status: active
-## Phase: v0.1.0 PLANNING
+## Phase: v0.1.0 DEVELOPMENT
 ## Priority: 1
-## Progress: 10
+## Progress: 50
 
-## Focus: Initialize repository, design system, and draft migration spec
-## Next: Implement core Python/Node CLI structure and ZSH/flow-cli integration
+## Focus: Core Causal Inference Engine (Positivity, Exchangeability, SUTVA) & R Bridge CLI
+## Next: Implement agy-obs (Obsidian knowledge bridge) and Atlas state synchronisation
 
 ## Quick Context
 agy-cli is the core engine for Antigravity, providing domain-specific Plugins,
-context-activated Skills, interactive Artifacts, and parallel validation Agents.
+interactive Skills, interactive Artifacts, and parallel validation Agents.
 Optimized for ADHD statistics researchers with a clean, low-clutter terminal presentation.
 
 ## Features
@@ -20,7 +20,7 @@ Optimized for ADHD statistics researchers with a clean, low-clutter terminal pre
 - **Atlas/Flow-CLI Sync**: Bidirectional session tracking and local caching.
 
 ## Test Stats
-- Total: 0 passing
+- Total: 18 passing (pytest suite)
 
 ## Links
 - **Spec**: file:///Users/dt/projects/dev-tools/agy-cli/docs/specs/SPEC-agy-cli-optimization.md
