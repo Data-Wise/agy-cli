@@ -38,11 +38,14 @@ graph TD
 ### 1. Plugins: System Integration
 Plugins extend the core capabilities of `agy` by adding system-level tools.
 
+> [!IMPORTANT]
+> **In-Process Architecture (rforge Model):** Following `rforge` v1.3.0+, `agy` deprecates external JSON-RPC MCP servers for local tasks to avoid network latency. Plugins are fully self-contained modules loaded directly into the `agy` Python process, keeping startup times under $T < 10\text{ms}$.
+
 *   **`agy-obs` (Obsidian Knowledge Bridge):**
-    *   Integrates with the SQLite database of [obsidian-cli-ops](file:///Users/dt/projects/dev-tools/obsidian-cli-ops).
+    *   Integrates directly with the SQLite database of [obsidian-cli-ops](file:///Users/dt/projects/dev-tools/obsidian-cli-ops).
     *   Allows `agy` to run semantic note lookups, identify duplicate research notes, and find gaps in statistical literature.
 *   **`agy-rforge` (R Package Harness):**
-    *   Exposes tools to run `devtools::check()`, `devtools::test()`, and check package dependency trees.
+    *   Exposes in-process commands to execute `devtools::check()`, `devtools::test()`, and resolve package dependencies.
     *   Automates Roxygen2 documentation validation.
 *   **`agy-atlas-hub` (State Hub Interface):**
     *   Bridges `agy` sessions with the [atlas](file:///Users/dt/projects/dev-tools/atlas) state database to track current goals, active sessions, and recent breadcrumbs.
