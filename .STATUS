@@ -1,12 +1,12 @@
 ## Project: agy-cli
 ## Type: mixed
-## Status: active
+## Status: completed
 ## Phase: v0.1.0 DEVELOPMENT
 ## Priority: 1
-## Progress: 60
+## Progress: 100
 
-## Focus: Core Causal Inference Engine integrated. Moving to Plugins (Obsidian & Atlas)
-## Next: Create specification for agy-obs and Atlas integration
+## Focus: Completed Plugins (Obsidian & Atlas Hub integrations)
+## Next: Ship and integrate further skills
 
 ## Quick Context
 agy-cli is the core engine for Antigravity, providing domain-specific Plugins,
@@ -20,7 +20,7 @@ Optimized for ADHD statistics researchers with a clean, low-clutter terminal pre
 - **Atlas/Flow-CLI Sync**: Bidirectional session tracking and local caching.
 
 ## Test Stats
-- Total: 18 passing (pytest suite)
+- Total: 29 passing (pytest suite)
 
 ## Links
 - **Spec**: file:///Users/dt/projects/dev-tools/agy-cli/docs/specs/SPEC-agy-cli-optimization.md

@@ -184,5 +184,160 @@ def dag(description, output, treatment, outcome):
         sys.exit(1)
 
 
+@main.group(name="obs")
+@click.option("--db-path", type=click.Path(exists=True), help="Path to Obsidian SQLite database.")
+@click.pass_context
+def obs_group(ctx, db_path):
+    """Obsidian knowledge bridge commands."""
+    ctx.ensure_object(dict)
+    from agy.plugins.obsidian import ObsidianBridge
+    ctx.obj["bridge"] = ObsidianBridge(db_path=db_path)
+
+
+@obs_group.command(name="orphans")
+@click.pass_context
+def obs_orphans(ctx):
+    """List orphan notes (in-degree and out-degree are 0)."""
+    bridge = ctx.obj["bridge"]
+    orphans = bridge.get_orphan_notes()
+    if not orphans:
+        console.print("[green]No orphan notes found.[/green]")
+        return
+    
+    table = Table(title="Orphan Notes")
+    table.add_column("Title", style="cyan")
+    table.add_column("Path", style="magenta")
+    table.add_column("Modified At", style="green")
+    for note in orphans:
+        table.add_row(note.get("title") or "Untitled", note.get("path") or "", note.get("modified_at") or "Unknown")
+    console.print(table)
+
+
+@obs_group.command(name="hubs")
+@click.option("--limit", "-l", type=int, default=10, help="Maximum number of hub notes to display.")
+@click.option("--sort", "-s", type=click.Choice(["pagerank", "out_degree", "in_degree", "total_degree"]), default="pagerank", help="Field to sort by.")
+@click.pass_context
+def obs_hubs(ctx, limit, sort):
+    """List hub notes (high centrality/connections)."""
+    bridge = ctx.obj["bridge"]
+    hubs = bridge.get_hub_notes(order_by=sort, limit=limit)
+    if not hubs:
+        console.print("[yellow]No hub notes found.[/yellow]")
+        return
+    
+    table = Table(title=f"Hub Notes (Sorted by {sort})")
+    table.add_column("Title", style="cyan")
+    table.add_column("Path", style="magenta")
+    table.add_column("PageRank", style="green")
+    table.add_column("In-Degree", style="blue")
+    table.add_column("Out-Degree", style="blue")
+    table.add_column("Total Degree", style="yellow")
+    for note in hubs:
+        table.add_row(
+            note.get("title") or "Untitled",
+            note.get("path") or "",
+            f"{note.get('pagerank', 0.0):.4f}",
+            str(note.get("in_degree", 0)),
+            str(note.get("out_degree", 0)),
+            str(note.get("total_degree", 0))
+        )
+    console.print(table)
+
+
+@obs_group.command(name="health")
+@click.pass_context
+def obs_health(ctx):
+    """Check vault graph health (e.g. broken links)."""
+    bridge = ctx.obj["bridge"]
+    broken = bridge.get_broken_links()
+    if not broken:
+        console.print("[bold green]✔ Vault health check passed. No broken links found.[/bold green]")
+        return
+    
+    table = Table(title="Broken Links Detected", show_header=True, header_style="bold red")
+    table.add_column("Source Note", style="cyan")
+    table.add_column("Source Path", style="magenta")
+    table.add_column("Target Path", style="yellow")
+    table.add_column("Count", style="red")
+    for link in broken:
+        table.add_row(
+            link.get("source_title") or "Untitled",
+            link.get("source_path") or "",
+            link.get("target_path") or "",
+            str(link.get("broken_count", 1))
+        )
+    console.print(table)
+
+
+@main.group(name="atlas")
+@click.option("--sessions-path", type=click.Path(exists=True), help="Path to Atlas sessions YAML.")
+@click.option("--registry-path", type=click.Path(exists=True), help="Path to Atlas registry YAML.")
+@click.pass_context
+def atlas_group(ctx, sessions_path, registry_path):
+    """Atlas state synchronizer commands."""
+    ctx.ensure_object(dict)
+    from agy.plugins.atlas import AtlasBridge
+    ctx.obj["bridge"] = AtlasBridge(sessions_path=sessions_path, registry_path=registry_path)
+
+
+@atlas_group.command(name="status")
+@click.pass_context
+def atlas_status(ctx):
+    """Show active session status."""
+    bridge = ctx.obj["bridge"]
+    session = bridge.get_active_session()
+    captures = bridge.get_captured_inbox_items()
+    
+    if not session:
+        panel_content = "[yellow]No active session.[/yellow]\n"
+        if captures:
+            panel_content += f"\n[bold]Captured Inbox Items:[/bold] {len(captures)}"
+        console.print(Panel(panel_content, title="Atlas Status"))
+        return
+    
+    duration_secs = session.get("duration", 0)
+    hours, remainder = divmod(int(duration_secs), 3600)
+    minutes, seconds = divmod(remainder, 60)
+    duration_str = f"{hours:02d}:{minutes:02d}:{seconds:02d}"
+    
+    panel_content = (
+        f"[bold]Project:[/bold] {session.get('project')}\n"
+        f"[bold]Task:[/bold] {session.get('task')}\n"
+        f"[bold]Duration:[/bold] {duration_str}\n"
+        f"[bold]Description:[/bold] {session.get('description')}"
+    )
+    if captures:
+        panel_content += f"\n\n[bold]Captured Inbox Items:[/bold] {len(captures)}"
+        
+    console.print(Panel(panel_content, title="Active Atlas Session", border_style="green"))
+
+
+@atlas_group.command(name="trail")
+@click.option("--limit", "-l", type=int, default=10, help="Maximum number of breadcrumbs to display.")
+@click.pass_context
+def atlas_trail(ctx, limit):
+    """Display active or recent breadcrumbs."""
+    bridge = ctx.obj["bridge"]
+    crumbs = bridge.get_breadcrumbs(limit=limit)
+    if not crumbs:
+        console.print("[yellow]No breadcrumbs found.[/yellow]")
+        return
+    
+    table = Table(title="Recent Breadcrumbs (Trail)")
+    table.add_column("Timestamp", style="cyan")
+    table.add_column("Type", style="magenta")
+    table.add_column("Project", style="green")
+    table.add_column("Description", style="white")
+    
+    for crumb in crumbs:
+        table.add_row(
+            crumb.get("timestamp") or "Unknown",
+            crumb.get("type") or "note",
+            crumb.get("project") or "N/A",
+            crumb.get("text") or ""
+        )
+    console.print(table)
+
+
 if __name__ == "__main__":
     main()
