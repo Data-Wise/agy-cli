@@ -43,27 +43,27 @@ gantt
 ### Phase 2: Core Execution (The Causal Inference Engine)
 *   **Goal:** Implement the math validation routines and DAG compilers.
 *   **Tasks:**
-    *   [ ] **R Process Bridge:** Create an in-process subprocess wrapper to spawn R sessions and load `tidyverse`, `ggdag`, and `dagitty`.
-    *   [ ] **Assumption Verifier (`agy eval`):** Write algorithms to verify:
+    *   [x] **R Process Bridge:** Create an in-process subprocess wrapper to spawn R sessions and load `tidyverse`, `ggdag`, and `dagitty`.
+    *   [x] **Assumption Verifier (`agy eval`):** Write algorithms to verify:
         *   **Positivity:** Parse dataset columns to verify non-zero probabilities: $0 < P(W=1|X) < 1$.
         *   **Exchangeability:** Check that the backdoor path is blocked: $Y(w) \perp\!\!\perp W \mid X$.
-    *   [ ] **DAG Compiler (`agy dag`):** Convert string descriptions (e.g., `W -> Y, X -> W, X -> Y`) into `dagitty` formatting and render ASCII visualization in terminal.
+    *   [x] **DAG Compiler (`agy dag`):** Convert string descriptions (e.g., `W -> Y, X -> W, X -> Y`) into `dagitty` formatting and render ASCII visualization in terminal.
 
 ### Phase 3: Plugin Integrations (In-Process Spreads)
 *   **Goal:** Integrate workspace tracking and knowledge graphs.
 *   **Tasks:**
-    *   [ ] **`agy-obs`:** Add SQLite queries targeting [obsidian-cli-ops](file:///Users/dt/projects/dev-tools/obsidian-cli-ops) schema to find unlinked notes or high-centrality research nodes.
-    *   [ ] **`agy-atlas-hub`:** Implement a YAML reader for `~/.atlas/` to synchronise active work sessions with ZSH environments.
+    *   [x] **`agy-obs`:** Add SQLite queries targeting [obsidian-cli-ops](file:///Users/dt/projects/dev-tools/obsidian-cli-ops) schema to find unlinked notes or high-centrality research nodes.
+    *   [x] **`agy-atlas-hub`:** Implement a YAML reader for `~/.atlas/` to synchronise active work sessions with ZSH environments.
 
 ### Phase 4: Testing Harness (Safety Gates)
 *   **Goal:** Enforce test coverage ($>80\%$) and ensure regression safety.
 *   **Tasks:**
-    *   [ ] **Unit Tests:** Implement unit tests under `tests/` covering parsing logic, DAG translation, and SQLite schema mappings.
-    *   [ ] **Sandbox Vaults:** Generate virtual test directories containing dummy Markdown files and datasets to run end-to-end (E2E) integration checks.
+    *   [x] **Unit Tests:** Implement unit tests under `tests/` covering parsing logic, DAG translation, and SQLite schema mappings.
+    *   [x] **Sandbox Vaults:** Generate virtual test directories containing dummy Markdown files and datasets to run end-to-end (E2E) integration checks.
 
 ### Phase 5: Documentation & Distribution (Publishing)
 *   **Goal:** Deploy clear guides and set up installation.
 *   **Tasks:**
-    *   [ ] **MkDocs:** Configure `mkdocs.yml` using the Material theme, detailing the causal workflow guides.
-    *   [ ] **Man Page:** Create a Unix man page `agy.1` to document all CLI commands.
+    *   [x] **MkDocs:** Configure `mkdocs.yml` using the Material theme, detailing the causal workflow guides.
+    *   [x] **Man Page:** Create a Unix man page `agy.1` to document all CLI commands.
     *   [ ] **Homebrew Tap:** Write a Ruby formula and integrate with GitHub release actions to distribute `agy-cli` via Homebrew.

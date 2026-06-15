@@ -18,8 +18,50 @@ from agy.core.dag_compiler import (
     parse_dag_string,
     compile_to_r,
 )
+from agy.core.sandbox import SandboxVault
+from agy.agents.orchestrator import ValidationOrchestrator
+from agy.agents.synthesizer import ReportSynthesizer
+from agy.core.worktree import WorktreeManager
+from pathlib import Path
+
+import logging
+from logging.handlers import RotatingFileHandler
+
+def setup_error_logging():
+    log_file_env = os.environ.get("AGY_LOG_FILE")
+    if log_file_env:
+        log_file = os.path.abspath(log_file_env)
+        os.makedirs(os.path.dirname(log_file), exist_ok=True)
+    else:
+        log_dir = os.path.expanduser("~/.config/obs")
+        os.makedirs(log_dir, exist_ok=True)
+        log_file = os.path.join(log_dir, "obs.log")
+    
+    logger = logging.getLogger("agy")
+    logger.setLevel(logging.ERROR)
+    
+    handler = RotatingFileHandler(log_file, maxBytes=5 * 1024 * 1024, backupCount=3)
+    formatter = logging.Formatter("%(asctime)s [%(levelname)s] %(message)s")
+    handler.setFormatter(formatter)
+    
+    # Clear existing handlers to allow clean re-configuration in tests or re-runs
+    for h in list(logger.handlers):
+        logger.removeHandler(h)
+    logger.addHandler(handler)
+        
+    def handle_unhandled_exception(exc_type, exc_value, exc_traceback):
+        if issubclass(exc_type, KeyboardInterrupt):
+            sys.__excepthook__(exc_type, exc_value, exc_traceback)
+            return
+        logger.error("Unhandled exception occurred", exc_info=(exc_type, exc_value, exc_traceback))
+        sys.__excepthook__(exc_type, exc_value, exc_traceback)
+
+    sys.excepthook = handle_unhandled_exception
+
+setup_error_logging()
 
 console = Console()
+
 
 
 @click.group()
@@ -52,7 +94,13 @@ def status(verbose):
 @click.option(
     "--interactive/--non-interactive", default=True, help="Run interactive SUTVA prompts."
 )
-def eval(study_design_file, treatment, outcome, covariates, data, dag_str, interactive):
+@click.option(
+    "--method",
+    type=click.Choice(["none", "matching", "weighting"]),
+    default="none",
+    help="Propensity score adjustment method for diagnostics.",
+)
+def eval(study_design_file, treatment, outcome, covariates, data, dag_str, interactive, method):
     """Evaluate observational study assumptions (Positivity, Exchangeability, SUTVA)."""
 
     # 1. Load study design file if provided
@@ -70,6 +118,9 @@ def eval(study_design_file, treatment, outcome, covariates, data, dag_str, inter
 
     # 2. Extract settings, prioritizing CLI options over file values
     data_path = data or design.get("data")
+    if data_path and not os.path.isabs(data_path) and study_design_file:
+        design_dir = os.path.dirname(os.path.abspath(study_design_file))
+        data_path = os.path.join(design_dir, data_path)
     treatment_var = treatment or design.get("treatment")
     outcome_var = outcome or design.get("outcome")
 
@@ -83,6 +134,7 @@ def eval(study_design_file, treatment, outcome, covariates, data, dag_str, inter
             covs_list = [c.strip() for c in str(covs_raw).split(",") if c.strip()]
 
     dag_desc = dag_str or design.get("dag")
+    method_val = method if method != "none" else (design.get("method") or "none")
 
     console.print(
         Panel.fit(
@@ -90,71 +142,160 @@ def eval(study_design_file, treatment, outcome, covariates, data, dag_str, inter
         )
     )
 
-    # 3. Check Positivity
-    if data_path and treatment_var:
-        console.print("\n[bold]Checking Positivity Assumption...[/bold]")
-        try:
-            violations_df = check_positivity(data_path, treatment_var, covs_list)
-            if violations_df.empty:
-                console.print(
-                    "[bold green]✔ Positivity check passed.[/bold green] All covariate strata have treatment variation."
-                )
-            else:
-                console.print(
-                    "[bold red]✗ Positivity assumption VIOLATED.[/bold red] Found strata with no treatment variation:"
-                )
-                table = Table(show_header=True, header_style="bold red")
-                for col in violations_df.columns:
-                    table.add_column(col)
-                for _, row in violations_df.iterrows():
-                    table.add_row(*[str(val) for val in row])
-                console.print(table)
-        except Exception as e:
-            console.print(f"[bold red]Positivity check failed with error:[/bold red] {e}")
-    else:
-        console.print(
-            "\n[yellow]⚠ Skipping Positivity check (requires --data/data and --treatment/treatment).[/yellow]"
-        )
-
-    # 4. Check Backdoor Exchangeability
-    if dag_desc and treatment_var and outcome_var:
-        console.print("\n[bold]Checking Backdoor Exchangeability...[/bold]")
+    # 3. Parse DAG if provided
+    graph = None
+    if dag_desc:
         try:
             nodes, edges = parse_dag_string(dag_desc)
             graph = nx.DiGraph()
             graph.add_nodes_from(nodes)
             graph.add_edges_from(edges)
-
-            result = check_exchangeability(graph, treatment_var, outcome_var, covs_list)
-            if result["satisfied"]:
-                console.print(
-                    f"[bold green]✔ Exchangeability check passed.[/bold green] {result['reason']}"
-                )
-            else:
-                console.print(
-                    f"[bold red]✗ Exchangeability check FAILED.[/bold red] {result['reason']}"
-                )
         except Exception as e:
-            console.print(f"[bold red]Exchangeability check failed with error:[/bold red] {e}")
-    else:
-        console.print(
-            "\n[yellow]⚠ Skipping Exchangeability check (requires DAG description/dag, --treatment/treatment, and --outcome/outcome).[/yellow]"
-        )
+            console.print(f"[bold red]Failed to parse DAG description:[/bold red] {e}")
 
-    # 5. Check SUTVA
-    console.print("\n[bold]Checking SUTVA Assumptions...[/bold]")
+    # 4. Instantiate and run orchestrator
     sutva_responses = design.get("sutva_responses")
     is_stdin_tty = sys.stdin.isatty()
     run_interactively = interactive and is_stdin_tty and not sutva_responses
 
-    try:
-        sutva_res = check_sutva(interactive=run_interactively, responses=sutva_responses)
-        if sutva_res["satisfied"]:
-            console.print(f"[bold green]✔ SUTVA check passed.[/bold green] {sutva_res['summary']}")
+    orchestrator = ValidationOrchestrator(
+        data_path=data_path,
+        treatment=treatment_var,
+        outcome=outcome_var,
+        covariates=covs_list,
+        graph=graph,
+        dag_desc=dag_desc,
+        interactive=run_interactively,
+        sutva_responses=sutva_responses,
+        method=method_val,
+    )
+
+    results = orchestrator.run_all()
+
+    # 5. Output results to stdout (preserving exact strings for test assertions)
+    # Positivity
+    pos = results.get("positivity", {})
+    if pos.get("skipped"):
+        console.print(f"\n[yellow]⚠ Skipping Positivity check ({pos.get('reason')}).[/yellow]")
+    elif pos.get("error"):
+        console.print(f"\n[bold red]Positivity check failed with error:[/bold red] {pos.get('error')}")
+    else:
+        console.print("\n[bold]Checking Positivity Assumption...[/bold]")
+        if pos.get("satisfied"):
+            console.print(
+                "[bold green]✔ Positivity check passed.[/bold green] All covariate strata have treatment variation."
+            )
         else:
-            console.print(f"[bold red]✗ SUTVA check FAILED.[/bold red] {sutva_res['summary']}")
+            console.print(
+                "[bold red]✗ Positivity assumption VIOLATED.[/bold red] Found strata with no treatment variation:"
+            )
+            # Create Rich table for violations
+            violations = pos.get("violations", [])
+            if violations:
+                table = Table(show_header=True, header_style="bold red")
+                for col in violations[0].keys():
+                    table.add_column(col)
+                for row in violations:
+                    table.add_row(*[str(val) for val in row.values()])
+                console.print(table)
+
+    # Exchangeability
+    exc = results.get("exchangeability", {})
+    if exc.get("skipped"):
+        console.print(f"\n[yellow]⚠ Skipping Exchangeability check ({exc.get('reason')}).[/yellow]")
+    elif exc.get("error"):
+        console.print(f"\n[bold red]Exchangeability check failed with error:[/bold red] {exc.get('error')}")
+    else:
+        console.print("\n[bold]Checking Backdoor Exchangeability...[/bold]")
+        if exc.get("satisfied"):
+            console.print(
+                f"[bold green]✔ Exchangeability check passed.[/bold green] {exc.get('reason')}"
+            )
+        else:
+            console.print(
+                f"[bold red]✗ Exchangeability check FAILED.[/bold red] {exc.get('reason')}"
+            )
+
+    # SUTVA
+    sut = results.get("sutva", {}).get("result", {})
+    if results.get("sutva", {}).get("skipped"):
+        console.print("\n[yellow]⚠ Skipping SUTVA check.[/yellow]")
+    else:
+        console.print("\n[bold]Checking SUTVA Assumptions...[/bold]")
+        if sut.get("satisfied"):
+            console.print(f"[bold green]✔ SUTVA check passed.[/bold green] {sut.get('summary')}")
+        else:
+            console.print(f"[bold red]✗ SUTVA check FAILED.[/bold red] {sut.get('summary')}")
+
+    # Covariate Balance
+    bal = results.get("balance", {})
+    if bal.get("skipped"):
+        console.print(f"\n[yellow]⚠ Skipping Covariate Balance check ({bal.get('reason')}).[/yellow]")
+    elif bal.get("error"):
+        console.print(f"\n[bold red]Covariate Balance check failed with error:[/bold red] {bal.get('error')}")
+    else:
+        console.print("\n[bold]Checking Covariate Balance (Standardized Mean Difference)...[/bold]")
+        if bal.get("satisfied"):
+            console.print(
+                "[bold green]✔ Covariate Balance check passed.[/bold green] All covariates are balanced (SMD <= 0.1)."
+            )
+        else:
+            console.print(
+                "[bold red]✗ Covariate Balance check VIOLATED.[/bold red] Found imbalanced covariates (SMD > 0.1):"
+            )
+        
+        balance_rows = bal.get("balance", [])
+        if balance_rows:
+            adj_method = bal.get("method", "none")
+            if adj_method in ("matching", "weighting"):
+                table = Table(show_header=True, header_style="bold magenta")
+                table.add_column("Covariate")
+                table.add_column("SMD (Pre)")
+                table.add_column("SMD (Post)")
+                table.add_column(f"Status ({adj_method.capitalize()})")
+                
+                for row in balance_rows:
+                    status_str = "[green]Balanced[/green]" if row.get("satisfied_post") else "[red]Imbalanced[/red]"
+                    table.add_row(
+                        row.get("covariate"),
+                        f"{row.get('smd_pre', 0.0):.4f}",
+                        f"{row.get('smd_post', 0.0):.4f}",
+                        status_str
+                    )
+                console.print(table)
+            else:
+                table = Table(show_header=True, header_style="bold magenta")
+                table.add_column("Covariate")
+                table.add_column("Mean (Treated)")
+                table.add_column("Mean (Control)")
+                table.add_column("SMD")
+                table.add_column("Status")
+                
+                for row in balance_rows:
+                    status_str = "[green]Balanced[/green]" if row.get("satisfied_post") else "[red]Imbalanced[/red]"
+                    table.add_row(
+                        row.get("covariate"),
+                        f"{row.get('mean_treated_pre', 0.0):.4f}",
+                        f"{row.get('mean_control_pre', 0.0):.4f}",
+                        f"{row.get('smd_pre', 0.0):.4f}",
+                        status_str
+                    )
+                console.print(table)
+
+    # 6. Save Markdown Report
+    try:
+        synthesizer = ReportSynthesizer(Path.cwd())
+        meta = {
+            "treatment": treatment_var,
+            "outcome": outcome_var,
+            "covariates": covs_list,
+            "data": data_path,
+            "dag": dag_desc,
+        }
+        report_path = synthesizer.synthesize(results, meta)
+        console.print(f"\n[dim]Synthesized Markdown Report saved to: {report_path}[/dim]")
     except Exception as e:
-        console.print(f"[bold red]SUTVA check failed with error:[/bold red] {e}")
+        console.print(f"\n[yellow]⚠ Failed to synthesize markdown report: {e}[/yellow]")
 
 
 @main.command()
@@ -337,6 +478,204 @@ def atlas_trail(ctx, limit):
             crumb.get("text") or ""
         )
     console.print(table)
+
+
+@atlas_group.command(name="start-session")
+@click.option("--project", "-p", required=True, help="Project name.")
+@click.option("--task", "-t", required=True, help="Task description.")
+@click.option("--desc", "-d", default="Active work session", help="Detailed session description.")
+@click.pass_context
+def atlas_start_session(ctx, project, task, desc):
+    """Start a new active Atlas session."""
+    bridge = ctx.obj["bridge"]
+    try:
+        res = bridge.create_session(project, task, desc)
+        console.print(f"[bold green]✔ Started active session '{res['id']}' for project '{res['project']}'.[/bold green]")
+    except Exception as e:
+        console.print(f"[bold red]Failed to start session:[/bold red] {e}")
+        sys.exit(1)
+
+
+@atlas_group.command(name="log-crumb")
+@click.argument("text")
+@click.option("--type", "-t", "type_str", default="command", help="Type of breadcrumb (e.g. command, note).")
+@click.option("--project", "-p", help="Associated project name.")
+@click.pass_context
+def atlas_log_crumb(ctx, text, type_str, project):
+    """Log a breadcrumb trail item to the registry."""
+    bridge = ctx.obj["bridge"]
+    try:
+        res = bridge.add_breadcrumb(text, type_str, project)
+        console.print(f"[bold green]✔ Logged breadcrumb '{res['id']}': {res['text']}[/bold green]")
+    except Exception as e:
+        console.print(f"[bold red]Failed to log breadcrumb:[/bold red] {e}")
+        sys.exit(1)
+
+
+@main.group(name="sandbox")
+def sandbox_group():
+    """Sandbox vault management commands."""
+    pass
+
+
+@sandbox_group.command(name="generate")
+@click.argument("path", type=click.Path())
+@click.option("--violations", is_flag=True, help="Inject positivity, exchangeability, and SUTVA violations.")
+def sandbox_generate(path, violations):
+    """Generate a temporary sandbox vault at the specified path for testing."""
+    from pathlib import Path
+    
+    try:
+        vault_path = Path(path)
+        sandbox = SandboxVault(vault_path)
+        results = sandbox.build(violations=violations)
+        
+        # Present clean ADHD-friendly Rich output
+        panel_content = (
+            f"[bold green]✔ Sandbox Vault successfully generated![/bold green]\n\n"
+            f"[bold]Location:[/bold] {results['path']}\n"
+            f"[bold]Obsidian DB:[/bold] {results['db_path']}\n"
+            f"[bold]Causal Data:[/bold] {results['data_path']}\n"
+            f"[bold]Study Design:[/bold] {results['design_path']}\n"
+            f"[bold]Atlas Sessions:[/bold] {results['sessions_path']}\n"
+            f"[bold]Atlas Registry:[/bold] {results['registry_path']}\n\n"
+            f"[dim]Violations injected: {violations}[/dim]"
+        )
+        console.print(Panel(panel_content, title="Sandbox Generator", border_style="green"))
+    except Exception as e:
+        console.print(f"[bold red]Failed to generate sandbox vault:[/bold red] {e}")
+        sys.exit(1)
+
+
+@main.group(name="worktree")
+def worktree_group():
+    """Git worktree isolation workflow helper commands."""
+    pass
+
+
+@worktree_group.command(name="add")
+@click.argument("name")
+def worktree_add(name):
+    """Add a persistent feature worktree off the dev branch."""
+    from pathlib import Path
+    from agy.core.worktree import WorktreeManager
+    
+    try:
+        manager = WorktreeManager(Path.cwd())
+        res = manager.add_worktree(name)
+        panel_content = (
+            f"[bold green]✔ Git worktree successfully added![/bold green]\n\n"
+            f"[bold]Name:[/bold] {res['name']}\n"
+            f"[bold]Branch:[/bold] {res['branch']}\n"
+            f"[bold]Path:[/bold] {res['path']}\n\n"
+            f"[dim]Run 'cd {res['path']} && agy' to begin feature development.[/dim]"
+        )
+        console.print(Panel(panel_content, title="Worktree Manager", border_style="green"))
+    except Exception as e:
+        console.print(f"[bold red]Error adding worktree:[/bold red] {e}")
+        sys.exit(1)
+
+
+@worktree_group.command(name="list")
+def worktree_list():
+    """List currently active/registered git worktrees."""
+    from pathlib import Path
+    from agy.core.worktree import WorktreeManager
+    
+    try:
+        manager = WorktreeManager(Path.cwd())
+        wts = manager.list_worktrees()
+        if not wts:
+            console.print("[yellow]No worktrees found.[/yellow]")
+            return
+        
+        table = Table(title="Active Git Worktrees")
+        table.add_column("Path", style="cyan")
+        table.add_column("Branch", style="magenta")
+        for wt in wts:
+            table.add_row(wt["path"], wt["branch"] or "N/A")
+        console.print(table)
+    except Exception as e:
+        console.print(f"[bold red]Error listing worktrees:[/bold red] {e}")
+        sys.exit(1)
+
+
+@worktree_group.command(name="remove")
+@click.argument("name")
+def worktree_remove(name):
+    """Remove a worktree and clean up the tracking branch."""
+    from pathlib import Path
+    from agy.core.worktree import WorktreeManager
+    
+    try:
+        manager = WorktreeManager(Path.cwd())
+        res = manager.remove_worktree(name)
+        console.print(f"[bold green]✔ Removed worktree feature-{res['name']} and branch {res['branch']}.[/bold green]")
+    except Exception as e:
+        console.print(f"[bold red]Error removing worktree:[/bold red] {e}")
+        sys.exit(1)
+
+
+@main.group(name="rforge")
+@click.option("--pkg-dir", type=click.Path(exists=True), help="Path to R package directory.")
+@click.pass_context
+def rforge_group(ctx, pkg_dir):
+    """R Package Validation Harness commands."""
+    ctx.ensure_object(dict)
+    from agy.plugins.rforge import RForgeBridge
+    ctx.obj["bridge"] = RForgeBridge(pkg_dir=pkg_dir)
+
+
+@rforge_group.command(name="check")
+@click.pass_context
+def rforge_check(ctx):
+    """Run devtools::check() on the local package."""
+    bridge = ctx.obj["bridge"]
+    console.print("[bold]Running package check...[/bold]")
+    res = bridge.check_package()
+    if res["success"]:
+        console.print("[bold green]✔ Package check passed successfully.[/bold green]")
+    else:
+        console.print("[bold red]✗ Package check failed.[/bold red]")
+        if res.get("stderr"):
+            console.print(f"Error:\n{res['stderr']}")
+        else:
+            console.print(f"Stdout:\n{res['stdout']}")
+        sys.exit(res.get("returncode", 1))
+
+
+@rforge_group.command(name="test")
+@click.pass_context
+def rforge_test(ctx):
+    """Run devtools::test() on the local package."""
+    bridge = ctx.obj["bridge"]
+    console.print("[bold]Running package unit tests...[/bold]")
+    res = bridge.test_package()
+    if res["success"]:
+        console.print("[bold green]✔ Package unit tests passed.[/bold green]")
+        console.print(res["stdout"])
+    else:
+        console.print("[bold red]✗ Package unit tests failed.[/bold red]")
+        console.print(res["stdout"])
+        if res.get("stderr"):
+            console.print(res["stderr"])
+        sys.exit(res.get("returncode", 1))
+
+
+@rforge_group.command(name="document")
+@click.pass_context
+def rforge_document(ctx):
+    """Run devtools::document() on the local package."""
+    bridge = ctx.obj["bridge"]
+    console.print("[bold]Compiling Roxygen2 documentation...[/bold]")
+    res = bridge.document_package()
+    if res["success"]:
+        console.print("[bold green]✔ Documentation compiled successfully.[/bold green]")
+    else:
+        console.print("[bold red]✗ Documentation compilation failed.[/bold red]")
+        if res.get("stderr"):
+            console.print(res["stderr"])
+        sys.exit(res.get("returncode", 1))
 
 
 if __name__ == "__main__":

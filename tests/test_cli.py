@@ -140,3 +140,59 @@ def test_cli_atlas_commands(tmp_path):
     result = runner.invoke(main, ["atlas", "--sessions-path", str(sessions_file), "--registry-path", str(registry_file), "trail"])
     assert result.exit_code == 0
     assert "First breadcrumb" in result.output
+
+    # Test start-session command
+    result = runner.invoke(main, [
+        "atlas", "--sessions-path", str(sessions_file), "--registry-path", str(registry_file),
+        "start-session", "--project", "test-proj", "--task", "Write code", "--desc", "Implementing CLI"
+    ])
+    assert result.exit_code == 0
+    assert "Started active session" in result.output
+    assert "test-proj" in result.output
+
+    # Test log-crumb command
+    result = runner.invoke(main, [
+        "atlas", "--sessions-path", str(sessions_file), "--registry-path", str(registry_file),
+        "log-crumb", "Adding a test", "--type", "test", "--project", "test-proj"
+    ])
+    assert result.exit_code == 0
+    assert "Logged breadcrumb" in result.output
+    assert "Adding a test" in result.output
+
+
+def test_cli_rforge_commands(tmp_path, mocker):
+    # Setup mock DESCRIPTION file to look like an R package
+    pkg_dir = tmp_path / "my_r_package"
+    pkg_dir.mkdir()
+    (pkg_dir / "DESCRIPTION").write_text("Package: myrpackage\n")
+
+    # Mock RForgeBridge methods
+    mock_check = mocker.patch("agy.plugins.rforge.RForgeBridge.check_package")
+    mock_check.return_value = {"success": True, "stdout": "Check passed", "stderr": ""}
+
+    mock_test = mocker.patch("agy.plugins.rforge.RForgeBridge.test_package")
+    mock_test.return_value = {"success": True, "stdout": "Tests passed", "stderr": ""}
+
+    mock_doc = mocker.patch("agy.plugins.rforge.RForgeBridge.document_package")
+    mock_doc.return_value = {"success": True, "stdout": "Docs compiled", "stderr": ""}
+
+    runner = CliRunner()
+
+    # Test check command
+    result = runner.invoke(main, ["rforge", "--pkg-dir", str(pkg_dir), "check"])
+    assert result.exit_code == 0
+    assert "Package check passed successfully" in result.output
+    mock_check.assert_called_once()
+
+    # Test test command
+    result = runner.invoke(main, ["rforge", "--pkg-dir", str(pkg_dir), "test"])
+    assert result.exit_code == 0
+    assert "Package unit tests passed" in result.output
+    mock_test.assert_called_once()
+
+    # Test document command
+    result = runner.invoke(main, ["rforge", "--pkg-dir", str(pkg_dir), "document"])
+    assert result.exit_code == 0
+    assert "Documentation compiled successfully" in result.output
+    mock_doc.assert_called_once()
+

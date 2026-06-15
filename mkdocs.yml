@@ -1,0 +1,39 @@
+site_name: agy-cli
+site_description: Core engine for Antigravity (Gemini CLI)
+site_author: Statistics Research Assistant
+
+theme:
+  name: material
+  palette:
+    scheme: slate
+    primary: indigo
+    accent: indigo
+  features:
+    - navigation.sections
+    - navigation.expand
+    - content.code.copy
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.arithmatex:
+      generic: true
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+nav:
+  - Home: index.md
+  - Guides:
+    - Command Reference: guides/commands.md
+    - Causal Inference Assumptions: guides/causal_inference.md
+    - Covariate Balance & SMD: guides/balance_tutorial.md
+    - R Package Validation: guides/rforge_tutorial.md
+    - Obsidian & Atlas Plugins: guides/plugins.md
+    - Testing & Sandbox Vaults: guides/sandbox.md

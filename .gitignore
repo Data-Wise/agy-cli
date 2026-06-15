@@ -36,3 +36,8 @@ var/
 wheels/
 share/python-wheels/
 
+# Caches and builds
+site/
+.agy/
+
+

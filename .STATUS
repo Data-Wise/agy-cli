@@ -1,12 +1,12 @@
 ## Project: agy-cli
 ## Type: mixed
 ## Status: active
-## Phase: v0.1.0 DEVELOPMENT
+## Phase: v0.3.0 DEVELOPMENT
 ## Priority: 1
-## Progress: 75
+## Progress: 100
 
-## Focus: Obsidian and Atlas plugin integrations complete. Moving to Testing Harness (Sandbox Vaults).
-## Next: Implement test-vault generator and E2E integration CLI tests
+## Focus: Completed propensity score matching and inverse probability weighting (IPW) diagnostics, added E2E tests, updated man page, commands guide, balance tutorial, and verified all tests.
+## Next: Propose release tagging, configuring .github/workflows for publishing releases, and deploying to the Homebrew tap.
 
 ## Quick Context
 agy-cli is the core engine for Antigravity, providing domain-specific Plugins,
@@ -20,7 +20,7 @@ Optimized for ADHD statistics researchers with a clean, low-clutter terminal pre
 - **Atlas/Flow-CLI Sync**: Bidirectional session tracking and local caching.
 
 ## Test Stats
-- Total: 29 passing (pytest suite)
+- Total: 54 passing (pytest suite)
 
 ## Links
 - **Spec**: file:///Users/dt/projects/dev-tools/agy-cli/docs/specs/SPEC-agy-cli-optimization.md

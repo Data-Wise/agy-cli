@@ -6,6 +6,8 @@ from agy.core.evaluator import (
     check_positivity,
     check_exchangeability,
     check_sutva,
+    check_covariate_balance,
+    check_propensity_diagnostics,
 )
 
 
@@ -99,3 +101,101 @@ def test_check_sutva_violated():
     result = check_sutva(interactive=False, responses=responses)
     assert result["satisfied"] is False
     assert "interference" in result["violations"]
+
+
+def test_check_covariate_balance_satisfied(tmp_path):
+    # Perfect balance: W=0 and W=1 have identical distributions of X
+    data = pd.DataFrame(
+        {
+            "X": [1.0, 1.0, 2.0, 2.0, 1.0, 1.0, 2.0, 2.0],
+            "W": [0, 1, 0, 1, 0, 1, 0, 1],
+            "Y": [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0],
+        }
+    )
+    data_file = tmp_path / "balance_sat.csv"
+    data.to_csv(data_file, index=False)
+
+    res = check_covariate_balance(str(data_file), treatment="W", covariates=["X"])
+    assert len(res) == 1
+    assert res[0]["covariate"] == "X"
+    assert res[0]["satisfied"] is True
+    assert res[0]["smd"] == 0.0
+
+
+def test_check_covariate_balance_violated(tmp_path):
+    # Imbalanced with non-zero variance:
+    # W=1 has mean ~10.0, W=0 has mean ~1.0
+    data = pd.DataFrame(
+        {
+            "X": [1.0, 10.0, 1.1, 10.1, 0.9, 9.9, 1.0, 10.0],
+            "W": [0, 1, 0, 1, 0, 1, 0, 1],
+            "Y": [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0],
+        }
+    )
+    data_file = tmp_path / "balance_viol.csv"
+    data.to_csv(data_file, index=False)
+
+    res = check_covariate_balance(str(data_file), treatment="W", covariates=["X"])
+    assert len(res) == 1
+    assert res[0]["satisfied"] is False
+    assert res[0]["smd"] > 0.1
+
+
+def test_check_covariate_balance_missing_column(tmp_path):
+    # Missing covariate column X
+    data = pd.DataFrame(
+        {
+            "W": [0, 1, 0, 1],
+            "Y": [1.0, 1.0, 1.0, 1.0],
+        }
+    )
+    data_file = tmp_path / "balance_missing.csv"
+    data.to_csv(data_file, index=False)
+
+    with pytest.raises(RuntimeError) as exc_info:
+        check_covariate_balance(str(data_file), treatment="W", covariates=["X"])
+    assert "Covariate column X not found" in str(exc_info.value)
+
+
+def test_check_propensity_diagnostics_matching(tmp_path):
+    # Confounded dataset with overlap: 3 treated, 6 controls.
+    # Controls closest to treated units (2.0, 3.0, 4.0) will be matched.
+    data = pd.DataFrame(
+        {
+            "X": [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 2.1, 3.1, 4.1],
+            "W": [0, 0, 0, 0, 0, 0, 1, 1, 1],
+            "Y": [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0],
+        }
+    )
+    data_file = tmp_path / "propensity_match.csv"
+    data.to_csv(data_file, index=False)
+
+    res = check_propensity_diagnostics(str(data_file), treatment="W", covariates=["X"], method="matching")
+    assert len(res) == 1
+    assert res[0]["covariate"] == "X"
+    assert res[0]["smd_pre"] > 0.1
+    # Matching must reduce the SMD
+    assert res[0]["smd_post"] < res[0]["smd_pre"]
+
+
+def test_check_propensity_diagnostics_weighting(tmp_path):
+    # Confounded dataset with overlap: W=1 (X=2,3,4,5), W=0 (X=1,2,3,4)
+    data = pd.DataFrame(
+        {
+            "X": [1.0, 2.0, 3.0, 4.0, 2.0, 3.0, 4.0, 5.0],
+            "W": [0, 0, 0, 0, 1, 1, 1, 1],
+            "Y": [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0],
+        }
+    )
+    data_file = tmp_path / "propensity_weight.csv"
+    data.to_csv(data_file, index=False)
+
+    res = check_propensity_diagnostics(str(data_file), treatment="W", covariates=["X"], method="weighting")
+    assert len(res) == 1
+    assert res[0]["covariate"] == "X"
+    assert res[0]["smd_pre"] > 0.1
+    # Weighting must reduce the SMD
+    assert res[0]["smd_post"] < res[0]["smd_pre"]
+
+
+
