@@ -30,8 +30,8 @@ class RForgeBridge:
                 "stdout": "",
                 "stderr": "",
             }
-        
-        pkg_path_str = str(self.pkg_dir).replace('\\', '/')
+
+        pkg_path_str = str(self.pkg_dir).replace("\\", "/")
         r_cmd = f"devtools::check(pkg = '{pkg_path_str}', document = FALSE)"
         return self._run_r_cmd(r_cmd)
 
@@ -46,8 +46,8 @@ class RForgeBridge:
                 "stdout": "",
                 "stderr": "",
             }
-        
-        pkg_path_str = str(self.pkg_dir).replace('\\', '/')
+
+        pkg_path_str = str(self.pkg_dir).replace("\\", "/")
         r_cmd = f"devtools::test(pkg = '{pkg_path_str}')"
         return self._run_r_cmd(r_cmd)
 
@@ -62,8 +62,8 @@ class RForgeBridge:
                 "stdout": "",
                 "stderr": "",
             }
-        
-        pkg_path_str = str(self.pkg_dir).replace('\\', '/')
+
+        pkg_path_str = str(self.pkg_dir).replace("\\", "/")
         r_cmd = f"devtools::document(pkg = '{pkg_path_str}')"
         return self._run_r_cmd(r_cmd)
 

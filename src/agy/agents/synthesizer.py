@@ -1,6 +1,6 @@
 import datetime
 from pathlib import Path
-from typing import Dict, Any, Optional, List
+from typing import Dict, Any, List
 
 
 class ReportSynthesizer:
@@ -82,9 +82,13 @@ class ReportSynthesizer:
         elif pos.get("error"):
             content.append(f"*   *Check Failed with Execution Error:* `{pos.get('error')}`")
         elif pos.get("satisfied"):
-            content.append("*   [bold green]Passed:[/bold green] All covariate strata have sufficient treatment variation ($0 < P(W=1|X) < 1$).")
+            content.append(
+                "*   [bold green]Passed:[/bold green] All covariate strata have sufficient treatment variation ($0 < P(W=1|X) < 1$)."
+            )
         else:
-            content.append("*   [bold red]Violated:[/bold red] Found strata with no treatment variation:")
+            content.append(
+                "*   [bold red]Violated:[/bold red] Found strata with no treatment variation:"
+            )
             violations = pos.get("violations", [])
             if violations:
                 headers = list(violations[0].keys())
@@ -110,9 +114,13 @@ class ReportSynthesizer:
             content.append(f"*   **Violated:** {exc.get('reason')}")
             desc_v = exc.get("descendant_violations", [])
             if desc_v:
-                content.append(f"    *   *Descendant Violations:* Covariates {desc_v} are downstream descendants of treatment.")
+                content.append(
+                    f"    *   *Descendant Violations:* Covariates {desc_v} are downstream descendants of treatment."
+                )
             if not exc.get("backdoor_blocked"):
-                content.append("    *   *Backdoor Paths:* Backdoor paths are not fully blocked/d-separated by adjusted covariates.")
+                content.append(
+                    "    *   *Backdoor Paths:* Backdoor paths are not fully blocked/d-separated by adjusted covariates."
+                )
         content.append("")
 
         # 3. SUTVA details
@@ -137,7 +145,9 @@ class ReportSynthesizer:
             content.append("*   **Passed:** All covariates are balanced ($SMD \\le 0.1$).")
             self._append_balance_table(content, bal.get("balance", []), bal.get("method", "none"))
         else:
-            content.append("*   **Violated:** One or more covariates are imbalanced ($SMD > 0.1$). Details below:")
+            content.append(
+                "*   **Violated:** One or more covariates are imbalanced ($SMD > 0.1$). Details below:"
+            )
             self._append_balance_table(content, bal.get("balance", []), bal.get("method", "none"))
         content.append("")
 
@@ -146,11 +156,22 @@ class ReportSynthesizer:
 
         return report_path
 
-    def _append_balance_table(self, content: List[str], balance_rows: List[Dict[str, Any]], method: str = "none"):
+    def _append_balance_table(
+        self, content: List[str], balance_rows: List[Dict[str, Any]], method: str = "none"
+    ):
         if not balance_rows:
             return
         if method in ("matching", "weighting"):
-            headers = ["Covariate", "Mean T (Pre)", "Mean C (Pre)", "SMD (Pre)", "Mean T (Post)", "Mean C (Post)", "SMD (Post)", "Status"]
+            headers = [
+                "Covariate",
+                "Mean T (Pre)",
+                "Mean C (Pre)",
+                "SMD (Pre)",
+                "Mean T (Post)",
+                "Mean C (Post)",
+                "SMD (Post)",
+                "Status",
+            ]
             header_row = " | ".join(headers)
             divider_row = " | ".join(["---"] * len(headers))
             content.append(f"\n| {header_row} |")
@@ -167,7 +188,15 @@ class ReportSynthesizer:
                     f"| `{row.get('covariate')}` | {m1_pre} | {m0_pre} | {smd_pre} | {m1_post} | {m0_post} | {smd_post} | {status} |"
                 )
         else:
-            headers = ["Covariate", "Mean (Treated)", "Mean (Control)", "Var (Treated)", "Var (Control)", "SMD", "Status"]
+            headers = [
+                "Covariate",
+                "Mean (Treated)",
+                "Mean (Control)",
+                "Var (Treated)",
+                "Var (Control)",
+                "SMD",
+                "Status",
+            ]
             header_row = " | ".join(headers)
             divider_row = " | ".join(["---"] * len(headers))
             content.append(f"\n| {header_row} |")

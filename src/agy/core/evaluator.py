@@ -1,7 +1,6 @@
 import subprocess
 import os
 import io
-import sys
 import pandas as pd
 import networkx as nx
 from typing import List, Dict, Any, Optional
@@ -96,10 +95,10 @@ def check_positivity(data_path: str, treatment: str, covariates: List[str]) -> p
     safe_data_path = os.path.abspath(data_path).replace("\\", "/").replace('"', '\\"')
     safe_treatment = treatment.replace('"', '\\"')
     safe_covariates = [c.replace('"', '\\"') for c in covariates]
-    
+
     covs_formatted = ", ".join(f'"{c}"' for c in safe_covariates)
     covs_vector = f"c({covs_formatted})"
-    
+
     r_script = f"""
 library(dplyr)
 df <- read.csv("{safe_data_path}")
@@ -204,7 +203,7 @@ def check_exchangeability(
 
     try:
         backdoor_blocked = is_d_separator(graph_backdoor, {treatment}, {outcome}, set(covariates))
-    except Exception as e:
+    except Exception:
         # Fallback or error handling
         backdoor_blocked = False
 
@@ -291,14 +290,16 @@ def check_sutva(
     }
 
 
-def check_covariate_balance(data_path: str, treatment: str, covariates: List[str]) -> List[Dict[str, Any]]:
+def check_covariate_balance(
+    data_path: str, treatment: str, covariates: List[str]
+) -> List[Dict[str, Any]]:
     """
     Checks covariate balance between treated and control groups using Standardized Mean Difference (SMD).
     SMD > 0.1 indicates significant imbalance.
     """
     if not os.path.exists(data_path):
         raise FileNotFoundError(f"Data file not found at {data_path}")
-        
+
     if not covariates:
         return []
 
@@ -306,10 +307,10 @@ def check_covariate_balance(data_path: str, treatment: str, covariates: List[str
     safe_data_path = os.path.abspath(data_path).replace("\\", "/").replace('"', '\\"')
     safe_treatment = treatment.replace('"', '\\"')
     safe_covariates = [c.replace('"', '\\"') for c in covariates]
-    
+
     covs_formatted = ", ".join(f'"{c}"' for c in safe_covariates)
     covs_vector = f"c({covs_formatted})"
-    
+
     r_script = f"""
 library(dplyr)
 df <- read.csv("{safe_data_path}")
@@ -568,5 +569,6 @@ write.csv(balance_results, row.names = FALSE)
         df_balance = pd.read_csv(io.StringIO(csv_content))
         return df_balance.to_dict(orient="records")
     except Exception as e:
-        raise RuntimeError(f"Failed to parse R propensity diagnostics output:\n{output}\nError: {e}")
-
+        raise RuntimeError(
+            f"Failed to parse R propensity diagnostics output:\n{output}\nError: {e}"
+        )

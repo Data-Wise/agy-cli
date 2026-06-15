@@ -1,4 +1,3 @@
-import os
 import pytest
 import pandas as pd
 import networkx as nx
@@ -170,7 +169,9 @@ def test_check_propensity_diagnostics_matching(tmp_path):
     data_file = tmp_path / "propensity_match.csv"
     data.to_csv(data_file, index=False)
 
-    res = check_propensity_diagnostics(str(data_file), treatment="W", covariates=["X"], method="matching")
+    res = check_propensity_diagnostics(
+        str(data_file), treatment="W", covariates=["X"], method="matching"
+    )
     assert len(res) == 1
     assert res[0]["covariate"] == "X"
     assert res[0]["smd_pre"] > 0.1
@@ -190,12 +191,11 @@ def test_check_propensity_diagnostics_weighting(tmp_path):
     data_file = tmp_path / "propensity_weight.csv"
     data.to_csv(data_file, index=False)
 
-    res = check_propensity_diagnostics(str(data_file), treatment="W", covariates=["X"], method="weighting")
+    res = check_propensity_diagnostics(
+        str(data_file), treatment="W", covariates=["X"], method="weighting"
+    )
     assert len(res) == 1
     assert res[0]["covariate"] == "X"
     assert res[0]["smd_pre"] > 0.1
     # Weighting must reduce the SMD
     assert res[0]["smd_post"] < res[0]["smd_pre"]
-
-
-

@@ -1,13 +1,13 @@
-import os
 import sqlite3
 import pytest
 from agy.plugins.obsidian import ObsidianBridge
+
 
 @pytest.fixture
 def mock_db(tmp_path):
     db_file = tmp_path / "test_vault_db.sqlite"
     conn = sqlite3.connect(db_file)
-    
+
     # Create tables
     conn.execute(
         """
@@ -41,7 +41,7 @@ def mock_db(tmp_path):
         )
         """
     )
-    
+
     # Create views
     conn.execute(
         """
@@ -71,24 +71,35 @@ def mock_db(tmp_path):
         GROUP BY l.source_note_id, l.target_path
         """
     )
-    
+
     # Insert notes
-    conn.execute("INSERT INTO notes VALUES ('note1', 'vault-1', 'path1.md', 'Orphan Note', '2026-06-12 12:00:00')")
-    conn.execute("INSERT INTO notes VALUES ('note2', 'vault-1', 'path2.md', 'Hub Note', '2026-06-12 12:01:00')")
-    conn.execute("INSERT INTO notes VALUES ('note3', 'vault-1', 'path3.md', 'Target Note', '2026-06-12 12:02:00')")
-    
+    conn.execute(
+        "INSERT INTO notes VALUES ('note1', 'vault-1', 'path1.md', 'Orphan Note', '2026-06-12 12:00:00')"
+    )
+    conn.execute(
+        "INSERT INTO notes VALUES ('note2', 'vault-1', 'path2.md', 'Hub Note', '2026-06-12 12:01:00')"
+    )
+    conn.execute(
+        "INSERT INTO notes VALUES ('note3', 'vault-1', 'path3.md', 'Target Note', '2026-06-12 12:02:00')"
+    )
+
     # Insert links (note2 -> note3 is a valid link, note2 -> non-existent is a broken link)
-    conn.execute("INSERT INTO links (source_note_id, target_note_id, target_path, link_type) VALUES ('note2', 'note3', 'path3.md', 'internal')")
-    conn.execute("INSERT INTO links (source_note_id, target_note_id, target_path, link_type) VALUES ('note2', NULL, 'non-existent.md', 'broken')")
-    
+    conn.execute(
+        "INSERT INTO links (source_note_id, target_note_id, target_path, link_type) VALUES ('note2', 'note3', 'path3.md', 'internal')"
+    )
+    conn.execute(
+        "INSERT INTO links (source_note_id, target_note_id, target_path, link_type) VALUES ('note2', NULL, 'non-existent.md', 'broken')"
+    )
+
     # Insert graph metrics
     conn.execute("INSERT INTO graph_metrics VALUES ('note1', 0.15, 0, 0)")
     conn.execute("INSERT INTO graph_metrics VALUES ('note2', 0.5, 0, 2)")
     conn.execute("INSERT INTO graph_metrics VALUES ('note3', 0.35, 1, 0)")
-    
+
     conn.commit()
     conn.close()
     return str(db_file)
+
 
 def test_get_orphan_notes(mock_db):
     bridge = ObsidianBridge(db_path=mock_db)
@@ -97,19 +108,21 @@ def test_get_orphan_notes(mock_db):
     assert orphans[0]["id"] == "note1"
     assert orphans[0]["title"] == "Orphan Note"
 
+
 def test_get_hub_notes(mock_db):
     bridge = ObsidianBridge(db_path=mock_db)
-    
+
     # Sort by pagerank
     hubs = bridge.get_hub_notes(order_by="pagerank", limit=5)
     assert len(hubs) == 3
     assert hubs[0]["id"] == "note2"  # 0.5
     assert hubs[1]["id"] == "note3"  # 0.35
     assert hubs[2]["id"] == "note1"  # 0.15
-    
+
     # Sort by out_degree
     hubs_out = bridge.get_hub_notes(order_by="out_degree", limit=5)
     assert hubs_out[0]["id"] == "note2"  # out_degree = 2
+
 
 def test_get_broken_links(mock_db):
     bridge = ObsidianBridge(db_path=mock_db)
@@ -118,6 +131,7 @@ def test_get_broken_links(mock_db):
     assert broken[0]["source_title"] == "Hub Note"
     assert broken[0]["target_path"] == "non-existent.md"
     assert broken[0]["broken_count"] == 1
+
 
 def test_missing_db():
     bridge = ObsidianBridge(db_path="non_existent_file.sqlite")

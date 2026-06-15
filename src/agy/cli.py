@@ -4,16 +4,10 @@ import yaml
 import os
 import sys
 import networkx as nx
-import pandas as pd
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 
-from agy.core.evaluator import (
-    check_positivity,
-    check_exchangeability,
-    check_sutva,
-)
 from agy.core.dag_compiler import (
     parse_dag_string,
     compile_to_r,
@@ -27,6 +21,7 @@ from pathlib import Path
 import logging
 from logging.handlers import RotatingFileHandler
 
+
 def setup_error_logging():
     log_file_env = os.environ.get("AGY_LOG_FILE")
     if log_file_env:
@@ -36,19 +31,19 @@ def setup_error_logging():
         log_dir = os.path.expanduser("~/.config/obs")
         os.makedirs(log_dir, exist_ok=True)
         log_file = os.path.join(log_dir, "obs.log")
-    
+
     logger = logging.getLogger("agy")
     logger.setLevel(logging.ERROR)
-    
+
     handler = RotatingFileHandler(log_file, maxBytes=5 * 1024 * 1024, backupCount=3)
     formatter = logging.Formatter("%(asctime)s [%(levelname)s] %(message)s")
     handler.setFormatter(formatter)
-    
+
     # Clear existing handlers to allow clean re-configuration in tests or re-runs
     for h in list(logger.handlers):
         logger.removeHandler(h)
     logger.addHandler(handler)
-        
+
     def handle_unhandled_exception(exc_type, exc_value, exc_traceback):
         if issubclass(exc_type, KeyboardInterrupt):
             sys.__excepthook__(exc_type, exc_value, exc_traceback)
@@ -58,10 +53,10 @@ def setup_error_logging():
 
     sys.excepthook = handle_unhandled_exception
 
+
 setup_error_logging()
 
 console = Console()
-
 
 
 @click.group()
@@ -178,7 +173,9 @@ def eval(study_design_file, treatment, outcome, covariates, data, dag_str, inter
     if pos.get("skipped"):
         console.print(f"\n[yellow]⚠ Skipping Positivity check ({pos.get('reason')}).[/yellow]")
     elif pos.get("error"):
-        console.print(f"\n[bold red]Positivity check failed with error:[/bold red] {pos.get('error')}")
+        console.print(
+            f"\n[bold red]Positivity check failed with error:[/bold red] {pos.get('error')}"
+        )
     else:
         console.print("\n[bold]Checking Positivity Assumption...[/bold]")
         if pos.get("satisfied"):
@@ -204,7 +201,9 @@ def eval(study_design_file, treatment, outcome, covariates, data, dag_str, inter
     if exc.get("skipped"):
         console.print(f"\n[yellow]⚠ Skipping Exchangeability check ({exc.get('reason')}).[/yellow]")
     elif exc.get("error"):
-        console.print(f"\n[bold red]Exchangeability check failed with error:[/bold red] {exc.get('error')}")
+        console.print(
+            f"\n[bold red]Exchangeability check failed with error:[/bold red] {exc.get('error')}"
+        )
     else:
         console.print("\n[bold]Checking Backdoor Exchangeability...[/bold]")
         if exc.get("satisfied"):
@@ -230,9 +229,13 @@ def eval(study_design_file, treatment, outcome, covariates, data, dag_str, inter
     # Covariate Balance
     bal = results.get("balance", {})
     if bal.get("skipped"):
-        console.print(f"\n[yellow]⚠ Skipping Covariate Balance check ({bal.get('reason')}).[/yellow]")
+        console.print(
+            f"\n[yellow]⚠ Skipping Covariate Balance check ({bal.get('reason')}).[/yellow]"
+        )
     elif bal.get("error"):
-        console.print(f"\n[bold red]Covariate Balance check failed with error:[/bold red] {bal.get('error')}")
+        console.print(
+            f"\n[bold red]Covariate Balance check failed with error:[/bold red] {bal.get('error')}"
+        )
     else:
         console.print("\n[bold]Checking Covariate Balance (Standardized Mean Difference)...[/bold]")
         if bal.get("satisfied"):
@@ -243,7 +246,7 @@ def eval(study_design_file, treatment, outcome, covariates, data, dag_str, inter
             console.print(
                 "[bold red]✗ Covariate Balance check VIOLATED.[/bold red] Found imbalanced covariates (SMD > 0.1):"
             )
-        
+
         balance_rows = bal.get("balance", [])
         if balance_rows:
             adj_method = bal.get("method", "none")
@@ -253,14 +256,18 @@ def eval(study_design_file, treatment, outcome, covariates, data, dag_str, inter
                 table.add_column("SMD (Pre)")
                 table.add_column("SMD (Post)")
                 table.add_column(f"Status ({adj_method.capitalize()})")
-                
+
                 for row in balance_rows:
-                    status_str = "[green]Balanced[/green]" if row.get("satisfied_post") else "[red]Imbalanced[/red]"
+                    status_str = (
+                        "[green]Balanced[/green]"
+                        if row.get("satisfied_post")
+                        else "[red]Imbalanced[/red]"
+                    )
                     table.add_row(
                         row.get("covariate"),
                         f"{row.get('smd_pre', 0.0):.4f}",
                         f"{row.get('smd_post', 0.0):.4f}",
-                        status_str
+                        status_str,
                     )
                 console.print(table)
             else:
@@ -270,15 +277,19 @@ def eval(study_design_file, treatment, outcome, covariates, data, dag_str, inter
                 table.add_column("Mean (Control)")
                 table.add_column("SMD")
                 table.add_column("Status")
-                
+
                 for row in balance_rows:
-                    status_str = "[green]Balanced[/green]" if row.get("satisfied_post") else "[red]Imbalanced[/red]"
+                    status_str = (
+                        "[green]Balanced[/green]"
+                        if row.get("satisfied_post")
+                        else "[red]Imbalanced[/red]"
+                    )
                     table.add_row(
                         row.get("covariate"),
                         f"{row.get('mean_treated_pre', 0.0):.4f}",
                         f"{row.get('mean_control_pre', 0.0):.4f}",
                         f"{row.get('smd_pre', 0.0):.4f}",
-                        status_str
+                        status_str,
                     )
                 console.print(table)
 
@@ -332,6 +343,7 @@ def obs_group(ctx, db_path):
     """Obsidian knowledge bridge commands."""
     ctx.ensure_object(dict)
     from agy.plugins.obsidian import ObsidianBridge
+
     ctx.obj["bridge"] = ObsidianBridge(db_path=db_path)
 
 
@@ -344,19 +356,29 @@ def obs_orphans(ctx):
     if not orphans:
         console.print("[green]No orphan notes found.[/green]")
         return
-    
+
     table = Table(title="Orphan Notes")
     table.add_column("Title", style="cyan")
     table.add_column("Path", style="magenta")
     table.add_column("Modified At", style="green")
     for note in orphans:
-        table.add_row(note.get("title") or "Untitled", note.get("path") or "", note.get("modified_at") or "Unknown")
+        table.add_row(
+            note.get("title") or "Untitled",
+            note.get("path") or "",
+            note.get("modified_at") or "Unknown",
+        )
     console.print(table)
 
 
 @obs_group.command(name="hubs")
 @click.option("--limit", "-l", type=int, default=10, help="Maximum number of hub notes to display.")
-@click.option("--sort", "-s", type=click.Choice(["pagerank", "out_degree", "in_degree", "total_degree"]), default="pagerank", help="Field to sort by.")
+@click.option(
+    "--sort",
+    "-s",
+    type=click.Choice(["pagerank", "out_degree", "in_degree", "total_degree"]),
+    default="pagerank",
+    help="Field to sort by.",
+)
 @click.pass_context
 def obs_hubs(ctx, limit, sort):
     """List hub notes (high centrality/connections)."""
@@ -365,7 +387,7 @@ def obs_hubs(ctx, limit, sort):
     if not hubs:
         console.print("[yellow]No hub notes found.[/yellow]")
         return
-    
+
     table = Table(title=f"Hub Notes (Sorted by {sort})")
     table.add_column("Title", style="cyan")
     table.add_column("Path", style="magenta")
@@ -380,7 +402,7 @@ def obs_hubs(ctx, limit, sort):
             f"{note.get('pagerank', 0.0):.4f}",
             str(note.get("in_degree", 0)),
             str(note.get("out_degree", 0)),
-            str(note.get("total_degree", 0))
+            str(note.get("total_degree", 0)),
         )
     console.print(table)
 
@@ -392,9 +414,11 @@ def obs_health(ctx):
     bridge = ctx.obj["bridge"]
     broken = bridge.get_broken_links()
     if not broken:
-        console.print("[bold green]✔ Vault health check passed. No broken links found.[/bold green]")
+        console.print(
+            "[bold green]✔ Vault health check passed. No broken links found.[/bold green]"
+        )
         return
-    
+
     table = Table(title="Broken Links Detected", show_header=True, header_style="bold red")
     table.add_column("Source Note", style="cyan")
     table.add_column("Source Path", style="magenta")
@@ -405,7 +429,7 @@ def obs_health(ctx):
             link.get("source_title") or "Untitled",
             link.get("source_path") or "",
             link.get("target_path") or "",
-            str(link.get("broken_count", 1))
+            str(link.get("broken_count", 1)),
         )
     console.print(table)
 
@@ -418,6 +442,7 @@ def atlas_group(ctx, sessions_path, registry_path):
     """Atlas state synchronizer commands."""
     ctx.ensure_object(dict)
     from agy.plugins.atlas import AtlasBridge
+
     ctx.obj["bridge"] = AtlasBridge(sessions_path=sessions_path, registry_path=registry_path)
 
 
@@ -428,19 +453,19 @@ def atlas_status(ctx):
     bridge = ctx.obj["bridge"]
     session = bridge.get_active_session()
     captures = bridge.get_captured_inbox_items()
-    
+
     if not session:
         panel_content = "[yellow]No active session.[/yellow]\n"
         if captures:
             panel_content += f"\n[bold]Captured Inbox Items:[/bold] {len(captures)}"
         console.print(Panel(panel_content, title="Atlas Status"))
         return
-    
+
     duration_secs = session.get("duration", 0)
     hours, remainder = divmod(int(duration_secs), 3600)
     minutes, seconds = divmod(remainder, 60)
     duration_str = f"{hours:02d}:{minutes:02d}:{seconds:02d}"
-    
+
     panel_content = (
         f"[bold]Project:[/bold] {session.get('project')}\n"
         f"[bold]Task:[/bold] {session.get('task')}\n"
@@ -449,12 +474,14 @@ def atlas_status(ctx):
     )
     if captures:
         panel_content += f"\n\n[bold]Captured Inbox Items:[/bold] {len(captures)}"
-        
+
     console.print(Panel(panel_content, title="Active Atlas Session", border_style="green"))
 
 
 @atlas_group.command(name="trail")
-@click.option("--limit", "-l", type=int, default=10, help="Maximum number of breadcrumbs to display.")
+@click.option(
+    "--limit", "-l", type=int, default=10, help="Maximum number of breadcrumbs to display."
+)
 @click.pass_context
 def atlas_trail(ctx, limit):
     """Display active or recent breadcrumbs."""
@@ -463,19 +490,19 @@ def atlas_trail(ctx, limit):
     if not crumbs:
         console.print("[yellow]No breadcrumbs found.[/yellow]")
         return
-    
+
     table = Table(title="Recent Breadcrumbs (Trail)")
     table.add_column("Timestamp", style="cyan")
     table.add_column("Type", style="magenta")
     table.add_column("Project", style="green")
     table.add_column("Description", style="white")
-    
+
     for crumb in crumbs:
         table.add_row(
             crumb.get("timestamp") or "Unknown",
             crumb.get("type") or "note",
             crumb.get("project") or "N/A",
-            crumb.get("text") or ""
+            crumb.get("text") or "",
         )
     console.print(table)
 
@@ -490,7 +517,9 @@ def atlas_start_session(ctx, project, task, desc):
     bridge = ctx.obj["bridge"]
     try:
         res = bridge.create_session(project, task, desc)
-        console.print(f"[bold green]✔ Started active session '{res['id']}' for project '{res['project']}'.[/bold green]")
+        console.print(
+            f"[bold green]✔ Started active session '{res['id']}' for project '{res['project']}'.[/bold green]"
+        )
     except Exception as e:
         console.print(f"[bold red]Failed to start session:[/bold red] {e}")
         sys.exit(1)
@@ -498,7 +527,9 @@ def atlas_start_session(ctx, project, task, desc):
 
 @atlas_group.command(name="log-crumb")
 @click.argument("text")
-@click.option("--type", "-t", "type_str", default="command", help="Type of breadcrumb (e.g. command, note).")
+@click.option(
+    "--type", "-t", "type_str", default="command", help="Type of breadcrumb (e.g. command, note)."
+)
 @click.option("--project", "-p", help="Associated project name.")
 @click.pass_context
 def atlas_log_crumb(ctx, text, type_str, project):
@@ -520,16 +551,18 @@ def sandbox_group():
 
 @sandbox_group.command(name="generate")
 @click.argument("path", type=click.Path())
-@click.option("--violations", is_flag=True, help="Inject positivity, exchangeability, and SUTVA violations.")
+@click.option(
+    "--violations", is_flag=True, help="Inject positivity, exchangeability, and SUTVA violations."
+)
 def sandbox_generate(path, violations):
     """Generate a temporary sandbox vault at the specified path for testing."""
     from pathlib import Path
-    
+
     try:
         vault_path = Path(path)
         sandbox = SandboxVault(vault_path)
         results = sandbox.build(violations=violations)
-        
+
         # Present clean ADHD-friendly Rich output
         panel_content = (
             f"[bold green]✔ Sandbox Vault successfully generated![/bold green]\n\n"
@@ -558,8 +591,7 @@ def worktree_group():
 def worktree_add(name):
     """Add a persistent feature worktree off the dev branch."""
     from pathlib import Path
-    from agy.core.worktree import WorktreeManager
-    
+
     try:
         manager = WorktreeManager(Path.cwd())
         res = manager.add_worktree(name)
@@ -580,15 +612,14 @@ def worktree_add(name):
 def worktree_list():
     """List currently active/registered git worktrees."""
     from pathlib import Path
-    from agy.core.worktree import WorktreeManager
-    
+
     try:
         manager = WorktreeManager(Path.cwd())
         wts = manager.list_worktrees()
         if not wts:
             console.print("[yellow]No worktrees found.[/yellow]")
             return
-        
+
         table = Table(title="Active Git Worktrees")
         table.add_column("Path", style="cyan")
         table.add_column("Branch", style="magenta")
@@ -605,12 +636,13 @@ def worktree_list():
 def worktree_remove(name):
     """Remove a worktree and clean up the tracking branch."""
     from pathlib import Path
-    from agy.core.worktree import WorktreeManager
-    
+
     try:
         manager = WorktreeManager(Path.cwd())
         res = manager.remove_worktree(name)
-        console.print(f"[bold green]✔ Removed worktree feature-{res['name']} and branch {res['branch']}.[/bold green]")
+        console.print(
+            f"[bold green]✔ Removed worktree feature-{res['name']} and branch {res['branch']}.[/bold green]"
+        )
     except Exception as e:
         console.print(f"[bold red]Error removing worktree:[/bold red] {e}")
         sys.exit(1)
@@ -623,6 +655,7 @@ def rforge_group(ctx, pkg_dir):
     """R Package Validation Harness commands."""
     ctx.ensure_object(dict)
     from agy.plugins.rforge import RForgeBridge
+
     ctx.obj["bridge"] = RForgeBridge(pkg_dir=pkg_dir)
 
 

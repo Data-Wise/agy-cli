@@ -1,7 +1,5 @@
-import os
 import sqlite3
 import yaml
-import pytest
 from pathlib import Path
 from click.testing import CliRunner
 
@@ -29,7 +27,7 @@ def test_sandbox_vault_satisfied_generation(tmp_path):
     # Check DB structure and content
     conn = sqlite3.connect(results["db_path"])
     cursor = conn.cursor()
-    
+
     # Check that views return valid rows
     cursor.execute("SELECT id FROM orphaned_notes")
     orphans = cursor.fetchall()
@@ -72,14 +70,16 @@ def test_sandbox_vault_violated_generation(tmp_path):
     # Check study design
     with open(results["design_path"], "r") as f:
         design = yaml.safe_load(f)
-    assert design["covariates"] == ["X"]  # Covariate X adjusted, but positivity / exchangeability still fail
+    assert design["covariates"] == [
+        "X"
+    ]  # Covariate X adjusted, but positivity / exchangeability still fail
     assert design["sutva_responses"]["interference"] == "yes"  # SUTVA violation
 
 
 def test_cli_sandbox_generate(tmp_path):
     vault_dir = tmp_path / "cli_vault"
     runner = CliRunner()
-    
+
     # Generate satisfied vault
     result = runner.invoke(main, ["sandbox", "generate", str(vault_dir)])
     assert result.exit_code == 0
@@ -88,7 +88,9 @@ def test_cli_sandbox_generate(tmp_path):
     assert (vault_dir / "study_design.yaml").exists()
 
     # Check we can run Obsidian plugin command against it
-    result_obs = runner.invoke(main, ["obs", "--db-path", str(vault_dir / "vault_db.sqlite"), "orphans"])
+    result_obs = runner.invoke(
+        main, ["obs", "--db-path", str(vault_dir / "vault_db.sqlite"), "orphans"]
+    )
     assert result_obs.exit_code == 0
     assert "Orphan Causal Note" in result_obs.output
 
@@ -111,7 +113,9 @@ def test_cli_sandbox_generate(tmp_path):
     assert "Integration Testing" in result_atlas.output
 
     # Check we can run eval command against study design (satisfied case)
-    result_eval = runner.invoke(main, ["eval", str(vault_dir / "study_design.yaml"), "--non-interactive"])
+    result_eval = runner.invoke(
+        main, ["eval", str(vault_dir / "study_design.yaml"), "--non-interactive"]
+    )
     assert result_eval.exit_code == 0
     assert "Positivity check passed" in result_eval.output
     assert "Exchangeability check passed" in result_eval.output
@@ -125,19 +129,23 @@ def test_cli_sandbox_generate_violations(tmp_path):
     # Setup _violations vault
     vault_dir = tmp_path / "cli_vault_violations"
     runner = CliRunner()
-    
+
     # Generate violated vault
     result = runner.invoke(main, ["sandbox", "generate", str(vault_dir), "--violations"])
     assert result.exit_code == 0
     assert "Sandbox Vault successfully generated!" in result.output
 
     # Check that Obsidian health command spots the broken link
-    result_obs = runner.invoke(main, ["obs", "--db-path", str(vault_dir / "vault_db.sqlite"), "health"])
+    result_obs = runner.invoke(
+        main, ["obs", "--db-path", str(vault_dir / "vault_db.sqlite"), "health"]
+    )
     assert result_obs.exit_code == 0
     assert "broken_target" in result_obs.output
 
     # Check that eval spots the violations
-    result_eval = runner.invoke(main, ["eval", str(vault_dir / "study_design.yaml"), "--non-interactive"])
+    result_eval = runner.invoke(
+        main, ["eval", str(vault_dir / "study_design.yaml"), "--non-interactive"]
+    )
     # The eval command outputs the violations to stdout. Click return code is 0 as evaluations run normally even with statistical violations
     assert result_eval.exit_code == 0
     assert "Positivity assumption VIOLATED" in result_eval.output
@@ -149,18 +157,21 @@ def test_cli_sandbox_generate_violations(tmp_path):
 def test_cli_eval_propensity_matching(tmp_path):
     vault_dir = tmp_path / "matching_vault"
     runner = CliRunner()
-    
+
     # Generate satisfied vault
     result = runner.invoke(main, ["sandbox", "generate", str(vault_dir)])
     assert result.exit_code == 0
-    
+
     # Clean up any existing report first
     report_path = Path.cwd() / ".agy" / "report.md"
     if report_path.exists():
         report_path.unlink()
 
     # Run eval with matching
-    result_eval = runner.invoke(main, ["eval", str(vault_dir / "study_design.yaml"), "--non-interactive", "--method", "matching"])
+    result_eval = runner.invoke(
+        main,
+        ["eval", str(vault_dir / "study_design.yaml"), "--non-interactive", "--method", "matching"],
+    )
     assert result_eval.exit_code == 0
     # Output should print the pre/post balance table containing before/after SMDs
     assert "SMD (Pre)" in result_eval.output
@@ -181,18 +192,27 @@ def test_cli_eval_propensity_matching(tmp_path):
 def test_cli_eval_propensity_weighting(tmp_path):
     vault_dir = tmp_path / "weighting_vault"
     runner = CliRunner()
-    
+
     # Generate satisfied vault
     result = runner.invoke(main, ["sandbox", "generate", str(vault_dir)])
     assert result.exit_code == 0
-    
+
     # Clean up any existing report first
     report_path = Path.cwd() / ".agy" / "report.md"
     if report_path.exists():
         report_path.unlink()
 
     # Run eval with weighting
-    result_eval = runner.invoke(main, ["eval", str(vault_dir / "study_design.yaml"), "--non-interactive", "--method", "weighting"])
+    result_eval = runner.invoke(
+        main,
+        [
+            "eval",
+            str(vault_dir / "study_design.yaml"),
+            "--non-interactive",
+            "--method",
+            "weighting",
+        ],
+    )
     assert result_eval.exit_code == 0
     assert "SMD (Pre)" in result_eval.output
     assert "SMD (Post)" in result_eval.output
@@ -207,6 +227,3 @@ def test_cli_eval_propensity_weighting(tmp_path):
     assert "Mean C (Post)" in report_content
     assert "SMD (Pre)" in report_content
     assert "SMD (Post)" in report_content
-
-
-

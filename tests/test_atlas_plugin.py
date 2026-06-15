@@ -1,8 +1,8 @@
-import os
 import yaml
 import pytest
 import datetime
 from agy.plugins.atlas import AtlasBridge
+
 
 @pytest.fixture
 def mock_atlas_files(tmp_path):
@@ -22,7 +22,7 @@ def mock_atlas_files(tmp_path):
             "startTime": "2026-06-12T10:00:00Z",
             "endTime": "2026-06-12T10:30:00Z",
             "state": "ended",
-            "outcome": "completed"
+            "outcome": "completed",
         },
         {
             "id": "session-active",
@@ -32,10 +32,8 @@ def mock_atlas_files(tmp_path):
             "endTime": None,
             "state": "active",
             "outcome": None,
-            "context": {
-                "description": "Implementing plugin integrations"
-            }
-        }
+            "context": {"description": "Implementing plugin integrations"},
+        },
     ]
 
     registry_data = {
@@ -45,15 +43,15 @@ def mock_atlas_files(tmp_path):
                 "text": "First breadcrumb",
                 "type": "note",
                 "project": "flow-cli",
-                "timestamp": "2026-06-12T14:00:00Z"
+                "timestamp": "2026-06-12T14:00:00Z",
             },
             {
                 "id": "crumb-2",
                 "text": "Second breadcrumb",
                 "type": "command",
                 "project": "flow-cli",
-                "timestamp": "2026-06-12T14:15:00Z"
-            }
+                "timestamp": "2026-06-12T14:15:00Z",
+            },
         ],
         "captures": [
             {
@@ -62,7 +60,7 @@ def mock_atlas_files(tmp_path):
                 "type": "idea",
                 "status": "done",
                 "project": "flow-cli",
-                "createdAt": "2026-06-12T13:00:00Z"
+                "createdAt": "2026-06-12T13:00:00Z",
             },
             {
                 "id": "cap-2",
@@ -70,7 +68,7 @@ def mock_atlas_files(tmp_path):
                 "type": "idea",
                 "status": "inbox",
                 "project": "flow-cli",
-                "createdAt": "2026-06-12T13:10:00Z"
+                "createdAt": "2026-06-12T13:10:00Z",
             },
             {
                 "id": "cap-3",
@@ -78,9 +76,9 @@ def mock_atlas_files(tmp_path):
                 "type": "task",
                 "status": "inbox",
                 "project": "flow-cli",
-                "createdAt": "2026-06-12T13:15:00Z"
-            }
-        ]
+                "createdAt": "2026-06-12T13:15:00Z",
+            },
+        ],
     }
 
     with open(sessions_file, "w") as f:
@@ -90,6 +88,7 @@ def mock_atlas_files(tmp_path):
         yaml.safe_dump(registry_data, f)
 
     return str(sessions_file), str(registry_file)
+
 
 def test_get_active_session(mock_atlas_files):
     sessions_path, registry_path = mock_atlas_files
@@ -103,14 +102,16 @@ def test_get_active_session(mock_atlas_files):
     # Duration should be approximately 45 minutes (2700 seconds)
     assert 2600 < active["duration"] < 2800
 
+
 def test_get_active_session_none(tmp_path):
     # Empty sessions file
     sessions_file = tmp_path / "sessions_empty.yaml"
     with open(sessions_file, "w") as f:
         yaml.safe_dump([], f)
-        
+
     bridge = AtlasBridge(sessions_path=str(sessions_file))
     assert bridge.get_active_session() is None
+
 
 def test_get_breadcrumbs(mock_atlas_files):
     sessions_path, registry_path = mock_atlas_files
@@ -123,6 +124,7 @@ def test_get_breadcrumbs(mock_atlas_files):
     crumbs_all = bridge.get_breadcrumbs()
     assert len(crumbs_all) == 2
 
+
 def test_get_captured_inbox_items(mock_atlas_files):
     sessions_path, registry_path = mock_atlas_files
     bridge = AtlasBridge(sessions_path=sessions_path, registry_path=registry_path)
@@ -132,8 +134,11 @@ def test_get_captured_inbox_items(mock_atlas_files):
     assert inbox[0]["text"] == "inbox item 1"
     assert inbox[1]["text"] == "inbox item 2"
 
+
 def test_missing_files():
-    bridge = AtlasBridge(sessions_path="missing_sessions.yaml", registry_path="missing_registry.yaml")
+    bridge = AtlasBridge(
+        sessions_path="missing_sessions.yaml", registry_path="missing_registry.yaml"
+    )
     assert bridge.get_active_session() is None
     assert bridge.get_breadcrumbs() == []
     assert bridge.get_captured_inbox_items() == []

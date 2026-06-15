@@ -1,6 +1,3 @@
-import os
-import pytest
-from pathlib import Path
 import networkx as nx
 
 from agy.agents.orchestrator import ValidationOrchestrator
@@ -62,10 +59,13 @@ def test_validation_orchestrator_violated(tmp_path):
     results = orchestrator.run_all()
 
     assert results["positivity"]["satisfied"] is False  # Positivity violated (W=X)
-    assert results["exchangeability"]["satisfied"] is False  # Exchangeability violated (Z unblocked)
+    assert (
+        results["exchangeability"]["satisfied"] is False
+    )  # Exchangeability violated (Z unblocked)
     assert results["sutva"]["result"]["satisfied"] is False  # SUTVA violated (interference)
-    assert results["balance"]["satisfied"] is True  # Deterministic treatment W=X has var=0, SMD=0 (Balanced)
-
+    assert (
+        results["balance"]["satisfied"] is True
+    )  # Deterministic treatment W=X has var=0, SMD=0 (Balanced)
 
 
 def test_report_synthesizer(tmp_path):
@@ -85,10 +85,10 @@ def test_report_synthesizer(tmp_path):
                     "var_treated_pre": 1.0,
                     "var_control_pre": 1.0,
                     "smd_pre": 0.02,
-                    "satisfied_post": True
+                    "satisfied_post": True,
                 }
-            ]
-        }
+            ],
+        },
     }
     meta = {
         "treatment": "W",
@@ -109,4 +109,3 @@ def test_report_synthesizer(tmp_path):
     assert "**SUTVA:** ✔" in content
     assert "Covariate Balance (SMD)" in content
     assert "`X` | 0.5000 | 0.4800 | 1.0000 | 1.0000 | 0.0200 | Balanced" in content
-

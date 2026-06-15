@@ -24,6 +24,9 @@ markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
 
+extra_css:
+  - stylesheets/extra.css
+
 extra_javascript:
   - javascripts/mathjax.js
   - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
@@ -31,9 +34,20 @@ extra_javascript:
 nav:
   - Home: index.md
   - Guides:
-    - Command Reference: guides/commands.md
-    - Causal Inference Assumptions: guides/causal_inference.md
-    - Covariate Balance & SMD: guides/balance_tutorial.md
-    - R Package Validation: guides/rforge_tutorial.md
-    - Obsidian & Atlas Plugins: guides/plugins.md
-    - Testing & Sandbox Vaults: guides/sandbox.md
+      - Command Reference: guides/commands.md
+      - Causal Inference Assumptions: guides/causal_inference.md
+      - Covariate Balance & SMD: guides/balance_tutorial.md
+      - Asymptotic Theory & EIF: guides/asymptotic_theory.md
+      - R Package Validation: guides/rforge_tutorial.md
+      - Obsidian & Atlas Plugins: guides/plugins.md
+      - Testing & Sandbox Vaults: guides/sandbox.md
+      - Development & CI Workflows: guides/development_workflows.md
+  - Specs & Contributing:
+      - Branch Workflow: contributing/BRANCH-WORKFLOW.md
+      - Implementation Roadmap: specs/SPEC-agy-cli-roadmap.md
+      - Optimization Spec: specs/SPEC-agy-cli-optimization.md
+      - Worktree Rules: specs/SPEC-worktree-rules.md
+      - Causal Engine Plan: specs/PLAN-causal-engine.md
+      - Plugin Plan: specs/PLAN-plugin-integrations.md
+
+

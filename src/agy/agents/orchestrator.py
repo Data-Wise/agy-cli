@@ -57,21 +57,15 @@ class ValidationOrchestrator:
 
             # Dispatch Positivity
             if self.data_path and self.treatment:
-                positivity_future = executor.submit(
-                    self._run_positivity
-                )
+                positivity_future = executor.submit(self._run_positivity)
 
             # Dispatch Exchangeability
             if self.graph and self.treatment and self.outcome:
-                exchangeability_future = executor.submit(
-                    self._run_exchangeability
-                )
+                exchangeability_future = executor.submit(self._run_exchangeability)
 
             # Dispatch Covariate Balance
             if self.data_path and self.treatment and self.covariates:
-                balance_future = executor.submit(
-                    self._run_balance
-                )
+                balance_future = executor.submit(self._run_balance)
 
             # 2. Run SUTVA on main thread (handles interactive click.confirm)
             sutva_start = time.time()
@@ -167,25 +161,29 @@ class ValidationOrchestrator:
                 )
                 satisfied = all(row.get("satisfied_post", True) for row in balance_data)
             else:
-                raw_balance = check_covariate_balance(self.data_path, self.treatment, self.covariates)
+                raw_balance = check_covariate_balance(
+                    self.data_path, self.treatment, self.covariates
+                )
                 balance_data = []
                 for row in raw_balance:
-                    balance_data.append({
-                        "covariate": row.get("covariate"),
-                        "mean_treated_pre": row.get("mean_treated"),
-                        "mean_control_pre": row.get("mean_control"),
-                        "var_treated_pre": row.get("var_treated"),
-                        "var_control_pre": row.get("var_control"),
-                        "smd_pre": row.get("smd"),
-                        "mean_treated_post": row.get("mean_treated"),
-                        "mean_control_post": row.get("mean_control"),
-                        "var_treated_post": row.get("var_treated"),
-                        "var_control_post": row.get("var_control"),
-                        "smd_post": row.get("smd"),
-                        "satisfied_post": row.get("satisfied"),
-                    })
+                    balance_data.append(
+                        {
+                            "covariate": row.get("covariate"),
+                            "mean_treated_pre": row.get("mean_treated"),
+                            "mean_control_pre": row.get("mean_control"),
+                            "var_treated_pre": row.get("var_treated"),
+                            "var_control_pre": row.get("var_control"),
+                            "smd_pre": row.get("smd"),
+                            "mean_treated_post": row.get("mean_treated"),
+                            "mean_control_post": row.get("mean_control"),
+                            "var_treated_post": row.get("var_treated"),
+                            "var_control_post": row.get("var_control"),
+                            "smd_post": row.get("smd"),
+                            "satisfied_post": row.get("satisfied"),
+                        }
+                    )
                 satisfied = all(row.get("satisfied", True) for row in raw_balance)
-                
+
             duration = time.time() - start
             return {
                 "satisfied": satisfied,
@@ -202,4 +200,3 @@ class ValidationOrchestrator:
                 "error": str(e),
                 "method": self.method,
             }
-

@@ -148,7 +148,9 @@ class WorktreeManager:
         if tracking_idx != -1:
             # Read existing tracking lines
             scan_idx = tracking_idx + 1
-            while scan_idx < len(lines) and (lines[scan_idx].startswith("- ") or not lines[scan_idx].strip()):
+            while scan_idx < len(lines) and (
+                lines[scan_idx].startswith("- ") or not lines[scan_idx].strip()
+            ):
                 if lines[scan_idx].startswith("- "):
                     current_tracked.append(lines[scan_idx][2:].strip())
                 scan_idx += 1

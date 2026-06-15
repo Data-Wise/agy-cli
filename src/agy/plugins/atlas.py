@@ -3,6 +3,7 @@ import datetime
 import yaml
 from typing import List, Dict, Any, Optional
 
+
 class AtlasBridge:
     """Reader and parser for Atlas state registries and active sessions."""
 
@@ -19,8 +20,8 @@ class AtlasBridge:
         if not ts_str:
             return None
         # Replace Z with +00:00 for Python 3.9/3.10 compatibility
-        if ts_str.endswith('Z'):
-            ts_str = ts_str[:-1] + '+00:00'
+        if ts_str.endswith("Z"):
+            ts_str = ts_str[:-1] + "+00:00"
         try:
             return datetime.datetime.fromisoformat(ts_str)
         except ValueError:
@@ -76,7 +77,7 @@ class AtlasBridge:
                     "startTime": start_time_str,
                     "duration": duration,
                     "context": context,
-                    "description": context_desc or session.get("task") or "Active work session"
+                    "description": context_desc or session.get("task") or "Active work session",
                 }
         return None
 
@@ -141,6 +142,7 @@ class AtlasBridge:
 
         # 2. Add new session
         import uuid
+
         session_id = f"session-{uuid.uuid4().hex[:8]}"
         new_session = {
             "id": session_id,
@@ -150,9 +152,7 @@ class AtlasBridge:
             "endTime": None,
             "state": "active",
             "outcome": None,
-            "context": {
-                "description": description
-            }
+            "context": {"description": description},
         }
         sessions.append(new_session)
 
@@ -164,10 +164,12 @@ class AtlasBridge:
             "project": project,
             "task": task,
             "startTime": now_str,
-            "description": description
+            "description": description,
         }
 
-    def add_breadcrumb(self, text: str, type_str: str = "command", project: Optional[str] = None) -> Dict[str, Any]:
+    def add_breadcrumb(
+        self, text: str, type_str: str = "command", project: Optional[str] = None
+    ) -> Dict[str, Any]:
         """
         Adds a new breadcrumb to the registry trail.
         """
@@ -189,13 +191,14 @@ class AtlasBridge:
             proj_name = active.get("project") if active else "N/A"
 
         import uuid
+
         crumb_id = f"crumb-{uuid.uuid4().hex[:8]}"
         new_crumb = {
             "id": crumb_id,
             "text": text,
             "type": type_str,
             "project": proj_name,
-            "timestamp": now_str
+            "timestamp": now_str,
         }
 
         # Prepend to breadcrumbs for LIFO order

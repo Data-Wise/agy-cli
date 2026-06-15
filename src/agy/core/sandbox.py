@@ -1,11 +1,9 @@
-import os
 import sqlite3
 import yaml
-import json
 import numpy as np
 import pandas as pd
 from pathlib import Path
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any
 
 
 class SandboxVault:
@@ -33,9 +31,24 @@ class SandboxVault:
 
         # 1. Generate Markdown Notes
         notes = [
-            {"id": "note1", "title": "Orphan Causal Note", "filename": "orphan_causal.md", "content": "# Orphan Causal Note\nNo links here."},
-            {"id": "note2", "title": "Confounder Hub Note", "filename": "confounder_hub.md", "content": "# Confounder Hub Note\nLinks to [[target_outcome]] and [[broken_target]]."},
-            {"id": "note3", "title": "Target Outcome Note", "filename": "target_outcome.md", "content": "# Target Outcome Note\nNo links."},
+            {
+                "id": "note1",
+                "title": "Orphan Causal Note",
+                "filename": "orphan_causal.md",
+                "content": "# Orphan Causal Note\nNo links here.",
+            },
+            {
+                "id": "note2",
+                "title": "Confounder Hub Note",
+                "filename": "confounder_hub.md",
+                "content": "# Confounder Hub Note\nLinks to [[target_outcome]] and [[broken_target]].",
+            },
+            {
+                "id": "note3",
+                "title": "Target Outcome Note",
+                "filename": "target_outcome.md",
+                "content": "# Target Outcome Note\nNo links.",
+            },
         ]
         self._write_markdown_notes(notes)
 
@@ -73,9 +86,10 @@ class SandboxVault:
 
     def _create_sqlite_db(self, db_path: Path, violations: bool):
         conn = sqlite3.connect(db_path)
-        
+
         # Create Tables
-        conn.execute("""
+        conn.execute(
+            """
             CREATE TABLE notes (
                 id TEXT PRIMARY KEY,
                 vault_id TEXT,
@@ -83,8 +97,10 @@ class SandboxVault:
                 title TEXT,
                 modified_at TIMESTAMP
             )
-        """)
-        conn.execute("""
+        """
+        )
+        conn.execute(
+            """
             CREATE TABLE links (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 source_note_id TEXT,
@@ -92,52 +108,71 @@ class SandboxVault:
                 target_path TEXT,
                 link_type TEXT
             )
-        """)
-        conn.execute("""
+        """
+        )
+        conn.execute(
+            """
             CREATE TABLE graph_metrics (
                 note_id TEXT PRIMARY KEY,
                 pagerank REAL,
                 in_degree INTEGER,
                 out_degree INTEGER
             )
-        """)
+        """
+        )
 
         # Create standard views expected by ObsidianBridge
-        conn.execute("""
+        conn.execute(
+            """
             CREATE VIEW orphaned_notes AS
             SELECT n.id, n.vault_id, n.path, n.title, n.modified_at
             FROM notes n
             LEFT JOIN links l_out ON n.id = l_out.source_note_id
             LEFT JOIN links l_in ON n.id = l_in.target_note_id
             WHERE l_out.id IS NULL AND l_in.id IS NULL
-        """)
-        conn.execute("""
+        """
+        )
+        conn.execute(
+            """
             CREATE VIEW hub_notes AS
             SELECT n.id, n.vault_id, n.path, n.title, gm.pagerank, gm.in_degree, gm.out_degree, (gm.in_degree + gm.out_degree) as total_degree
             FROM notes n
             JOIN graph_metrics gm ON n.id = gm.note_id
-        """)
-        conn.execute("""
+        """
+        )
+        conn.execute(
+            """
             CREATE VIEW broken_links AS
             SELECT n.path as source_path, n.title as source_title, l.target_path, COUNT(*) as broken_count
             FROM links l
             JOIN notes n ON l.source_note_id = n.id
             WHERE l.link_type = 'broken'
             GROUP BY l.source_note_id, l.target_path
-        """)
+        """
+        )
 
         # Insert Mock Notes
-        conn.execute("INSERT INTO notes VALUES ('note1', 'vault-sandbox', 'notes/orphan_causal.md', 'Orphan Causal Note', '2026-06-14 12:00:00')")
-        conn.execute("INSERT INTO notes VALUES ('note2', 'vault-sandbox', 'notes/confounder_hub.md', 'Confounder Hub Note', '2026-06-14 12:01:00')")
-        conn.execute("INSERT INTO notes VALUES ('note3', 'vault-sandbox', 'notes/target_outcome.md', 'Target Outcome Note', '2026-06-14 12:02:00')")
+        conn.execute(
+            "INSERT INTO notes VALUES ('note1', 'vault-sandbox', 'notes/orphan_causal.md', 'Orphan Causal Note', '2026-06-14 12:00:00')"
+        )
+        conn.execute(
+            "INSERT INTO notes VALUES ('note2', 'vault-sandbox', 'notes/confounder_hub.md', 'Confounder Hub Note', '2026-06-14 12:01:00')"
+        )
+        conn.execute(
+            "INSERT INTO notes VALUES ('note3', 'vault-sandbox', 'notes/target_outcome.md', 'Target Outcome Note', '2026-06-14 12:02:00')"
+        )
 
         # Insert Mock Links
         # Link note2 -> note3 (internal)
-        conn.execute("INSERT INTO links (source_note_id, target_note_id, target_path, link_type) VALUES ('note2', 'note3', 'notes/target_outcome.md', 'internal')")
-        
+        conn.execute(
+            "INSERT INTO links (source_note_id, target_note_id, target_path, link_type) VALUES ('note2', 'note3', 'notes/target_outcome.md', 'internal')"
+        )
+
         # If violations are enabled, create a broken link note2 -> broken_target.md
         if violations:
-            conn.execute("INSERT INTO links (source_note_id, target_note_id, target_path, link_type) VALUES ('note2', NULL, 'notes/broken_target.md', 'broken')")
+            conn.execute(
+                "INSERT INTO links (source_note_id, target_note_id, target_path, link_type) VALUES ('note2', NULL, 'notes/broken_target.md', 'broken')"
+            )
 
         # Insert Graph Metrics
         conn.execute("INSERT INTO graph_metrics VALUES ('note1', 0.15, 0, 0)")
@@ -174,7 +209,7 @@ class SandboxVault:
     def _create_study_design(self, design_path: Path, data_path: Path, violations: bool):
         # We write relative path to the data file
         relative_data_path = f"data/{data_path.name}"
-        
+
         if violations:
             # Violations design:
             # 1. Positivity: we adjust for X, but in the data W = X (p_treatment is 0 or 1).
@@ -187,8 +222,8 @@ class SandboxVault:
                 "dag": "X -> W, X -> Y, W -> Y, Z -> W, Z -> Y",
                 "sutva_responses": {
                     "interference": "yes",  # SUTVA violation
-                    "treatment_variation": "no"
-                }
+                    "treatment_variation": "no",
+                },
             }
         else:
             # Satisfied design
@@ -198,10 +233,7 @@ class SandboxVault:
                 "covariates": ["X"],
                 "data": relative_data_path,
                 "dag": "X -> W, X -> Y, W -> Y",
-                "sutva_responses": {
-                    "interference": "no",
-                    "treatment_variation": "no"
-                }
+                "sutva_responses": {"interference": "no", "treatment_variation": "no"},
             }
 
         with open(design_path, "w") as f:
@@ -215,9 +247,7 @@ class SandboxVault:
                 "task": "Integration Testing",
                 "startTime": "2026-06-14T21:00:00Z",
                 "state": "active",
-                "context": {
-                    "description": "Verifying sandbox generator code"
-                }
+                "context": {"description": "Verifying sandbox generator code"},
             }
         ]
 
@@ -228,16 +258,12 @@ class SandboxVault:
                     "text": "Created sandbox directory",
                     "type": "command",
                     "project": "agy-sandbox",
-                    "timestamp": "2026-06-14T21:05:00Z"
+                    "timestamp": "2026-06-14T21:05:00Z",
                 }
             ],
             "captures": [
-                {
-                    "id": "cap-sandbox-1",
-                    "text": "Triaged sandbox item",
-                    "status": "inbox"
-                }
-            ]
+                {"id": "cap-sandbox-1", "text": "Triaged sandbox item", "status": "inbox"}
+            ],
         }
 
         with open(sessions_path, "w") as f:

@@ -3,6 +3,7 @@ import sqlite3
 import re
 from typing import List, Dict, Any
 
+
 class ObsidianBridge:
     """Database connector and query executor for Obsidian vaults."""
 
@@ -21,7 +22,9 @@ class ObsidianBridge:
                         with open(config_path, "r") as f:
                             content = f.read()
                             # In case db path is defined in config file in the future
-                            match = re.search(r'^OBS_DB=["\']?([^"\']+)["\']?', content, re.MULTILINE)
+                            match = re.search(
+                                r'^OBS_DB=["\']?([^"\']+)["\']?', content, re.MULTILINE
+                            )
                             if match:
                                 self.db_path = os.path.expanduser(match.group(1))
                     except Exception:
@@ -41,7 +44,9 @@ class ObsidianBridge:
             with self.get_connection() as conn:
                 # Try querying the orphaned_notes view first
                 try:
-                    cursor = conn.execute("SELECT id, title, path, vault_id, modified_at FROM orphaned_notes")
+                    cursor = conn.execute(
+                        "SELECT id, title, path, vault_id, modified_at FROM orphaned_notes"
+                    )
                     return [dict(row) for row in cursor.fetchall()]
                 except sqlite3.OperationalError:
                     # Fallback to raw query if view doesn't exist
@@ -88,7 +93,9 @@ class ObsidianBridge:
             with self.get_connection() as conn:
                 # Try querying broken_links view first
                 try:
-                    cursor = conn.execute("SELECT source_path, source_title, target_path, broken_count FROM broken_links")
+                    cursor = conn.execute(
+                        "SELECT source_path, source_title, target_path, broken_count FROM broken_links"
+                    )
                     return [dict(row) for row in cursor.fetchall()]
                 except sqlite3.OperationalError:
                     # Fallback to raw query if view doesn't exist
