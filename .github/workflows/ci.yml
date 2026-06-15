@@ -31,7 +31,7 @@ jobs:
       - name: Install R System Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev gfortran
+          sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev gfortran libfontconfig1-dev libharfbuzz-dev libfribidi-dev libfreetype6-dev libpng-dev libtiff-dev libjpeg-dev
 
       - name: Install R Packages
         run: |
@@ -39,9 +39,10 @@ jobs:
             libs <- c("dplyr", "ggplot2", "dagitty", "ggdag")
             missing <- libs[!libs %in% installed.packages()[,"Package"]]
             if (length(missing) > 0) {
-              install.packages(missing, repos="https://cloud.r-project.org")
+              install.packages(missing, repos="https://packagemanager.posit.co/cran/__linux__/jammy/latest")
             }
           '
+
 
       - name: Set up Python
         uses: actions/setup-python@v5
