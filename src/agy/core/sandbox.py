@@ -88,8 +88,7 @@ class SandboxVault:
         conn = sqlite3.connect(db_path)
 
         # Create Tables
-        conn.execute(
-            """
+        conn.execute("""
             CREATE TABLE notes (
                 id TEXT PRIMARY KEY,
                 vault_id TEXT,
@@ -97,10 +96,8 @@ class SandboxVault:
                 title TEXT,
                 modified_at TIMESTAMP
             )
-        """
-        )
-        conn.execute(
-            """
+        """)
+        conn.execute("""
             CREATE TABLE links (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 source_note_id TEXT,
@@ -108,48 +105,39 @@ class SandboxVault:
                 target_path TEXT,
                 link_type TEXT
             )
-        """
-        )
-        conn.execute(
-            """
+        """)
+        conn.execute("""
             CREATE TABLE graph_metrics (
                 note_id TEXT PRIMARY KEY,
                 pagerank REAL,
                 in_degree INTEGER,
                 out_degree INTEGER
             )
-        """
-        )
+        """)
 
         # Create standard views expected by ObsidianBridge
-        conn.execute(
-            """
+        conn.execute("""
             CREATE VIEW orphaned_notes AS
             SELECT n.id, n.vault_id, n.path, n.title, n.modified_at
             FROM notes n
             LEFT JOIN links l_out ON n.id = l_out.source_note_id
             LEFT JOIN links l_in ON n.id = l_in.target_note_id
             WHERE l_out.id IS NULL AND l_in.id IS NULL
-        """
-        )
-        conn.execute(
-            """
+        """)
+        conn.execute("""
             CREATE VIEW hub_notes AS
             SELECT n.id, n.vault_id, n.path, n.title, gm.pagerank, gm.in_degree, gm.out_degree, (gm.in_degree + gm.out_degree) as total_degree
             FROM notes n
             JOIN graph_metrics gm ON n.id = gm.note_id
-        """
-        )
-        conn.execute(
-            """
+        """)
+        conn.execute("""
             CREATE VIEW broken_links AS
             SELECT n.path as source_path, n.title as source_title, l.target_path, COUNT(*) as broken_count
             FROM links l
             JOIN notes n ON l.source_note_id = n.id
             WHERE l.link_type = 'broken'
             GROUP BY l.source_note_id, l.target_path
-        """
-        )
+        """)
 
         # Insert Mock Notes
         conn.execute(

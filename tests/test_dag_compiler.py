@@ -19,13 +19,11 @@ def test_parse_dag_string_chained():
 
 
 def test_parse_dag_string_newlines_and_spaces():
-    nodes, edges = parse_dag_string(
-        """
+    nodes, edges = parse_dag_string("""
         W -> Y
         X -> W
         X -> Y
-    """
-    )
+    """)
     assert sorted(nodes) == ["W", "X", "Y"]
     assert len(edges) == 3
     assert ("W", "Y") in edges
