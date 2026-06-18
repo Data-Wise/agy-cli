@@ -1,19 +1,51 @@
 site_name: agy-cli
-site_description: Core engine for Antigravity (Gemini CLI)
-site_author: Statistics Research Assistant
+site_description: "agy — CLI for causal inference: verify assumptions, compile DAGs to R, audit Obsidian vaults, run R package checks."
+site_url: https://data-wise.github.io/agy-cli/
+site_author: Data-Wise Research
+
+repo_name: Data-Wise/agy-cli
+repo_url: https://github.com/Data-Wise/agy-cli
+edit_uri: edit/main/docs/
 
 theme:
   name: material
+  favicon: img/favicon.png
+  logo: img/logo.png
   palette:
     scheme: slate
     primary: indigo
-    accent: indigo
+    accent: deep purple
+  font:
+    text: Inter
+    code: JetBrains Mono
+  icon:
+    repo: fontawesome/brands/github
+    admonition:
+      note: octicons/tag-16
+      tip: octicons/squirrel-16
+      warning: octicons/alert-16
   features:
+    - navigation.tabs
+    - navigation.tabs.sticky
     - navigation.sections
+    - navigation.indexes
+    - navigation.top
     - navigation.expand
+    - navigation.footer
     - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+    - search.highlight
+    - search.share
+    - search.suggest
+    - toc.follow
 
 markdown_extensions:
+  - attr_list
+  - md_in_html
+  - tables
+  - admonition
+  - pymdownx.details
   - pymdownx.highlight:
       anchor_linenums: true
       line_spans: __span
@@ -21,8 +53,16 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - pymdownx.arithmatex:
       generic: true
+  - toc:
+      permalink: true
+      title: On this page
 
 extra_css:
   - stylesheets/extra.css
@@ -31,23 +71,43 @@ extra_javascript:
   - javascripts/mathjax.js
   - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
 
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Data-Wise/agy-cli
+  copyright: "&copy; 2024 Data-Wise Research &middot; MIT License"
+
 nav:
   - Home: index.md
-  - Guides:
-      - Command Reference: guides/commands.md
-      - Causal Inference Assumptions: guides/causal_inference.md
-      - Covariate Balance & SMD: guides/balance_tutorial.md
-      - Asymptotic Theory & EIF: guides/asymptotic_theory.md
-      - R Package Validation: guides/rforge_tutorial.md
-      - Obsidian & Atlas Plugins: guides/plugins.md
-      - Testing & Sandbox Vaults: guides/sandbox.md
-      - Development & CI Workflows: guides/development_workflows.md
-  - Specs & Contributing:
-      - Branch Workflow: contributing/BRANCH-WORKFLOW.md
-      - Implementation Roadmap: specs/SPEC-agy-cli-roadmap.md
-      - Optimization Spec: specs/SPEC-agy-cli-optimization.md
-      - Worktree Rules: specs/SPEC-worktree-rules.md
-      - Causal Engine Plan: specs/PLAN-causal-engine.md
-      - Plugin Plan: specs/PLAN-plugin-integrations.md
 
+  - Tutorials:
+      - tutorials/index.md
+      - "1 · Get Started":           tutorials/01-getting-started.md
+      - "2 · Causal Assumptions":    tutorials/02-causal-assumptions.md
+      - "3 · DAG Compiler":          tutorials/03-dag-compiler.md
+      - "4 · Covariate Balance":     guides/balance_tutorial.md
+      - "5 · Obsidian Vault Audit":  guides/plugins.md
+      - "6 · Atlas Session Sync":    tutorials/06-atlas-session.md
+      - "7 · R Package Harness":     guides/rforge_tutorial.md
+      - "8 · Sandbox Vaults":        guides/sandbox.md
 
+  - Reference:
+      - reference/index.md
+      - Command Reference:           guides/commands.md
+      - Asymptotic Theory & EIF:     guides/asymptotic_theory.md
+      - Worktree Workflow:           reference/worktree.md
+      - Development & CI:            guides/development_workflows.md
+
+  - Specs:
+      - specs/index.md
+      - Implementation Roadmap:      specs/SPEC-agy-cli-roadmap.md
+      - Optimization Spec:           specs/SPEC-agy-cli-optimization.md
+      - Worktree Rules:              specs/SPEC-worktree-rules.md
+      - Causal Engine Plan:          specs/PLAN-causal-engine.md
+      - Plugin Integration Plan:     specs/PLAN-plugin-integrations.md
+
+  - Changelog: changelog.md
+
+  - Contributing:
+      - contributing/index.md
+      - Branch Workflow:             contributing/BRANCH-WORKFLOW.md
