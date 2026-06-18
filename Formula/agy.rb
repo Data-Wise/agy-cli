@@ -2,7 +2,7 @@ class Agy < Formula
   desc "Causal inference assumption validator and workspace state synchronization CLI"
   homepage "https://github.com/Data-Wise/agy-cli"
   url "https://github.com/Data-Wise/agy-cli/archive/refs/tags/v0.1.0.tar.gz"
-  sha256 "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855" # Placeholder for release hash
+  sha256 "93899f321f6d1ab888ed03d0ee680ab5e197f5cbb3112546d91c81c8422b8d27" # Placeholder for release hash
   license "MIT"
 
   depends_on "python@3.10"
