@@ -12,10 +12,17 @@
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Installation & Quick Start
 
 ### Installation
-Clone the repository and run dependencies sync:
+
+#### Option 1: Homebrew (Recommended)
+```bash
+brew tap data-wise/tap
+brew install agy
+```
+
+#### Option 2: Source Installation
 ```bash
 git clone git@github.com:Data-Wise/agy-cli.git
 cd agy-cli

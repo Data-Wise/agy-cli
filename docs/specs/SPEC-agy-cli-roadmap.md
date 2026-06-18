@@ -66,4 +66,4 @@ gantt
 *   **Tasks:**
     *   [x] **MkDocs:** Configure `mkdocs.yml` using the Material theme, detailing the causal workflow guides.
     *   [x] **Man Page:** Create a Unix man page `agy.1` to document all CLI commands.
-    *   [ ] **Homebrew Tap:** Write a Ruby formula and integrate with GitHub release actions to distribute `agy-cli` via Homebrew.
+    *   [x] **Homebrew Tap:** Write a Ruby formula and integrate with GitHub release actions to distribute `agy-cli` via Homebrew.
