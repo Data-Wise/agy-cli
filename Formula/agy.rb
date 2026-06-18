@@ -5,12 +5,12 @@ class Agy < Formula
   sha256 "84d412503540f905545ada224a959929024bfc516a6245c9c99c039acd3a0c18" # Placeholder for release hash
   license "MIT"
 
-  depends_on "python@3.10"
+  depends_on "python@3.12"
 
   include Language::Python::Virtualenv
 
   def install
-    venv = virtualenv_create(libexec, "python3.10")
+    venv = virtualenv_create(libexec, "python3.12")
     
     # Install dependencies explicitly to ensure correct version pinning in virtualenv
     venv.pip_install "click>=8.1.0"
