@@ -2,16 +2,26 @@ class Agy < Formula
   desc "Causal inference assumption validator and workspace state synchronization CLI"
   homepage "https://github.com/Data-Wise/agy-cli"
   url "https://github.com/Data-Wise/agy-cli/archive/refs/tags/v0.1.0.tar.gz"
-  sha256 "93899f321f6d1ab888ed03d0ee680ab5e197f5cbb3112546d91c81c8422b8d27" # Placeholder for release hash
+  sha256 "84d412503540f905545ada224a959929024bfc516a6245c9c99c039acd3a0c18" # Placeholder for release hash
   license "MIT"
 
-  depends_on "python@3.10"
+  depends_on "python@3.12"
 
   include Language::Python::Virtualenv
 
   def install
-    virtualenv_create(libexec, "python3.10")
-    system libexec/"bin/pip", "install", "-v", "--ignore-installed", buildpath
+    venv = virtualenv_create(libexec, "python3.12")
+    
+    # Install dependencies explicitly to ensure correct version pinning in virtualenv
+    venv.pip_install "click>=8.1.0"
+    venv.pip_install "rich>=13.7.0"
+    venv.pip_install "PyYAML>=6.0"
+    venv.pip_install "networkx>=3.2"
+    venv.pip_install "pandas>=2.0.0"
+    venv.pip_install "numpy>=1.24.0"
+    venv.pip_install "requests>=2.31.0"
+    
+    venv.pip_install buildpath
     bin.install_symlink libexec/"bin/agy"
   end
 
