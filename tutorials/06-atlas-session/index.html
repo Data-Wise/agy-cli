@@ -12,13 +12,13 @@
         <meta name="author" content="Data-Wise Research">
       
       
-        <link rel="canonical" href="https://data-wise.github.io/agy-cli/guides/balance_tutorial/">
+        <link rel="canonical" href="https://data-wise.github.io/agy-cli/tutorials/06-atlas-session/">
       
       
-        <link rel="prev" href="../../tutorials/03-dag-compiler/">
+        <link rel="prev" href="../../guides/plugins/">
       
       
-        <link rel="next" href="../plugins/">
+        <link rel="next" href="../../guides/rforge_tutorial/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>4 · Covariate Balance - agy-cli</title>
+        <title>6 · Atlas Session Sync - agy-cli</title>
       
     
     
@@ -100,7 +100,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#covariate-balance-tutorial-standardized-mean-difference" class="md-skip">
+        <a href="#tutorial-5-atlas-session-sync" class="md-skip">
           Skip to content
         </a>
       
@@ -135,7 +135,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              4 · Covariate Balance
+              6 · Atlas Session Sync
             
           </span>
         </div>
@@ -244,7 +244,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../../tutorials/" class="md-tabs__link">
+        <a href="../" class="md-tabs__link">
           
   
   
@@ -471,7 +471,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../tutorials/" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   
@@ -515,7 +515,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tutorials/01-getting-started/" class="md-nav__link">
+      <a href="../01-getting-started/" class="md-nav__link">
         
   
   
@@ -543,7 +543,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tutorials/02-causal-assumptions/" class="md-nav__link">
+      <a href="../02-causal-assumptions/" class="md-nav__link">
         
   
   
@@ -571,7 +571,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tutorials/03-dag-compiler/" class="md-nav__link">
+      <a href="../03-dag-compiler/" class="md-nav__link">
         
   
   
@@ -579,6 +579,62 @@
     
   
     3 · DAG Compiler
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/balance_tutorial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4 · Covariate Balance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/plugins/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5 · Obsidian Vault Audit
   
 
     
@@ -615,7 +671,7 @@
   <span class="md-ellipsis">
     
   
-    4 · Covariate Balance
+    6 · Atlas Session Sync
   
 
     
@@ -633,7 +689,7 @@
   <span class="md-ellipsis">
     
   
-    4 · Covariate Balance
+    6 · Atlas Session Sync
   
 
     
@@ -661,10 +717,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#mathematical-formulation" class="md-nav__link">
+  <a href="#what-is-atlas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        📐 Mathematical Formulation
+        What Is Atlas?
       
     </span>
   </a>
@@ -672,10 +728,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#balance-decision-rules" class="md-nav__link">
+  <a href="#setup" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🚨 Balance Decision Rules
+        Setup
       
     </span>
   </a>
@@ -683,10 +739,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#diagnostics-overlap-estimation" class="md-nav__link">
+  <a href="#step-1-start-a-session" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔍 Diagnostics &amp; Overlap Estimation
+        Step 1 — Start a Session
       
     </span>
   </a>
@@ -694,102 +750,46 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#adjustment-methods" class="md-nav__link">
+  <a href="#step-2-check-session-status" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🛠️ Adjustment Methods
+        Step 2 — Check Session Status
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="🛠️ Adjustment Methods">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-propensity-score-matching-method-matching" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Propensity Score Matching (--method matching)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-inverse-probability-weighting-method-weighting" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Inverse Probability Weighting (--method weighting)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#cli-walkthrough" class="md-nav__link">
+  <a href="#step-3-log-breadcrumbs" class="md-nav__link">
     <span class="md-ellipsis">
       
-        💻 CLI Walkthrough
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="💻 CLI Walkthrough">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-unadjusted-baseline-evaluation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Unadjusted (Baseline) Evaluation
+        Step 3 — Log Breadcrumbs
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#2-propensity-score-matching-evaluation" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#step-4-review-the-trail" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Propensity Score Matching Evaluation
+        Step 4 — Review the Trail
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#3-inverse-probability-weighting-evaluation" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Inverse Probability Weighting Evaluation
+        ✅ What's Next
       
     </span>
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#markdown-report-output" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        📄 Markdown Report Output
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -809,63 +809,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../plugins/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    5 · Obsidian Vault Audit
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../tutorials/06-atlas-session/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    6 · Atlas Session Sync
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../rforge_tutorial/" class="md-nav__link">
+      <a href="../../guides/rforge_tutorial/" class="md-nav__link">
         
   
   
@@ -893,7 +837,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../sandbox/" class="md-nav__link">
+      <a href="../../guides/sandbox/" class="md-nav__link">
         
   
   
@@ -1005,7 +949,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../commands/" class="md-nav__link">
+      <a href="../../guides/commands/" class="md-nav__link">
         
   
   
@@ -1033,7 +977,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../asymptotic_theory/" class="md-nav__link">
+      <a href="../../guides/asymptotic_theory/" class="md-nav__link">
         
   
   
@@ -1089,7 +1033,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../development_workflows/" class="md-nav__link">
+      <a href="../../guides/development_workflows/" class="md-nav__link">
         
   
   
@@ -1505,10 +1449,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#mathematical-formulation" class="md-nav__link">
+  <a href="#what-is-atlas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        📐 Mathematical Formulation
+        What Is Atlas?
       
     </span>
   </a>
@@ -1516,10 +1460,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#balance-decision-rules" class="md-nav__link">
+  <a href="#setup" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🚨 Balance Decision Rules
+        Setup
       
     </span>
   </a>
@@ -1527,10 +1471,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#diagnostics-overlap-estimation" class="md-nav__link">
+  <a href="#step-1-start-a-session" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔍 Diagnostics &amp; Overlap Estimation
+        Step 1 — Start a Session
       
     </span>
   </a>
@@ -1538,102 +1482,46 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#adjustment-methods" class="md-nav__link">
+  <a href="#step-2-check-session-status" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🛠️ Adjustment Methods
+        Step 2 — Check Session Status
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="🛠️ Adjustment Methods">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-propensity-score-matching-method-matching" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Propensity Score Matching (--method matching)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-inverse-probability-weighting-method-weighting" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Inverse Probability Weighting (--method weighting)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#cli-walkthrough" class="md-nav__link">
+  <a href="#step-3-log-breadcrumbs" class="md-nav__link">
     <span class="md-ellipsis">
       
-        💻 CLI Walkthrough
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="💻 CLI Walkthrough">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-unadjusted-baseline-evaluation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Unadjusted (Baseline) Evaluation
+        Step 3 — Log Breadcrumbs
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#2-propensity-score-matching-evaluation" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#step-4-review-the-trail" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Propensity Score Matching Evaluation
+        Step 4 — Review the Trail
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#3-inverse-probability-weighting-evaluation" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Inverse Probability Weighting Evaluation
+        ✅ What's Next
       
     </span>
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#markdown-report-output" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        📄 Markdown Report Output
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1657,128 +1545,120 @@
   
 
 
-<h1 id="covariate-balance-tutorial-standardized-mean-difference">Covariate Balance Tutorial (Standardized Mean Difference)<a class="headerlink" href="#covariate-balance-tutorial-standardized-mean-difference" title="Permanent link">&para;</a></h1>
-<p><strong>BLUF:</strong> Standardized Mean Difference (<span class="arithmatex">\(SMD\)</span>) measures covariate balance between treated and control groups. Any covariate with <span class="arithmatex">\(SMD &gt; 0.1\)</span> is flagged as imbalanced.</p>
+<h1 id="tutorial-5-atlas-session-sync">Tutorial 5 · Atlas Session Sync<a class="headerlink" href="#tutorial-5-atlas-session-sync" title="Permanent link">&para;</a></h1>
+<p><strong>Goal:</strong> Use <code>agy atlas</code> to start work sessions, track breadcrumbs, and review your activity trail — an ADHD-friendly context log for long research workflows.</p>
 <hr />
-<h2 id="mathematical-formulation">📐 Mathematical Formulation<a class="headerlink" href="#mathematical-formulation" title="Permanent link">&para;</a></h2>
-<p>For a given covariate <span class="arithmatex">\(X\)</span>, the Standardized Mean Difference (<span class="arithmatex">\(SMD\)</span>) between the treated group (<span class="arithmatex">\(W=1\)</span>) and the control group (<span class="arithmatex">\(W=0\)</span>) is defined as:</p>
-<div class="arithmatex">\[SMD = \frac{\bar{X}_1 - \bar{X}_0}{\sqrt{\frac{s_1^2 + s_0^2}{2}}}\]</div>
-<p>Where:
-*   <span class="arithmatex">\(\bar{X}_1\)</span> and <span class="arithmatex">\(\bar{X}_0\)</span> are the sample means of the covariate in the treated and control groups.
-*   <span class="arithmatex">\(s_1^2\)</span> and <span class="arithmatex">\(s_0^2\)</span> are the sample variances of the covariate in the treated and control groups.</p>
-<hr />
-<h2 id="balance-decision-rules">🚨 Balance Decision Rules<a class="headerlink" href="#balance-decision-rules" title="Permanent link">&para;</a></h2>
+<h2 id="what-is-atlas">What Is Atlas?<a class="headerlink" href="#what-is-atlas" title="Permanent link">&para;</a></h2>
+<p>Atlas is <code>agy</code>'s session synchronizer. It bridges your CLI workflow with a persistent breadcrumb trail so you can answer "what was I doing?" at any point.</p>
 <ul>
-<li><strong>Balanced:</strong> <span class="arithmatex">\(SMD \le 0.1\)</span>. The covariate distributions are sufficiently similar.</li>
-<li><strong>Imbalanced:</strong> <span class="arithmatex">\(SMD &gt; 0.1\)</span>. The distributions differ significantly, requiring adjustment (e.g., matching or weighting).</li>
+<li><strong>Sessions</strong> — named work contexts (project + task + duration)</li>
+<li><strong>Breadcrumbs</strong> — timestamped log entries tied to a session</li>
+<li><strong>Trail</strong> — ordered history of recent activity</li>
 </ul>
 <hr />
-<h2 id="diagnostics-overlap-estimation">🔍 Diagnostics &amp; Overlap Estimation<a class="headerlink" href="#diagnostics-overlap-estimation" title="Permanent link">&para;</a></h2>
-<p>Propensity score models are estimated via logistic regression:</p>
-<div class="arithmatex">\[e(X) = P(W = 1 \mid X)\]</div>
-<p>Estimated in R using:
-<div class="language-R highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">fit</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">glm</span><span class="p">(</span><span class="n">W</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">X1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">X2</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">binomial</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">)</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">ps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="n">fit</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;response&quot;</span><span class="p">)</span>
-</span></code></pre></div></p>
-<p>Evaluating propensity score overlap ensures that:</p>
-<div class="arithmatex">\[0 &lt; e(X) &lt; 1\]</div>
-<p>Which satisfies the <strong>Positivity</strong> assumption.</p>
-<hr />
-<h2 id="adjustment-methods">🛠️ Adjustment Methods<a class="headerlink" href="#adjustment-methods" title="Permanent link">&para;</a></h2>
-<p>When raw covariate balance is violated, we can adjust using one of the following methods via the <code>--method</code> option:</p>
-<h3 id="1-propensity-score-matching-method-matching">1. Propensity Score Matching (<code>--method matching</code>)<a class="headerlink" href="#1-propensity-score-matching-method-matching" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>Mechanism:</strong> Performs 1:1 nearest neighbor greedy matching without replacement.</li>
-<li><strong>Result:</strong> Outputs standard covariate means, variances, and Standardized Mean Differences (<span class="arithmatex">\(SMD\)</span>) calculated on the matched subgroup.</li>
-</ul>
-<h3 id="2-inverse-probability-weighting-method-weighting">2. Inverse Probability Weighting (<code>--method weighting</code>)<a class="headerlink" href="#2-inverse-probability-weighting-method-weighting" title="Permanent link">&para;</a></h3>
-<ul>
-<li>
-<p><strong>Mechanism:</strong> Computes weights <span class="arithmatex">\(w_i\)</span> for each unit <span class="arithmatex">\(i\)</span>:</p>
-<div class="arithmatex">\[w_i = \frac{W_i}{e(X_i)} + \frac{1 - W_i}{1 - e(X_i)}\]</div>
-</li>
-<li>
-<p><strong>Weighted Mean:</strong></p>
-<div class="arithmatex">\[\bar{X}_{g, w} = \frac{\sum_{i: W_i = g} w_i X_i}{\sum_{i: W_i = g} w_i}\]</div>
-</li>
-<li>
-<p><strong>Weighted Variance (Cochran's Variance with Reliability Weights):</strong></p>
-<div class="arithmatex">\[s^2_{g, w} = \frac{\sum_{i: W_i = g} w_i (X_i - \bar{X}_{g, w})^2}{\sum_{i: W_i = g} w_i - \frac{\sum_{i: W_i = g} w_i^2}{\sum_{i: W_i = g} w_i}}\]</div>
-</li>
-<li>
-<p><strong>Weighted Standardized Mean Difference:</strong></p>
-<div class="arithmatex">\[SMD_w = \frac{\bar{X}_{1, w} - \bar{X}_{0, w}}{\sqrt{\frac{s^2_{1, w} + s^2_{0, w}}{2}}}\]</div>
-</li>
-</ul>
-<hr />
-<h2 id="cli-walkthrough">💻 CLI Walkthrough<a class="headerlink" href="#cli-walkthrough" title="Permanent link">&para;</a></h2>
-<h3 id="1-unadjusted-baseline-evaluation">1. Unadjusted (Baseline) Evaluation<a class="headerlink" href="#1-unadjusted-baseline-evaluation" title="Permanent link">&para;</a></h3>
-<p>To evaluate raw covariate balance:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>agy<span class="w"> </span><span class="nb">eval</span><span class="w"> </span>-t<span class="w"> </span>W<span class="w"> </span>-o<span class="w"> </span>Y<span class="w"> </span>-c<span class="w"> </span>X<span class="w"> </span>-d<span class="w"> </span>./data.csv<span class="w"> </span>-g<span class="w"> </span><span class="s2">&quot;X -&gt; W, X -&gt; Y, W -&gt; Y&quot;</span><span class="w"> </span>--non-interactive
-</span></code></pre></div>
-The CLI prints the unadjusted <span class="arithmatex">\(SMD\)</span> table:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Checking Covariate Balance (Standardized Mean Difference)...
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>✗ Covariate Balance check VIOLATED. Found imbalanced covariates (SMD &gt; 0.1):
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>┌───────────┬────────────────┬────────────────┬────────┬────────────┐
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>│ Covariate │ Mean (Treated) │ Mean (Control) │ SMD    │ Status     │
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>├───────────┼────────────────┼────────────────┼────────┼────────────┤
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>│ X         │ 0.7000         │ 0.3000         │ 0.8718 │ Imbalanced │
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>└───────────┴────────────────┴────────────────┴────────┴────────────┘
-</span></code></pre></div></p>
-<h3 id="2-propensity-score-matching-evaluation">2. Propensity Score Matching Evaluation<a class="headerlink" href="#2-propensity-score-matching-evaluation" title="Permanent link">&para;</a></h3>
-<p>To check balance on matched subgroups:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>agy<span class="w"> </span><span class="nb">eval</span><span class="w"> </span>-t<span class="w"> </span>W<span class="w"> </span>-o<span class="w"> </span>Y<span class="w"> </span>-c<span class="w"> </span>X<span class="w"> </span>-d<span class="w"> </span>./data.csv<span class="w"> </span>-g<span class="w"> </span><span class="s2">&quot;X -&gt; W, X -&gt; Y, W -&gt; Y&quot;</span><span class="w"> </span>--non-interactive<span class="w"> </span>--method<span class="w"> </span>matching
-</span></code></pre></div>
-The CLI output compares before and after adjustment:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Checking Covariate Balance (Standardized Mean Difference)...
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>✗ Covariate Balance check VIOLATED. Found imbalanced covariates (SMD &gt; 0.1):
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>┌───────────┬───────────┬────────────┬───────────────────┐
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>│ Covariate │ SMD (Pre) │ SMD (Post) │ Status (Matching) │
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>├───────────┼───────────┼────────────┼───────────────────┤
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>│ X         │ 0.8718    │ 0.1500     │ Imbalanced        │
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>└───────────┴───────────┴────────────┴───────────────────┘
-</span></code></pre></div></p>
-<h3 id="3-inverse-probability-weighting-evaluation">3. Inverse Probability Weighting Evaluation<a class="headerlink" href="#3-inverse-probability-weighting-evaluation" title="Permanent link">&para;</a></h3>
-<p>To check balance on the weighted sample:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>agy<span class="w"> </span><span class="nb">eval</span><span class="w"> </span>-t<span class="w"> </span>W<span class="w"> </span>-o<span class="w"> </span>Y<span class="w"> </span>-c<span class="w"> </span>X<span class="w"> </span>-d<span class="w"> </span>./data.csv<span class="w"> </span>-g<span class="w"> </span><span class="s2">&quot;X -&gt; W, X -&gt; Y, W -&gt; Y&quot;</span><span class="w"> </span>--non-interactive<span class="w"> </span>--method<span class="w"> </span>weighting
-</span></code></pre></div>
-The CLI output displays the weighted comparison:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Checking Covariate Balance (Standardized Mean Difference)...
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>✔ Covariate Balance check passed. All covariates are balanced (SMD &lt;= 0.1).
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>┌───────────┬───────────┬────────────┬────────────────────┐
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>│ Covariate │ SMD (Pre) │ SMD (Post) │ Status (Weighting) │
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>├───────────┼───────────┼────────────┼────────────────────┤
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>│ X         │ 0.8718    │ 0.0234     │ Balanced           │
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>└───────────┴───────────┴────────────┴────────────────────┘
-</span></code></pre></div></p>
-<h3 id="markdown-report-output">📄 Markdown Report Output<a class="headerlink" href="#markdown-report-output" title="Permanent link">&para;</a></h3>
-<p>All validation results are synthesized to <code>.agy/report.md</code>. For adjusted methods (<code>matching</code> / <code>weighting</code>), the output format includes side-by-side means:</p>
+<h2 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h2>
+<p>Atlas uses two YAML files you point to at runtime:</p>
 <table>
 <thead>
 <tr>
-<th>Covariate</th>
-<th>Mean T (Pre)</th>
-<th>Mean C (Pre)</th>
-<th>SMD (Pre)</th>
-<th>Mean T (Post)</th>
-<th>Mean C (Post)</th>
-<th>SMD (Post)</th>
-<th>Status</th>
+<th>File</th>
+<th>Purpose</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>X</code></td>
-<td>0.7000</td>
-<td>0.3000</td>
-<td>0.8718</td>
-<td>0.5123</td>
-<td>0.5012</td>
-<td>0.0234</td>
-<td>Balanced</td>
+<td><code>sessions.yaml</code></td>
+<td>Stores active and past work sessions</td>
+</tr>
+<tr>
+<td><code>registry.yaml</code></td>
+<td>Stores breadcrumb log entries</td>
+</tr>
+</tbody>
+</table>
+<p>Generate both with a sandbox:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>agy<span class="w"> </span>sandbox<span class="w"> </span>generate<span class="w"> </span>./atlas-test
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="c1"># → creates atlas/sessions.yaml + atlas/registry.yaml</span>
+</span></code></pre></div>
+<p>Or create them manually — both start as empty YAML files (<code>{}</code>).</p>
+<div class="admonition tip">
+<p class="admonition-title">Shortcut</p>
+<p>Export paths as shell aliases to avoid typing <code>--sessions-path</code> every time:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">AGY_SESSIONS</span><span class="o">=</span>~/atlas/sessions.yaml
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">AGY_REGISTRY</span><span class="o">=</span>~/atlas/registry.yaml
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nb">alias</span><span class="w"> </span><span class="nv">agya</span><span class="o">=</span><span class="s2">&quot;agy atlas --sessions-path </span><span class="nv">$AGY_SESSIONS</span><span class="s2"> --registry-path </span><span class="nv">$AGY_REGISTRY</span><span class="s2">&quot;</span>
+</span></code></pre></div></p>
+</div>
+<hr />
+<h2 id="step-1-start-a-session">Step 1 — Start a Session<a class="headerlink" href="#step-1-start-a-session" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>agy<span class="w"> </span>atlas<span class="w"> </span>--sessions-path<span class="w"> </span>~/atlas/sessions.yaml<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span>start-session<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span>--project<span class="w"> </span><span class="s2">&quot;mediation-study&quot;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span>--task<span class="w"> </span><span class="s2">&quot;Fit propensity model&quot;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span>--desc<span class="w"> </span><span class="s2">&quot;Running IPW on RCT dataset v3&quot;</span>
+</span></code></pre></div>
+<p>Output:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>✔ Started active session &#39;sess_abc123&#39; for project &#39;mediation-study&#39;.
+</span></code></pre></div>
+<hr />
+<h2 id="step-2-check-session-status">Step 2 — Check Session Status<a class="headerlink" href="#step-2-check-session-status" title="Permanent link">&para;</a></h2>
+<p>Mid-work, check elapsed time and current task:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>agy<span class="w"> </span>atlas<span class="w"> </span>--sessions-path<span class="w"> </span>~/atlas/sessions.yaml<span class="w"> </span>status
+</span></code></pre></div>
+<p>Output:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>╭─ Active Atlas Session ──────────────────────╮
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>│ Project:     mediation-study                │
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>│ Task:        Fit propensity model           │
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>│ Duration:    00:42:17                       │
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>│ Description: Running IPW on RCT dataset v3  │
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>╰─────────────────────────────────────────────╯
+</span></code></pre></div>
+<hr />
+<h2 id="step-3-log-breadcrumbs">Step 3 — Log Breadcrumbs<a class="headerlink" href="#step-3-log-breadcrumbs" title="Permanent link">&para;</a></h2>
+<p>Log a breadcrumb after each meaningful action:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>agy<span class="w"> </span>atlas<span class="w"> </span>--registry-path<span class="w"> </span>~/atlas/registry.yaml<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span>log-crumb<span class="w"> </span><span class="s2">&quot;Ran eval on RCT dataset — positivity passed&quot;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span>--type<span class="w"> </span><span class="nb">command</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span>--project<span class="w"> </span>mediation-study
+</span></code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>agy<span class="w"> </span>atlas<span class="w"> </span>--registry-path<span class="w"> </span>~/atlas/registry.yaml<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span>log-crumb<span class="w"> </span><span class="s2">&quot;Found SMD &gt; 0.1 for income — switching to matching&quot;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span>--type<span class="w"> </span>note<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span>--project<span class="w"> </span>mediation-study
+</span></code></pre></div>
+<p>Breadcrumb <code>--type</code> options: <code>command</code>, <code>note</code>, <code>file</code>, <code>decision</code>.</p>
+<hr />
+<h2 id="step-4-review-the-trail">Step 4 — Review the Trail<a class="headerlink" href="#step-4-review-the-trail" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>agy<span class="w"> </span>atlas<span class="w"> </span>--registry-path<span class="w"> </span>~/atlas/registry.yaml<span class="w"> </span>trail<span class="w"> </span>--limit<span class="w"> </span><span class="m">10</span>
+</span></code></pre></div>
+<p>Output:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a> Timestamp           │ Type    │ Project          │ Description
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>─────────────────────┼─────────┼──────────────────┼────────────────────────────────
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a> 2024-06-18 14:02:11 │ note    │ mediation-study  │ Found SMD &gt; 0.1 for income
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a> 2024-06-18 13:47:33 │ command │ mediation-study  │ Ran eval on RCT dataset
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a> 2024-06-18 13:20:00 │ command │ dag-spec         │ Compiled DAG to R — dag_v2.R
+</span></code></pre></div>
+<hr />
+<h2 id="whats-next">✅ What's Next<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Ready to...</th>
+<th>Go to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Run R package checks</td>
+<td><a href="../../guides/rforge_tutorial/">Tutorial 7 → R Package Harness</a></td>
+</tr>
+<tr>
+<td>Audit your Obsidian vault</td>
+<td><a href="../../guides/plugins/">Tutorial 5 → Obsidian Vault Audit</a></td>
+</tr>
+<tr>
+<td>Full <code>atlas</code> flags</td>
+<td><a href="../../guides/commands/">Command Reference</a></td>
 </tr>
 </tbody>
 </table>
@@ -1819,7 +1699,7 @@ The CLI output displays the weighted comparison:
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../../tutorials/03-dag-compiler/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 3 · DAG Compiler">
+          <a href="../../guides/plugins/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 5 · Obsidian Vault Audit">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1829,20 +1709,20 @@ The CLI output displays the weighted comparison:
                 Previous
               </span>
               <div class="md-ellipsis">
-                3 · DAG Compiler
+                5 · Obsidian Vault Audit
               </div>
             </div>
           </a>
         
         
           
-          <a href="../plugins/" class="md-footer__link md-footer__link--next" aria-label="Next: 5 · Obsidian Vault Audit">
+          <a href="../../guides/rforge_tutorial/" class="md-footer__link md-footer__link--next" aria-label="Next: 7 · R Package Harness">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                5 · Obsidian Vault Audit
+                7 · R Package Harness
               </div>
             </div>
             <div class="md-footer__button md-icon">

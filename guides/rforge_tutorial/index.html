@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://data-wise.github.io/agy-cli/guides/rforge_tutorial/">
       
       
-        <link rel="prev" href="../plugins/">
+        <link rel="prev" href="../../tutorials/06-atlas-session/">
       
       
         <link rel="next" href="../sandbox/">
@@ -29,7 +29,7 @@
     
     
       
-        <title>6 · R Package Harness - agy-cli</title>
+        <title>7 · R Package Harness - agy-cli</title>
       
     
     
@@ -100,7 +100,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#r-package-validation-bridge-rforge-tutorial" class="md-skip">
+        <a href="#tutorial-7-r-package-harness" class="md-skip">
           Skip to content
         </a>
       
@@ -135,7 +135,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              6 · R Package Harness
+              7 · R Package Harness
             
           </span>
         </div>
@@ -307,6 +307,25 @@
   
   
   
+    <li class="md-tabs__item">
+      <a href="../../changelog/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Changelog
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
     
     
       <li class="md-tabs__item">
@@ -414,6 +433,8 @@
       
         
           
+        
+      
         
       
         
@@ -613,7 +634,35 @@
   <span class="md-ellipsis">
     
   
-    5 · Obsidian & Atlas
+    5 · Obsidian Vault Audit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/06-atlas-session/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6 · Atlas Session Sync
   
 
     
@@ -650,7 +699,7 @@
   <span class="md-ellipsis">
     
   
-    6 · R Package Harness
+    7 · R Package Harness
   
 
     
@@ -668,7 +717,7 @@
   <span class="md-ellipsis">
     
   
-    6 · R Package Harness
+    7 · R Package Harness
   
 
     
@@ -699,7 +748,7 @@
   <a href="#prerequisites" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🛠 Prerequisites
+        Prerequisites
       
     </span>
   </a>
@@ -707,60 +756,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#commands-and-usage" class="md-nav__link">
+  <a href="#step-1-compile-roxygen2-documentation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🚀 Commands and Usage
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🚀 Commands and Usage">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-compile-documentation-rforge-document" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Compile Documentation (rforge document)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-run-unit-tests-rforge-test" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Run Unit Tests (rforge test)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-check-package-integrity-rforge-check" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Check Package Integrity (rforge check)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#recommended-directory-structure" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        📁 Recommended Directory Structure
+        Step 1 — Compile Roxygen2 Documentation
       
     </span>
   </a>
@@ -768,10 +767,54 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-by-step-e2e-package-validation-walkthrough" class="md-nav__link">
+  <a href="#step-2-run-unit-tests" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🏁 Step-by-Step E2E Package Validation Walkthrough
+        Step 2 — Run Unit Tests
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-check-package-integrity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3 — Check Package Integrity
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-4-full-validation-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4 — Full Validation Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recommended-package-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recommended Package Structure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ What's Next
       
     </span>
   </a>
@@ -801,7 +844,7 @@
   <span class="md-ellipsis">
     
   
-    7 · Sandbox Vaults
+    8 · Sandbox Vaults
   
 
     
@@ -1250,6 +1293,33 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
     
     
       
@@ -1274,7 +1344,7 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
         
           
           <div class="md-nav__link md-nav__container">
@@ -1296,14 +1366,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1382,7 +1452,7 @@
   <a href="#prerequisites" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🛠 Prerequisites
+        Prerequisites
       
     </span>
   </a>
@@ -1390,60 +1460,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#commands-and-usage" class="md-nav__link">
+  <a href="#step-1-compile-roxygen2-documentation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🚀 Commands and Usage
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🚀 Commands and Usage">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-compile-documentation-rforge-document" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Compile Documentation (rforge document)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-run-unit-tests-rforge-test" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Run Unit Tests (rforge test)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-check-package-integrity-rforge-check" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Check Package Integrity (rforge check)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#recommended-directory-structure" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        📁 Recommended Directory Structure
+        Step 1 — Compile Roxygen2 Documentation
       
     </span>
   </a>
@@ -1451,10 +1471,54 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-by-step-e2e-package-validation-walkthrough" class="md-nav__link">
+  <a href="#step-2-run-unit-tests" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🏁 Step-by-Step E2E Package Validation Walkthrough
+        Step 2 — Run Unit Tests
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-check-package-integrity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3 — Check Package Integrity
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-4-full-validation-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4 — Full Validation Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recommended-package-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recommended Package Structure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ What's Next
       
     </span>
   </a>
@@ -1481,61 +1545,96 @@
   
 
 
-<h1 id="r-package-validation-bridge-rforge-tutorial">R package Validation Bridge (<code>rforge</code>) Tutorial<a class="headerlink" href="#r-package-validation-bridge-rforge-tutorial" title="Permanent link">&para;</a></h1>
-<p><strong>BLUF:</strong> The <code>agy rforge</code> plugin bridges python validation workflows with R package development by executing <code>devtools</code> commands directly in an R process.</p>
+<h1 id="tutorial-7-r-package-harness">Tutorial 7 · R Package Harness<a class="headerlink" href="#tutorial-7-r-package-harness" title="Permanent link">&para;</a></h1>
+<p><strong>Goal:</strong> Use <code>agy rforge</code> to run <code>devtools::check</code>, <code>devtools::test</code>, and <code>devtools::document</code> directly from the CLI — without opening RStudio.</p>
 <hr />
-<h2 id="prerequisites">🛠 Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>R installation</strong> with the <code>devtools</code> package installed.</li>
-<li><strong>A valid R package directory</strong> containing a <code>DESCRIPTION</code> file.</li>
+<li>R installed with <code>devtools</code> package: <code>install.packages("devtools")</code></li>
+<li>A valid R package directory containing a <code>DESCRIPTION</code> file</li>
 </ul>
 <hr />
-<h2 id="commands-and-usage">🚀 Commands and Usage<a class="headerlink" href="#commands-and-usage" title="Permanent link">&para;</a></h2>
-<p>Execute these commands from your R package directory, or pass the package location via the <code>--pkg-dir</code> option.</p>
-<h3 id="1-compile-documentation-rforge-document">1. Compile Documentation (<code>rforge document</code>)<a class="headerlink" href="#1-compile-documentation-rforge-document" title="Permanent link">&para;</a></h3>
-<p>Generates/updates Rd help files and <code>NAMESPACE</code> from <code>roxygen2</code> comments.
-*   <strong>Command:</strong> <code>agy rforge document [--pkg-dir /path/to/pkg]</code>
-*   <strong>R equivalent:</strong> <code>devtools::document()</code></p>
-<h3 id="2-run-unit-tests-rforge-test">2. Run Unit Tests (<code>rforge test</code>)<a class="headerlink" href="#2-run-unit-tests-rforge-test" title="Permanent link">&para;</a></h3>
-<p>Executes the testing suite in <code>tests/testthat/</code>.
-*   <strong>Command:</strong> <code>agy rforge test [--pkg-dir /path/to/pkg]</code>
-*   <strong>R equivalent:</strong> <code>devtools::test()</code></p>
-<h3 id="3-check-package-integrity-rforge-check">3. Check Package Integrity (<code>rforge check</code>)<a class="headerlink" href="#3-check-package-integrity-rforge-check" title="Permanent link">&para;</a></h3>
-<p>Performs a comprehensive package check without documenting to speed up execution.
-*   <strong>Command:</strong> <code>agy rforge check [--pkg-dir /path/to/pkg]</code>
-*   <strong>R equivalent:</strong> <code>devtools::check(document = FALSE)</code></p>
-<hr />
-<p>Integrate package validation directly into validation workflows:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Verify docs, run tests, and run package checks sequentially</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>agy<span class="w"> </span>rforge<span class="w"> </span>document<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>agy<span class="w"> </span>rforge<span class="w"> </span><span class="nb">test</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>agy<span class="w"> </span>rforge<span class="w"> </span>check
+<h2 id="step-1-compile-roxygen2-documentation">Step 1 — Compile Roxygen2 Documentation<a class="headerlink" href="#step-1-compile-roxygen2-documentation" title="Permanent link">&para;</a></h2>
+<p>Generate/update <code>.Rd</code> help files and <code>NAMESPACE</code> from <code>#'</code> comments:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>agy<span class="w"> </span>rforge<span class="w"> </span>--pkg-dir<span class="w"> </span>./my_r_package<span class="w"> </span>document
+</span></code></pre></div>
+<p><strong>R equivalent:</strong> <code>devtools::document()</code></p>
+<p>Output:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Compiling Roxygen2 documentation...
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>✔ Documentation compiled successfully.
 </span></code></pre></div>
 <hr />
-<h2 id="recommended-directory-structure">📁 Recommended Directory Structure<a class="headerlink" href="#recommended-directory-structure" title="Permanent link">&para;</a></h2>
-<p>To work correctly with <code>agy rforge</code>, ensure your R package directory is structured as follows:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>my_r_package/
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>├── DESCRIPTION         # Required: defines metadata and package dependencies
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>├── NAMESPACE           # Exports and imports functions
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>├── R/
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>│   └── functions.R     # R source code containing Roxygen2 comments
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>└── tests/
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    ├── testthat.R      # Main testing runner
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    └── testthat/       # Test script directory
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>        └── test-func.R # Individual test files
+<h2 id="step-2-run-unit-tests">Step 2 — Run Unit Tests<a class="headerlink" href="#step-2-run-unit-tests" title="Permanent link">&para;</a></h2>
+<p>Execute the test suite in <code>tests/testthat/</code>:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>agy<span class="w"> </span>rforge<span class="w"> </span>--pkg-dir<span class="w"> </span>./my_r_package<span class="w"> </span><span class="nb">test</span>
+</span></code></pre></div>
+<p><strong>R equivalent:</strong> <code>devtools::test()</code></p>
+<p>Output on success:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Running package unit tests...
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>✔ Package unit tests passed.
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>── Test results ──────────────────────────────
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>[ PASS  7 ] test-dag_compiler.R
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>[ PASS  3 ] test-positivity.R
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>[ PASS  5 ] test-balance.R
 </span></code></pre></div>
 <hr />
-<h2 id="step-by-step-e2e-package-validation-walkthrough">🏁 Step-by-Step E2E Package Validation Walkthrough<a class="headerlink" href="#step-by-step-e2e-package-validation-walkthrough" title="Permanent link">&para;</a></h2>
-<p>To validate your package:</p>
-<ol>
-<li><strong>Generate Documentation:</strong> Compile the Roxygen2 markup:
-    <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>agy<span class="w"> </span>rforge<span class="w"> </span>--pkg-dir<span class="w"> </span>./my_r_package<span class="w"> </span>document
-</span></code></pre></div></li>
-<li><strong>Execute Tests:</strong> Validate that all unit test files in <code>tests/testthat/</code> pass:
-    <div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>agy<span class="w"> </span>rforge<span class="w"> </span>--pkg-dir<span class="w"> </span>./my_r_package<span class="w"> </span><span class="nb">test</span>
-</span></code></pre></div></li>
-<li><strong>Run Comprehensive Check:</strong> Verify metadata consistency and CRAN readiness:
-    <div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>agy<span class="w"> </span>rforge<span class="w"> </span>--pkg-dir<span class="w"> </span>./my_r_package<span class="w"> </span>check
-</span></code></pre></div></li>
-</ol>
+<h2 id="step-3-check-package-integrity">Step 3 — Check Package Integrity<a class="headerlink" href="#step-3-check-package-integrity" title="Permanent link">&para;</a></h2>
+<p>Full CRAN-readiness check (skips re-documenting for speed):</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>agy<span class="w"> </span>rforge<span class="w"> </span>--pkg-dir<span class="w"> </span>./my_r_package<span class="w"> </span>check
+</span></code></pre></div>
+<p><strong>R equivalent:</strong> <code>devtools::check(document = FALSE)</code></p>
+<p>Output:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Running package check...
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>✔ Package check passed successfully.
+</span></code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Check failures</p>
+<p>If <code>check</code> fails, look at <code>stderr</code> for <code>ERROR:</code> or <code>WARNING:</code> lines.
+Common causes: missing <code>Imports</code> in <code>DESCRIPTION</code>, undocumented exported functions, or test failures.</p>
+</div>
+<hr />
+<h2 id="step-4-full-validation-pipeline">Step 4 — Full Validation Pipeline<a class="headerlink" href="#step-4-full-validation-pipeline" title="Permanent link">&para;</a></h2>
+<p>Chain all three in sequence for a complete validation run:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>agy<span class="w"> </span>rforge<span class="w"> </span>--pkg-dir<span class="w"> </span>./my_r_package<span class="w"> </span>document<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>agy<span class="w"> </span>rforge<span class="w"> </span>--pkg-dir<span class="w"> </span>./my_r_package<span class="w"> </span><span class="nb">test</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>agy<span class="w"> </span>rforge<span class="w"> </span>--pkg-dir<span class="w"> </span>./my_r_package<span class="w"> </span>check
+</span></code></pre></div>
+<hr />
+<h2 id="recommended-package-structure">Recommended Package Structure<a class="headerlink" href="#recommended-package-structure" title="Permanent link">&para;</a></h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>my_r_package/
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>├── DESCRIPTION         ← Required: metadata, version, dependencies
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>├── NAMESPACE           ← Auto-generated by document
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>├── R/
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>│   └── functions.R     ← Source with roxygen2 comments
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>└── tests/
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>    ├── testthat.R      ← Test runner entry point
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>    └── testthat/
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>        └── test-func.R ← Individual test files
+</span></code></pre></div>
+<hr />
+<h2 id="whats-next">✅ What's Next<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Ready to...</th>
+<th>Go to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Generate test vaults for validation</td>
+<td><a href="../sandbox/">Tutorial 8 → Sandbox Vaults</a></td>
+</tr>
+<tr>
+<td>Read the full <code>rforge</code> flag reference</td>
+<td><a href="../commands/#8-rforge-r-package-bridge">Command Reference</a></td>
+</tr>
+<tr>
+<td>Understand the causal math behind your R package</td>
+<td><a href="../asymptotic_theory/">Asymptotic Theory &amp; EIF</a></td>
+</tr>
+</tbody>
+</table>
 
 
 
@@ -1573,7 +1672,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../plugins/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 5 · Obsidian &amp; Atlas">
+          <a href="../../tutorials/06-atlas-session/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 6 · Atlas Session Sync">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1583,20 +1682,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                5 · Obsidian & Atlas
+                6 · Atlas Session Sync
               </div>
             </div>
           </a>
         
         
           
-          <a href="../sandbox/" class="md-footer__link md-footer__link--next" aria-label="Next: 7 · Sandbox Vaults">
+          <a href="../sandbox/" class="md-footer__link md-footer__link--next" aria-label="Next: 8 · Sandbox Vaults">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                7 · Sandbox Vaults
+                8 · Sandbox Vaults
               </div>
             </div>
             <div class="md-footer__button md-icon">

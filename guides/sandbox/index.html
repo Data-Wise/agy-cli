@@ -29,7 +29,7 @@
     
     
       
-        <title>7 · Sandbox Vaults - agy-cli</title>
+        <title>8 · Sandbox Vaults - agy-cli</title>
       
     
     
@@ -100,7 +100,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#sandbox-vault-generator" class="md-skip">
+        <a href="#tutorial-8-sandbox-vaults" class="md-skip">
           Skip to content
         </a>
       
@@ -135,7 +135,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              7 · Sandbox Vaults
+              8 · Sandbox Vaults
             
           </span>
         </div>
@@ -307,6 +307,25 @@
   
   
   
+    <li class="md-tabs__item">
+      <a href="../../changelog/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Changelog
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
     
     
       <li class="md-tabs__item">
@@ -414,6 +433,8 @@
       
         
           
+        
+      
         
       
         
@@ -613,7 +634,35 @@
   <span class="md-ellipsis">
     
   
-    5 · Obsidian & Atlas
+    5 · Obsidian Vault Audit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/06-atlas-session/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6 · Atlas Session Sync
   
 
     
@@ -641,7 +690,7 @@
   <span class="md-ellipsis">
     
   
-    6 · R Package Harness
+    7 · R Package Harness
   
 
     
@@ -678,7 +727,7 @@
   <span class="md-ellipsis">
     
   
-    7 · Sandbox Vaults
+    8 · Sandbox Vaults
   
 
     
@@ -696,7 +745,7 @@
   <span class="md-ellipsis">
     
   
-    7 · Sandbox Vaults
+    8 · Sandbox Vaults
   
 
     
@@ -724,10 +773,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#cli-usage" class="md-nav__link">
+  <a href="#what-gets-generated" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🛠️ CLI Usage
+        What Gets Generated
       
     </span>
   </a>
@@ -735,30 +784,57 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#python-api-usage" class="md-nav__link">
+  <a href="#step-1-generate-a-clean-vault" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🐍 Python API Usage
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🐍 Python API Usage">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#pytest-fixture-integration" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Pytest Fixture Integration
+        Step 1 — Generate a Clean Vault
       
     </span>
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-generate-with-injected-violations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2 — Generate with Injected Violations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-use-in-pytest-fixtures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3 — Use in Pytest Fixtures
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-4-combine-with-agy-obs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4 — Combine with agy obs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ What's Next
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1206,6 +1282,33 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
     
     
       
@@ -1230,7 +1333,7 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
         
           
           <div class="md-nav__link md-nav__container">
@@ -1252,14 +1355,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1335,10 +1438,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#cli-usage" class="md-nav__link">
+  <a href="#what-gets-generated" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🛠️ CLI Usage
+        What Gets Generated
       
     </span>
   </a>
@@ -1346,30 +1449,57 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#python-api-usage" class="md-nav__link">
+  <a href="#step-1-generate-a-clean-vault" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🐍 Python API Usage
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🐍 Python API Usage">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#pytest-fixture-integration" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Pytest Fixture Integration
+        Step 1 — Generate a Clean Vault
       
     </span>
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-generate-with-injected-violations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2 — Generate with Injected Violations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-use-in-pytest-fixtures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3 — Use in Pytest Fixtures
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-4-combine-with-agy-obs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4 — Combine with agy obs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ What's Next
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1393,44 +1523,98 @@
   
 
 
-<h1 id="sandbox-vault-generator">Sandbox Vault Generator<a class="headerlink" href="#sandbox-vault-generator" title="Permanent link">&para;</a></h1>
-<p>The Sandbox Vault Generator automates creating temporary Obsidian vaults, mock databases, and causal datasets for integration and end-to-end (E2E) testing.</p>
+<h1 id="tutorial-8-sandbox-vaults">Tutorial 8 · Sandbox Vaults<a class="headerlink" href="#tutorial-8-sandbox-vaults" title="Permanent link">&para;</a></h1>
+<p><strong>Goal:</strong> Generate isolated test Obsidian vaults with mock causal datasets and optionally injected assumption violations — for stress-testing the validation engine.</p>
 <hr />
-<h2 id="cli-usage">🛠️ CLI Usage<a class="headerlink" href="#cli-usage" title="Permanent link">&para;</a></h2>
-<p>To generate a test sandbox vault at a specified path:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>agy<span class="w"> </span>sandbox<span class="w"> </span>generate<span class="w"> </span>./my-sandbox-vault
-</span></code></pre></div></p>
-<p>To generate a vault with pre-injected positivity, exchangeability, and SUTVA violations:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>agy<span class="w"> </span>sandbox<span class="w"> </span>generate<span class="w"> </span>./my-sandbox-vault<span class="w"> </span>--violations
-</span></code></pre></div></p>
-<hr />
-<h2 id="python-api-usage">🐍 Python API Usage<a class="headerlink" href="#python-api-usage" title="Permanent link">&para;</a></h2>
-<p>You can use the <code>SandboxVault</code> helper programmatically inside tests and scripts.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">agy.core.sandbox</span><span class="w"> </span><span class="kn">import</span> <span class="n">SandboxVault</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># Instantiate the sandbox helper</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">sandbox</span> <span class="o">=</span> <span class="n">SandboxVault</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;./my-sandbox-vault&quot;</span><span class="p">))</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="c1"># Generate the directory structure, DB, and datasets</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="n">results</span> <span class="o">=</span> <span class="n">sandbox</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">violations</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;db_path&quot;</span><span class="p">])</span>      <span class="c1"># Path to mock sqlite database</span>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;data_path&quot;</span><span class="p">])</span>    <span class="c1"># Path to mock causal CSV dataset</span>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;design_path&quot;</span><span class="p">])</span>  <span class="c1"># Path to study_design.yaml</span>
+<h2 id="what-gets-generated">What Gets Generated<a class="headerlink" href="#what-gets-generated" title="Permanent link">&para;</a></h2>
+<p>A single <code>agy sandbox generate</code> call creates a complete self-contained test environment:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>./my-sandbox/
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>├── vault_db.sqlite          ← Mock Obsidian SQLite graph
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>├── causal_data.csv          ← Observational dataset (treatment, outcome, covariates)
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>├── study_design.yaml        ← Ready-to-use eval config
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>├── atlas/
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>│   ├── sessions.yaml        ← Empty Atlas sessions file
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>│   └── registry.yaml        ← Empty Atlas registry file
 </span></code></pre></div>
-<h3 id="pytest-fixture-integration">Pytest Fixture Integration<a class="headerlink" href="#pytest-fixture-integration" title="Permanent link">&para;</a></h3>
-<p>Define a fixture inside your tests to manage sandboxes cleanly:
-<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">agy.core.sandbox</span><span class="w"> </span><span class="kn">import</span> <span class="n">SandboxVault</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">temp_vault</span><span class="p">(</span><span class="n">tmp_path</span><span class="p">):</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="n">sandbox</span> <span class="o">=</span> <span class="n">SandboxVault</span><span class="p">(</span><span class="n">tmp_path</span> <span class="o">/</span> <span class="s2">&quot;sandbox&quot;</span><span class="p">)</span>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="n">results</span> <span class="o">=</span> <span class="n">sandbox</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">violations</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="k">yield</span> <span class="n">results</span>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    <span class="c1"># Teardown logic if needed (tmp_path is cleaned by pytest automatically)</span>
-</span></code></pre></div></p>
+<hr />
+<h2 id="step-1-generate-a-clean-vault">Step 1 — Generate a Clean Vault<a class="headerlink" href="#step-1-generate-a-clean-vault" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>agy<span class="w"> </span>sandbox<span class="w"> </span>generate<span class="w"> </span>./test-vault
+</span></code></pre></div>
+<p>Output:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>╭─ Sandbox Generator ────────────────────────────────────────────╮
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>│ ✔ Sandbox Vault successfully generated!                        │
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>│                                                                │
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>│ Location:       ./test-vault                                   │
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>│ Obsidian DB:    ./test-vault/vault_db.sqlite                   │
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>│ Causal Data:    ./test-vault/causal_data.csv                   │
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>│ Study Design:   ./test-vault/study_design.yaml                 │
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>│ Atlas Sessions: ./test-vault/atlas/sessions.yaml               │
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>│ Atlas Registry: ./test-vault/atlas/registry.yaml               │
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>│                                                                │
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>│ Violations injected: False                                     │
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>╰────────────────────────────────────────────────────────────────╯
+</span></code></pre></div>
+<hr />
+<h2 id="step-2-generate-with-injected-violations">Step 2 — Generate with Injected Violations<a class="headerlink" href="#step-2-generate-with-injected-violations" title="Permanent link">&para;</a></h2>
+<p>Inject Positivity, Exchangeability, and SUTVA violations for negative testing:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>agy<span class="w"> </span>sandbox<span class="w"> </span>generate<span class="w"> </span>./test-vault-violations<span class="w"> </span>--violations
+</span></code></pre></div>
+<p>Then run eval on it to confirm the engine catches them:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>agy<span class="w"> </span><span class="nb">eval</span><span class="w"> </span>./test-vault-violations/study_design.yaml<span class="w"> </span>--non-interactive
+</span></code></pre></div>
+<p>Expected: all three assumption checks <strong>fail</strong> with violation details.</p>
+<hr />
+<h2 id="step-3-use-in-pytest-fixtures">Step 3 — Use in Pytest Fixtures<a class="headerlink" href="#step-3-use-in-pytest-fixtures" title="Permanent link">&para;</a></h2>
+<p>Integrate sandboxes into your test suite via a <code>pytest</code> fixture:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">agy.core.sandbox</span><span class="w"> </span><span class="kn">import</span> <span class="n">SandboxVault</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">clean_vault</span><span class="p">(</span><span class="n">tmp_path</span><span class="p">):</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    <span class="n">sandbox</span> <span class="o">=</span> <span class="n">SandboxVault</span><span class="p">(</span><span class="n">tmp_path</span> <span class="o">/</span> <span class="s2">&quot;sandbox&quot;</span><span class="p">)</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    <span class="k">return</span> <span class="n">sandbox</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">violations</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="k">def</span><span class="w"> </span><span class="nf">violation_vault</span><span class="p">(</span><span class="n">tmp_path</span><span class="p">):</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>    <span class="n">sandbox</span> <span class="o">=</span> <span class="n">SandboxVault</span><span class="p">(</span><span class="n">tmp_path</span> <span class="o">/</span> <span class="s2">&quot;sandbox&quot;</span><span class="p">)</span>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>    <span class="k">return</span> <span class="n">sandbox</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">violations</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_positivity_violation_detected</span><span class="p">(</span><span class="n">violation_vault</span><span class="p">):</span>
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>    <span class="c1"># eval the generated study_design.yaml</span>
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>    <span class="n">design_path</span> <span class="o">=</span> <span class="n">violation_vault</span><span class="p">[</span><span class="s2">&quot;design_path&quot;</span><span class="p">]</span>
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>    <span class="c1"># ... assert violations are reported</span>
+</span></code></pre></div>
+<hr />
+<h2 id="step-4-combine-with-agy-obs">Step 4 — Combine with <code>agy obs</code><a class="headerlink" href="#step-4-combine-with-agy-obs" title="Permanent link">&para;</a></h2>
+<p>The generated <code>vault_db.sqlite</code> is a valid Obsidian SQLite database — immediately auditable:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>agy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span>./test-vault/vault_db.sqlite<span class="w"> </span>health
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>agy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span>./test-vault/vault_db.sqlite<span class="w"> </span>orphans
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>agy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span>./test-vault/vault_db.sqlite<span class="w"> </span>hubs<span class="w"> </span>--sort<span class="w"> </span>pagerank
+</span></code></pre></div>
+<hr />
+<h2 id="whats-next">✅ What's Next<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Ready to...</th>
+<th>Go to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Understand what violations mean</td>
+<td><a href="../../tutorials/02-causal-assumptions/">Tutorial 2 → Causal Assumptions</a></td>
+</tr>
+<tr>
+<td>Audit the generated vault graph</td>
+<td><a href="../plugins/">Tutorial 5 → Obsidian Vault Audit</a></td>
+</tr>
+<tr>
+<td>Write tests against real CLI output</td>
+<td><a href="../development_workflows/">Development &amp; CI</a></td>
+</tr>
+</tbody>
+</table>
 
 
 
@@ -1468,7 +1652,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../rforge_tutorial/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 6 · R Package Harness">
+          <a href="../rforge_tutorial/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 7 · R Package Harness">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1478,7 +1662,7 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                6 · R Package Harness
+                7 · R Package Harness
               </div>
             </div>
           </a>

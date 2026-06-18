@@ -9,6 +9,10 @@
          <lastmod>2026-06-18</lastmod>
     </url>
     <url>
+         <loc>https://data-wise.github.io/agy-cli/changelog/</loc>
+         <lastmod>2026-06-18</lastmod>
+    </url>
+    <url>
          <loc>https://data-wise.github.io/agy-cli/contributing/</loc>
          <lastmod>2026-06-18</lastmod>
     </url>
@@ -101,7 +105,7 @@
          <lastmod>2026-06-18</lastmod>
     </url>
     <url>
-         <loc>https://data-wise.github.io/agy-cli/tutorials/04-atlas-session/</loc>
+         <loc>https://data-wise.github.io/agy-cli/tutorials/06-atlas-session/</loc>
          <lastmod>2026-06-18</lastmod>
     </url>
 </urlset>

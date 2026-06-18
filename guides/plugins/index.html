@@ -18,7 +18,7 @@
         <link rel="prev" href="../balance_tutorial/">
       
       
-        <link rel="next" href="../rforge_tutorial/">
+        <link rel="next" href="../../tutorials/06-atlas-session/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>5 · Obsidian & Atlas - agy-cli</title>
+        <title>5 · Obsidian Vault Audit - agy-cli</title>
       
     
     
@@ -100,7 +100,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#plugins-obsidian-atlas-integrations" class="md-skip">
+        <a href="#tutorial-5-obsidian-vault-audit" class="md-skip">
           Skip to content
         </a>
       
@@ -135,7 +135,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              5 · Obsidian & Atlas
+              5 · Obsidian Vault Audit
             
           </span>
         </div>
@@ -307,6 +307,25 @@
   
   
   
+    <li class="md-tabs__item">
+      <a href="../../changelog/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Changelog
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
     
     
       <li class="md-tabs__item">
@@ -414,6 +433,8 @@
       
         
           
+        
+      
         
       
         
@@ -622,7 +643,7 @@
   <span class="md-ellipsis">
     
   
-    5 · Obsidian & Atlas
+    5 · Obsidian Vault Audit
   
 
     
@@ -640,7 +661,7 @@
   <span class="md-ellipsis">
     
   
-    5 · Obsidian & Atlas
+    5 · Obsidian Vault Audit
   
 
     
@@ -668,214 +689,68 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#obsidian-knowledge-bridge-agy-obs" class="md-nav__link">
+  <a href="#background" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🪨 Obsidian Knowledge Bridge (agy obs)
+        Background
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="🪨 Obsidian Knowledge Bridge (agy obs)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#commands" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Commands
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Commands">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-list-orphan-notes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. List Orphan Notes
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-find-central-hub-notes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Find central Hub Notes
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-graph-health-audit" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Graph Health Audit
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#atlas-session-synchronizer-agy-atlas" class="md-nav__link">
+  <a href="#step-1-find-orphan-notes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🗺️ Atlas Session Synchronizer (agy atlas)
+        Step 1 — Find Orphan Notes
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="🗺️ Atlas Session Synchronizer (agy atlas)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#commands_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Commands
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Commands">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-show-session-status" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Show Session Status
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-view-breadcrumb-trail" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. View Breadcrumb Trail
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-start-a-new-active-session" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Start a new Active Session
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-log-breadcrumbs" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Log Breadcrumbs
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#r-package-validation-bridge-agy-rforge" class="md-nav__link">
+  <a href="#step-2-find-hub-notes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🛠️ R Package Validation Bridge (agy rforge)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🛠️ R Package Validation Bridge (agy rforge)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#commands_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Commands
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Commands">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-compile-documentation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Compile Documentation
+        Step 2 — Find Hub Notes
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#2-run-tests" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#step-3-audit-broken-links" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Run Tests
+        Step 3 — Audit Broken Links
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#3-run-package-checks" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#step-4-automate-vault-health-in-ci" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Run Package Checks
+        Step 4 — Automate Vault Health in CI
       
     </span>
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ What's Next
+      
+    </span>
+  </a>
   
 </li>
       
@@ -895,6 +770,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../tutorials/06-atlas-session/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6 · Atlas Session Sync
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../rforge_tutorial/" class="md-nav__link">
         
   
@@ -902,7 +805,7 @@
   <span class="md-ellipsis">
     
   
-    6 · R Package Harness
+    7 · R Package Harness
   
 
     
@@ -930,7 +833,7 @@
   <span class="md-ellipsis">
     
   
-    7 · Sandbox Vaults
+    8 · Sandbox Vaults
   
 
     
@@ -1379,6 +1282,33 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
     
     
       
@@ -1403,7 +1333,7 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
         
           
           <div class="md-nav__link md-nav__container">
@@ -1425,14 +1355,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1508,214 +1438,68 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#obsidian-knowledge-bridge-agy-obs" class="md-nav__link">
+  <a href="#background" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🪨 Obsidian Knowledge Bridge (agy obs)
+        Background
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="🪨 Obsidian Knowledge Bridge (agy obs)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#commands" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Commands
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Commands">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-list-orphan-notes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. List Orphan Notes
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-find-central-hub-notes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Find central Hub Notes
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-graph-health-audit" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Graph Health Audit
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#atlas-session-synchronizer-agy-atlas" class="md-nav__link">
+  <a href="#step-1-find-orphan-notes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🗺️ Atlas Session Synchronizer (agy atlas)
+        Step 1 — Find Orphan Notes
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="🗺️ Atlas Session Synchronizer (agy atlas)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#commands_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Commands
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Commands">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-show-session-status" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Show Session Status
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-view-breadcrumb-trail" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. View Breadcrumb Trail
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-start-a-new-active-session" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Start a new Active Session
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-log-breadcrumbs" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Log Breadcrumbs
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#r-package-validation-bridge-agy-rforge" class="md-nav__link">
+  <a href="#step-2-find-hub-notes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🛠️ R Package Validation Bridge (agy rforge)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🛠️ R Package Validation Bridge (agy rforge)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#commands_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Commands
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Commands">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-compile-documentation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Compile Documentation
+        Step 2 — Find Hub Notes
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#2-run-tests" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#step-3-audit-broken-links" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Run Tests
+        Step 3 — Audit Broken Links
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#3-run-package-checks" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#step-4-automate-vault-health-in-ci" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Run Package Checks
+        Step 4 — Automate Vault Health in CI
       
     </span>
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ What's Next
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1739,60 +1523,96 @@
   
 
 
-<h1 id="plugins-obsidian-atlas-integrations">Plugins: Obsidian &amp; Atlas Integrations<a class="headerlink" href="#plugins-obsidian-atlas-integrations" title="Permanent link">&para;</a></h1>
-<p>The <code>agy</code> CLI implements an in-process plugin architecture designed to integrate knowledge vaults and active developer sessions.</p>
+<h1 id="tutorial-5-obsidian-vault-audit">Tutorial 5 · Obsidian Vault Audit<a class="headerlink" href="#tutorial-5-obsidian-vault-audit" title="Permanent link">&para;</a></h1>
+<p><strong>Goal:</strong> Use <code>agy obs</code> to query your local Obsidian SQLite graph — find orphan notes, hub nodes by PageRank, and broken internal links.</p>
 <hr />
-<h2 id="obsidian-knowledge-bridge-agy-obs">🪨 Obsidian Knowledge Bridge (<code>agy obs</code>)<a class="headerlink" href="#obsidian-knowledge-bridge-agy-obs" title="Permanent link">&para;</a></h2>
-<p>The Obsidian plugin runs sqlite queries targeting local vault indexes to maintain knowledge graph health.</p>
-<h3 id="commands">Commands<a class="headerlink" href="#commands" title="Permanent link">&para;</a></h3>
-<h4 id="1-list-orphan-notes">1. List Orphan Notes<a class="headerlink" href="#1-list-orphan-notes" title="Permanent link">&para;</a></h4>
-<p>Finds notes with no incoming or outgoing connections (<span class="arithmatex">\(k_{in} = 0\)</span> and <span class="arithmatex">\(k_{out} = 0\)</span>).
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>agy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span>~/vault_db.sqlite<span class="w"> </span>orphans
-</span></code></pre></div></p>
-<h4 id="2-find-central-hub-notes">2. Find central Hub Notes<a class="headerlink" href="#2-find-central-hub-notes" title="Permanent link">&para;</a></h4>
-<p>Identifies hub notes ranked by PageRank or connection degrees.
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>agy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span>~/vault_db.sqlite<span class="w"> </span>hubs<span class="w"> </span>--sort<span class="w"> </span>pagerank<span class="w"> </span>--limit<span class="w"> </span><span class="m">5</span>
-</span></code></pre></div></p>
-<h4 id="3-graph-health-audit">3. Graph Health Audit<a class="headerlink" href="#3-graph-health-audit" title="Permanent link">&para;</a></h4>
-<p>Detects broken internal note links.
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>agy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span>~/vault_db.sqlite<span class="w"> </span>health
-</span></code></pre></div></p>
+<h2 id="background">Background<a class="headerlink" href="#background" title="Permanent link">&para;</a></h2>
+<p>When you enable the Obsidian <a href="https://github.com/coddingtonbear/obsidian-local-rest-api">Local REST API</a> or the built-in <strong>Obsidian Sync</strong>, the app writes a SQLite database (<code>vault_db.sqlite</code>) that <code>agy obs</code> queries directly.</p>
+<p>The graph is modelled as a directed network <span class="arithmatex">\(G = (V, E)\)</span> where:</p>
+<ul>
+<li><span class="arithmatex">\(V\)</span> = all notes in the vault</li>
+<li><span class="arithmatex">\(E\)</span> = all <code>[[wikilinks]]</code> between notes</li>
+<li><span class="arithmatex">\(k_{in}(v)\)</span> = in-degree (notes pointing <strong>to</strong> <span class="arithmatex">\(v\)</span>)</li>
+<li><span class="arithmatex">\(k_{out}(v)\)</span> = out-degree (notes <span class="arithmatex">\(v\)</span> points <strong>to</strong>)</li>
+</ul>
 <hr />
-<h2 id="atlas-session-synchronizer-agy-atlas">🗺️ Atlas Session Synchronizer (<code>agy atlas</code>)<a class="headerlink" href="#atlas-session-synchronizer-agy-atlas" title="Permanent link">&para;</a></h2>
-<p>The Atlas plugin reads session logs to bridge CLI activities with background workspace context.</p>
-<h3 id="commands_1">Commands<a class="headerlink" href="#commands_1" title="Permanent link">&para;</a></h3>
-<h4 id="1-show-session-status">1. Show Session Status<a class="headerlink" href="#1-show-session-status" title="Permanent link">&para;</a></h4>
-<p>Displays the active workspace project, task, start time, and current duration.
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>agy<span class="w"> </span>atlas<span class="w"> </span>--sessions-path<span class="w"> </span>~/sessions.yaml<span class="w"> </span>status
-</span></code></pre></div></p>
-<h4 id="2-view-breadcrumb-trail">2. View Breadcrumb Trail<a class="headerlink" href="#2-view-breadcrumb-trail" title="Permanent link">&para;</a></h4>
-<p>Prints the most recent developer breadcrumbs (commands executed or files touched).
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>agy<span class="w"> </span>atlas<span class="w"> </span>--registry-path<span class="w"> </span>~/registry.yaml<span class="w"> </span>trail<span class="w"> </span>--limit<span class="w"> </span><span class="m">10</span>
-</span></code></pre></div></p>
-<h4 id="3-start-a-new-active-session">3. Start a new Active Session<a class="headerlink" href="#3-start-a-new-active-session" title="Permanent link">&para;</a></h4>
-<p>Creates and registers a new active workspace project session.
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>agy<span class="w"> </span>atlas<span class="w"> </span>--sessions-path<span class="w"> </span>~/sessions.yaml<span class="w"> </span>start-session<span class="w"> </span>--project<span class="w"> </span>causal-analysis<span class="w"> </span>--task<span class="w"> </span><span class="s2">&quot;Data modeling&quot;</span><span class="w"> </span>--desc<span class="w"> </span><span class="s2">&quot;Fitting propensity scores&quot;</span>
-</span></code></pre></div></p>
-<h4 id="4-log-breadcrumbs">4. Log Breadcrumbs<a class="headerlink" href="#4-log-breadcrumbs" title="Permanent link">&para;</a></h4>
-<p>Appends a custom breadcrumb item to the registry trail.
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>agy<span class="w"> </span>atlas<span class="w"> </span>--registry-path<span class="w"> </span>~/registry.yaml<span class="w"> </span>log-crumb<span class="w"> </span><span class="s2">&quot;Ran check_covariate_balance&quot;</span><span class="w"> </span>--type<span class="w"> </span><span class="s2">&quot;command&quot;</span>
-</span></code></pre></div></p>
+<h2 id="step-1-find-orphan-notes">Step 1 — Find Orphan Notes<a class="headerlink" href="#step-1-find-orphan-notes" title="Permanent link">&para;</a></h2>
+<p>Orphans have <span class="arithmatex">\(k_{in} = 0\)</span> <strong>and</strong> <span class="arithmatex">\(k_{out} = 0\)</span> — no connections at all.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>agy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span>~/Library/Application<span class="se">\ </span>Support/obsidian/vault_db.sqlite<span class="w"> </span>orphans
+</span></code></pre></div>
+<p>Output:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a> Title              │ Path                       │ Modified At
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>────────────────────┼────────────────────────────┼─────────────────────
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a> Draft: SMD notes   │ research/drafts/smd.md     │ 2024-06-01 09:12:00
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a> Scratch pad        │ inbox/scratch.md            │ 2024-05-28 14:30:22
+</span></code></pre></div>
+<p><strong>Action:</strong> Link them into the graph or archive them.</p>
 <hr />
-<h2 id="r-package-validation-bridge-agy-rforge">🛠️ R Package Validation Bridge (<code>agy rforge</code>)<a class="headerlink" href="#r-package-validation-bridge-agy-rforge" title="Permanent link">&para;</a></h2>
-<p>The RForge plugin implements an in-process bridge that executes package checks, document compiling, and unit testing within an R subprocess.</p>
-<h3 id="commands_2">Commands<a class="headerlink" href="#commands_2" title="Permanent link">&para;</a></h3>
-<h4 id="1-compile-documentation">1. Compile Documentation<a class="headerlink" href="#1-compile-documentation" title="Permanent link">&para;</a></h4>
-<p>Runs <code>devtools::document()</code> to update help documents and namespaces from Roxygen2 syntax.
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>agy<span class="w"> </span>rforge<span class="w"> </span>--pkg-dir<span class="w"> </span>/path/to/package<span class="w"> </span>document
-</span></code></pre></div></p>
-<h4 id="2-run-tests">2. Run Tests<a class="headerlink" href="#2-run-tests" title="Permanent link">&para;</a></h4>
-<p>Runs unit testing suites using <code>devtools::test()</code>.
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>agy<span class="w"> </span>rforge<span class="w"> </span>--pkg-dir<span class="w"> </span>/path/to/package<span class="w"> </span><span class="nb">test</span>
-</span></code></pre></div></p>
-<h4 id="3-run-package-checks">3. Run Package Checks<a class="headerlink" href="#3-run-package-checks" title="Permanent link">&para;</a></h4>
-<p>Executes check validations utilizing <code>devtools::check(document = FALSE)</code>.
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>agy<span class="w"> </span>rforge<span class="w"> </span>--pkg-dir<span class="w"> </span>/path/to/package<span class="w"> </span>check
-</span></code></pre></div></p>
+<h2 id="step-2-find-hub-notes">Step 2 — Find Hub Notes<a class="headerlink" href="#step-2-find-hub-notes" title="Permanent link">&para;</a></h2>
+<p>Hubs are high-centrality nodes. Sort by <code>pagerank</code> (default), <code>in_degree</code>, <code>out_degree</code>, or <code>total_degree</code>.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>agy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span>~/vault.sqlite<span class="w"> </span>hubs<span class="w"> </span>--sort<span class="w"> </span>pagerank<span class="w"> </span>--limit<span class="w"> </span><span class="m">10</span>
+</span></code></pre></div>
+<p>Output:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a> Title               │ PageRank │ In  │ Out │ Total
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>─────────────────────┼──────────┼─────┼─────┼──────
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a> Causal Inference MOC│  0.1842  │  34 │  12 │  46
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a> Methods Index       │  0.0931  │  28 │   8 │  36
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a> Study Design Hub    │  0.0712  │  21 │  15 │  36
+</span></code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Map of Contents</p>
+<p>Hub notes with high <code>in_degree</code> are natural <strong>Maps of Content (MOC)</strong> — good candidates for pinning to your dashboard.</p>
+</div>
+<hr />
+<h2 id="step-3-audit-broken-links">Step 3 — Audit Broken Links<a class="headerlink" href="#step-3-audit-broken-links" title="Permanent link">&para;</a></h2>
+<p>Broken links are <code>[[wikilinks]]</code> pointing to notes that don't exist.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>agy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span>~/vault.sqlite<span class="w"> </span>health
+</span></code></pre></div>
+<p><strong>Healthy vault:</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>✔ Vault health check passed. No broken links found.
+</span></code></pre></div>
+<p><strong>With broken links:</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Broken Links Detected
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a> Source Note     │ Source Path          │ Target Path              │ Count
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>─────────────────┼──────────────────────┼──────────────────────────┼──────
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a> Week 23 Notes   │ journals/week-23.md  │ methods/iv-estimator.md  │  1
+</span></code></pre></div>
+<p><strong>Action:</strong> Create the missing note or correct the link path.</p>
+<hr />
+<h2 id="step-4-automate-vault-health-in-ci">Step 4 — Automate Vault Health in CI<a class="headerlink" href="#step-4-automate-vault-health-in-ci" title="Permanent link">&para;</a></h2>
+<p>Add a vault health check to your weekly review script:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="ch">#!/bin/bash</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="c1"># vault_health.sh</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>agy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OBSIDIAN_DB</span><span class="s2">&quot;</span><span class="w"> </span>health<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>agy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OBSIDIAN_DB</span><span class="s2">&quot;</span><span class="w"> </span>orphans
+</span></code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">OBSIDIAN_DB</span><span class="o">=</span>~/Library/Application<span class="se">\ </span>Support/obsidian/vault_db.sqlite
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>bash<span class="w"> </span>vault_health.sh
+</span></code></pre></div>
+<hr />
+<h2 id="whats-next">✅ What's Next<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Ready to...</th>
+<th>Go to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Track work sessions with Atlas</td>
+<td><a href="../../tutorials/06-atlas-session/">Tutorial 6 → Atlas Session Sync</a></td>
+</tr>
+<tr>
+<td>Run R package checks</td>
+<td><a href="../rforge_tutorial/">Tutorial 7 → R Package Harness</a></td>
+</tr>
+<tr>
+<td>Full <code>obs</code> CLI flags</td>
+<td><a href="../commands/">Command Reference</a></td>
+</tr>
+</tbody>
+</table>
 
 
 
@@ -1847,13 +1667,13 @@
         
         
           
-          <a href="../rforge_tutorial/" class="md-footer__link md-footer__link--next" aria-label="Next: 6 · R Package Harness">
+          <a href="../../tutorials/06-atlas-session/" class="md-footer__link md-footer__link--next" aria-label="Next: 6 · Atlas Session Sync">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                6 · R Package Harness
+                6 · Atlas Session Sync
               </div>
             </div>
             <div class="md-footer__button md-icon">
