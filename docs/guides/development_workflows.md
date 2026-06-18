@@ -1,66 +1,104 @@
-# Development & CI/CD Workflows
+# Development & CI Workflows
 
-*   **BLUF**: To maintain codebase stability and release consistency, all code modifications must follow the Git worktree structure, pass local pre-commit checks, and pass the dual-environment (Python + R) GitHub Actions CI suite.
+**BLUF:** All changes go through `feature/* → dev → main`. CI runs Python + R checks on every push. Releases are fully automated on version tags.
 
 ---
 
-## 🗺️ Git Branching Policy
-
-We strictly enforce a multi-branch development lifecycle to prevent unreviewed changes from hitting production:
+## Git Branching Policy
 
 ```text
-main (protected) ← Pull Request only (No direct commits allowed)
+main (protected)       ← PR only, no direct commits
   ↑
-dev (integration) ← Integration branch for planning and staging
+dev (integration)      ← Staging + planning branch
   ↑
-feature/* (worktrees) ← All coding & feature implementation
+feature/* (worktrees)  ← All feature development
 ```
 
-### Git Worktree Setup
-Instead of switching branches in a single directory, add dedicated worktrees from `dev`:
+Use `agy worktree` to manage feature branches:
+
 ```bash
-git checkout dev
-git worktree add ~/.git-worktrees/agy-cli/my-feature -b feature/my-feature dev
+agy worktree add my-feature     # creates feature/my-feature off dev
+agy worktree list               # see active worktrees
+agy worktree remove my-feature  # clean up after merge
 ```
+
+See [Worktree Workflow](../reference/worktree.md) for the full guide.
 
 ---
 
-## ⚓ Pre-Commit Hooks
+## Pre-Commit Hooks
 
-We use `pre-commit` to catch formatting, syntax, and style errors locally before code is committed to Git.
+Catch formatting and lint errors **before** they hit CI.
 
-### Setup Instructions
-1. Install pre-commit via Python virtual environment:
-   ```bash
-   uv pip install pre-commit
-   ```
-2. Register the hooks with Git:
-   ```bash
-   pre-commit install
-   ```
-
-### Included Checks
-*   **Black**: Automatically formats Python code to standard 100-character line lengths.
-*   **Ruff**: Instantly lints, checks syntax, and applies import sorting/autofixes.
-
-To run hooks manually across all files:
 ```bash
+# Install
+uv pip install pre-commit
+pre-commit install
+
+# Run manually
 pre-commit run --all-files
 ```
 
+| Hook | What it does |
+|---|---|
+| `black` | Auto-formats Python to 100-char line width |
+| `ruff` | Lints, checks syntax, sorts imports |
+
 ---
 
-## 🚀 GitHub Actions CI/CD Pipelines
+## GitHub Actions Pipelines
 
-Our repository runs two separate automated pipelines in GitHub Actions:
+### CI (`ci.yml`)
 
-### 1. Pull Request & Commit CI (`ci.yml`)
-Triggers on any push or pull request targeting `dev` or `main`.
-*   **Environments**: Installs Python 3.10 and R 4.4+.
-*   **R Setup**: Installs system requirements (`libcurl4`, `libxml2`, `libssl`) and the target stats packages (`dplyr`, `ggplot2`, `dagitty`, `ggdag`).
-*   **Checks**: Runs `black`, `ruff`, and the entire `pytest` suite.
+Triggers on push or PR to `dev` or `main`.
 
-### 2. Version Release & Distribution (`release.yml`)
-Triggers only on version tag pushes (`v*`).
-*   **Publishing**: Builds Python wheels, uploads distributions, and creates a GitHub Release.
-*   **Homebrew Bump**: Downloads the source tarball, calculates the new `sha256` hash, automatically updates `Formula/agy.rb`, and commits the bump directly back to the `dev` branch.
+```
+Python 3.12 + R 4.4+
+  → black + ruff
+  → pytest (full suite)
+  → R: install dagitty, ggdag, dplyr, ggplot2
+```
+
+Run locally before pushing:
+
+```bash
+uv run pytest tests/ -v
+pre-commit run --all-files
+```
+
+### Docs (`docs.yml`)
+
+Triggers on push to `main`. Builds MkDocs and deploys to `gh-pages`.
+
+```bash
+# Preview locally
+uv run mkdocs serve
+
+# Build
+uv run mkdocs build --strict
+```
+
+### Release (`release.yml`)
+
+Triggers on `v*` tag push. Fully automated:
+
+1. Build Python wheel + sdist
+2. Upload to PyPI
+3. Create GitHub Release
+4. Calculate new `sha256`, update `Formula/agy.rb`, commit Homebrew bump to `dev`
+
+```bash
+# Tag and push to trigger release
+git tag v0.2.0
+git push origin v0.2.0
+```
+
+---
+
+## ✅ What's Next
+
+| Ready to... | Go to |
+|---|---|
+| Set up git worktrees | [Worktree Reference](../reference/worktree.md) |
+| Read branch conventions | [Branch Workflow](../contributing/BRANCH-WORKFLOW.md) |
+| Understand the release spec | [Implementation Roadmap](../specs/SPEC-agy-cli-roadmap.md) |

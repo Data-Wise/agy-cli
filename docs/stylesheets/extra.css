@@ -1,133 +1,279 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
+/* ─── DESIGN TOKENS ──────────────────────────────────────────── */
 :root {
-  /* Font Families */
   --md-text-font: 'Inter', -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
   --md-code-font: 'JetBrains Mono', SFMono-Regular, Consolas, Menlo, monospace;
-  
-  /* Causal Engine Theme Palette (Dark Mode slate with rich indigo/violet gradients) */
-  --color-primary-gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-  --color-glass-bg: rgba(30, 41, 59, 0.7);
-  --color-glass-border: rgba(255, 255, 255, 0.08);
+
+  --grad-primary:   linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  --grad-glow:      linear-gradient(135deg, rgba(79,70,229,0.15) 0%, rgba(124,58,237,0.15) 100%);
+  --glass-bg:       rgba(15, 23, 42, 0.65);
+  --glass-border:   rgba(255, 255, 255, 0.07);
+  --violet-400:     #a78bfa;
+  --violet-500:     #8b5cf6;
+  --violet-600:     #7c3aed;
+  --indigo-400:     #818cf8;
+  --surface-1:      rgba(30, 41, 59, 0.6);
 }
 
-/* Base Body Styling */
+/* ─── BASE ───────────────────────────────────────────────────── */
 body {
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   background-color: #0f172a;
 }
 
-/* Headers Typography */
+/* ─── TYPOGRAPHY ─────────────────────────────────────────────── */
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Outfit', sans-serif !important;
   font-weight: 700;
   letter-spacing: -0.02em;
 }
 
-/* Header & Banner Customization */
+/* ─── HEADER ─────────────────────────────────────────────────── */
 .md-header {
-  background: var(--color-primary-gradient) !important;
+  background: var(--grad-primary) !important;
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--color-glass-border);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 4px 24px rgba(79,70,229,0.3);
 }
 
-/* Glassmorphism Search Bar */
+.md-header__title {
+  font-family: 'Outfit', sans-serif !important;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* Tabs bar */
+.md-tabs {
+  background: rgba(79,70,229,0.25) !important;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.md-tabs__link {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  opacity: 0.75;
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.md-tabs__link--active,
+.md-tabs__link:hover {
+  opacity: 1 !important;
+  color: #fff !important;
+}
+
+/* ─── SEARCH ─────────────────────────────────────────────────── */
 .md-search__form {
-  background-color: rgba(255, 255, 255, 0.08) !important;
-  border: 1px solid var(--color-glass-border) !important;
+  background-color: rgba(255,255,255,0.08) !important;
+  border: 1px solid var(--glass-border) !important;
   backdrop-filter: blur(8px);
   border-radius: 8px !important;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
 }
 
 .md-search__form:hover {
-  background-color: rgba(255, 255, 255, 0.12) !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background-color: rgba(255,255,255,0.12) !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
 }
 
-/* Glassmorphism Panels for Sidebar Navigation */
+/* ─── SIDEBAR ────────────────────────────────────────────────── */
 .md-sidebar--primary .md-sidebar__inner {
-  background: var(--color-glass-bg);
-  border: 1px solid var(--color-glass-border);
-  border-radius: 12px;
-  padding: 16px;
+  background: var(--glass-bg);
+  border-right: 1px solid var(--glass-border);
   backdrop-filter: blur(10px);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
-  margin-top: 12px;
 }
 
-/* Content Container Card Styling */
+/* ─── NAVIGATION ─────────────────────────────────────────────── */
+.md-nav__title {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--violet-400) !important;
+}
+
+.md-nav__link {
+  transition: all 0.2s ease-in-out !important;
+  border-radius: 6px;
+  padding: 5px 10px !important;
+  font-size: 0.85rem;
+}
+
+.md-nav__link:hover {
+  color: var(--violet-400) !important;
+  background-color: rgba(167,139,250,0.08);
+  transform: translateX(3px);
+}
+
+.md-nav__link--active {
+  font-weight: 600 !important;
+  color: #c084fc !important;
+  background-color: rgba(124,58,237,0.12) !important;
+  border-left: 2px solid var(--violet-600);
+  padding-left: 12px !important;
+}
+
+/* ─── CONTENT CONTAINER ──────────────────────────────────────── */
 .md-content {
-  background: var(--color-glass-bg);
-  border: 1px solid var(--color-glass-border);
+  background: var(--surface-1);
+  border: 1px solid var(--glass-border);
   border-radius: 16px;
-  padding: 32px;
+  padding: 36px 40px;
   backdrop-filter: blur(10px);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
   margin-top: 12px;
   margin-bottom: 32px;
 }
 
-/* Code Block Enhancements */
+/* ─── HERO BADGES ────────────────────────────────────────────── */
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 12px 0 20px 0;
+}
+
+.hero-badges img {
+  border-radius: 4px;
+  transition: transform 0.2s ease, filter 0.2s ease;
+  filter: brightness(0.95);
+}
+
+.hero-badges img:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+/* ─── GRID CARDS ─────────────────────────────────────────────── */
+.md-typeset .grid.cards > :is(ul, ol) {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)) !important;
+  gap: 16px !important;
+}
+
+.md-typeset .grid.cards > :is(ul, ol) > li {
+  background: var(--grad-glow) !important;
+  border: 1px solid rgba(124,58,237,0.25) !important;
+  border-radius: 12px !important;
+  padding: 20px !important;
+  transition: all 0.25s cubic-bezier(0.4,0,0.2,1) !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+.md-typeset .grid.cards > :is(ul, ol) > li:hover {
+  transform: translateY(-4px);
+  border-color: rgba(124,58,237,0.5) !important;
+  box-shadow: 0 8px 32px rgba(79,70,229,0.2) !important;
+}
+
+.md-typeset .grid.cards .lg {
+  font-size: 1.8rem;
+}
+
+/* ─── TABS (content.tabs.link) ───────────────────────────────── */
+.md-typeset .tabbed-set > input + .tabbed-content {
+  border: 1px solid var(--glass-border);
+  border-radius: 0 0 8px 8px;
+  padding: 16px;
+  background: rgba(15,23,42,0.5);
+}
+
+.md-typeset .tabbed-labels > label {
+  font-weight: 500;
+  font-size: 0.85rem;
+  border-radius: 6px 6px 0 0;
+  transition: all 0.2s ease;
+}
+
+/* ─── CODE BLOCKS ────────────────────────────────────────────── */
 .highlight {
-  border-radius: 8px !important;
-  border: 1px solid rgba(255, 255, 255, 0.05) !important;
-  box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+  border-radius: 10px !important;
+  border: 1px solid rgba(255,255,255,0.06) !important;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.25);
 }
 
-/* Smooth micro-animations on Navigation Links */
-.md-nav__link {
-  transition: all 0.2s ease-in-out !important;
-  border-radius: 6px;
-  padding: 6px 10px !important;
+pre, code {
+  font-family: 'JetBrains Mono', monospace !important;
 }
 
-.md-nav__link:hover {
-  color: #a78bfa !important;
-  background-color: rgba(255, 255, 255, 0.04);
-  transform: translateX(4px);
+/* ─── MATH (LaTeX) ───────────────────────────────────────────── */
+.arithmatex {
+  overflow-x: auto;
+  padding: 4px 0;
 }
 
-/* Active Navigation Highlight */
-.md-nav__link--active {
-  font-weight: 600 !important;
-  color: #c084fc !important;
-  background-color: rgba(124, 58, 237, 0.15) !important;
-  border-left: 3px solid #7c3aed;
+mjx-container {
+  color: #e2e8f0 !important;
 }
 
-/* Custom Table Styling */
+/* Display math blocks */
+mjx-container[display="true"] {
+  background: rgba(79,70,229,0.07);
+  border: 1px solid rgba(79,70,229,0.2);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 20px 0 !important;
+  overflow-x: auto;
+}
+
+/* ─── TABLES ─────────────────────────────────────────────────── */
 table {
   width: 100%;
   border-collapse: collapse;
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
-  border: 1px solid var(--color-glass-border);
+  border: 1px solid var(--glass-border);
+  font-size: 0.9rem;
 }
 
 th {
-  background-color: rgba(79, 70, 229, 0.15) !important;
+  background: rgba(79,70,229,0.18) !important;
   font-weight: 600;
-  color: #a5b4fc !important;
+  color: var(--indigo-400) !important;
   text-transform: uppercase;
-  font-size: 0.75rem;
-  letter-spacing: 0.05em;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
   padding: 12px 16px !important;
 }
 
 td {
-  padding: 12px 16px !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+  padding: 11px 16px !important;
+  border-bottom: 1px solid rgba(255,255,255,0.04) !important;
+  vertical-align: middle;
 }
 
 tr:hover td {
-  background-color: rgba(255, 255, 255, 0.02);
+  background-color: rgba(255,255,255,0.025);
 }
 
-/* Custom Alerts/Admonitions Styling */
+/* ─── ADMONITIONS ────────────────────────────────────────────── */
 .admonition {
-  border-radius: 8px !important;
+  border-radius: 10px !important;
   border-left-width: 4px !important;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  backdrop-filter: blur(6px);
 }
+
+.admonition-title {
+  font-family: 'Outfit', sans-serif !important;
+  font-weight: 600;
+}
+
+/* ─── FOOTER ─────────────────────────────────────────────────── */
+.md-footer {
+  background: rgba(15,23,42,0.9) !important;
+  border-top: 1px solid var(--glass-border);
+}
+
+/* ─── SCROLLBAR ──────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(124,58,237,0.4); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(124,58,237,0.65); }
+
+/* ─── SELECTION ──────────────────────────────────────────────── */
+::selection { background: rgba(124,58,237,0.35); color: #f8fafc; }
