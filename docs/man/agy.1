@@ -1,0 +1,151 @@
+.TH AGY 1 "June 2026" "agy-cli v0.3.0" "User Commands"
+.SH NAME
+agy \- Antigravity CLI workflow engine
+.SH SYNOPSIS
+.B agy
+[\fIOPTIONS\fR] \fICOMMAND\fR [\fIARGS\fR]...
+.SH DESCRIPTION
+.B agy
+is the core command-line workflow engine for Antigravity (Gemini CLI), optimized for stats researchers working on causal inference and managing Obsidian/Atlas subprojects. It provides concurrent assumption validation (Positivity, Exchangeability, SUTVA, and Covariate Balance), git worktree management with virtualenv dependency caching, and bidirectional Atlas session tracking.
+.SH OPTIONS
+.TP
+.B \-\-version
+Show the version and exit.
+.TP
+.B \-\-help
+Show helper messages and exit.
+.SH COMMANDS
+.SS Core Validation
+.TP
+.B eval \fR[\fISTUDY_DESIGN_FILE\fR] [\fIOPTIONS\fR]
+Concurrently evaluate observational study assumptions (Positivity, Exchangeability, SUTVA, and Covariate Balance).
+.RS
+.TP
+.BI \-t\fR,\fB \-\-treatment\fR \fINAME\fR
+Specify the treatment (exposure) variable name.
+.TP
+.BI \-o\fR,\fB \-\-outcome\fR \fINAME\fR
+Specify the outcome variable name.
+.TP
+.BI \-c\fR,\fB \-\-covariates\fR \fILIST\fR
+Comma-separated list of covariate names.
+.TP
+.BI \-d\fR,\fB \-\-data\fR \fIPATH\fR
+Path to observational data CSV file.
+.TP
+.BI \-g\fR,\fB \-\-dag\-str\fR \fISTRING\fR
+Causal graph description in DAG format (e.g., 'W -> Y, X -> W, X -> Y').
+.TP
+.B \-\-interactive / \-\-non\-interactive
+Enable or disable interactive SUTVA survey prompts.
+.TP
+.BI \-\-method\fR \fIMETHOD\fR
+Specify propensity score adjustment method: none, matching, or weighting (default: none).
+.RE
+.TP
+.B dag \fISTRING\fR [\fIOPTIONS\fR]
+Compile textual causal graph description to R ggdag/dagitty code.
+.RS
+.TP
+.BI \-o\fR,\fB \-\-output\fR \fIPATH\fR
+Output compiled R code directly to the specified file path.
+.TP
+.BI \-t\fR,\fB \-\-treatment\fR \fINAME\fR
+Inject exposure metadata.
+.TP
+.BI \-y\fR,\fB \-\-outcome\fR \fINAME\fR
+Inject outcome metadata.
+.RE
+.SS Worktree & Caching
+.TP
+.B worktree add \fINAME\fR
+Create a persistent feature worktree off the dev branch, tracking it inside .STATUS and symlinking the root .venv for sub-10ms dependency caching.
+.TP
+.B worktree list
+List currently active/registered git worktrees.
+.TP
+.B worktree remove \fINAME\fR
+Decommission the worktree and delete its local feature branch.
+.SS R Package Bridge
+.TP
+.B rforge check
+Run package check via devtools::check(document = FALSE).
+.TP
+.B rforge test
+Run package unit tests via devtools::test().
+.TP
+.B rforge document
+Compile Roxygen2 documentation via devtools::document().
+.SS Plugins & Bridges
+.TP
+.B obs orphans
+List notes with no connections ($k_{in} = 0$, $k_{out} = 0$).
+.TP
+.B obs hubs \fR[\fIOPTIONS\fR]
+List central notes. Options: --limit <INT> (default 10), --sort <pagerank|out_degree|in_degree|total_degree>.
+.TP
+.B obs health
+Verify graph connections for broken note links.
+.TP
+.B atlas status
+Show active project session status and elapsed duration.
+.TP
+.B atlas trail \fR[\fIOPTIONS\fR]
+Display recent workspace breadcrumbs. Options: --limit <INT> (default 10).
+.TP
+.B atlas start\-session \fR[\fIOPTIONS\fR]
+Start a new active Atlas session. Options: --project <NAME> (required), --task <TASK> (required), --desc <TEXT>.
+.TP
+.B atlas log\-crumb \fR[\fIOPTIONS\fR] \fITEXT\fR
+Log a custom breadcrumb to the registry. Options: --type <TYPE> (default "command"), --project <NAME>.
+.TP
+.B sandbox generate \fIPATH\fR [\fIOPTIONS\fR]
+Generate a temporary mock vault containing notes, databases, and causal CSV data. Options: --violations (inject positivity, exchangeability, and SUTVA violations).
+.SH ENVIRONMENT
+.TP
+.B AGY_LOG_FILE
+Path to the central error log file. Default: ~/.config/obs/obs.log
+.SH FILES
+.TP
+.I ~/.config/obs/obs.log
+Central rotating log file (5MB limit, 3 backups) capturing timestamps, log levels, and stack traces for unhandled CLI errors.
+.TP
+.I .STATUS
+Project status tracker and worktree registry.
+.TP
+.I ~/.git\-worktrees/agy\-cli
+Default parent directory for isolated git worktrees.
+.SH EXAMPLES
+Run concurrent validation on study assumptions:
+.RS
+.nf
+agy eval -t W -o Y -c X -d ./data.csv -g "X -> W, X -> Y, W -> Y" --non-interactive
+.fi
+.RE
+.PP
+Compile DAG to R script:
+.RS
+.nf
+agy dag "W -> Y, X -> W, X -> Y" -t W -y Y -o my_dag.R
+.fi
+.RE
+.PP
+Start active session tracking in Atlas:
+.RS
+.nf
+agy atlas start-session --project agy-cli --task "man alignment" --desc "Rewriting agy.1 man page"
+.fi
+.RE
+.PP
+Add a new feature worktree:
+.RS
+.nf
+agy worktree add feature-docs
+.fi
+.RE
+.SH SEE ALSO
+For online documentation and guides, see \fIhttps://github.com/Data-Wise/agy-cli\fR.
+.SH AUTHOR
+Statistics Research Assistant
+.SH COPYRIGHT
+MIT License

@@ -1,8 +1,6 @@
-import os
 import json
 import sqlite3
 import yaml
-import pytest
 from click.testing import CliRunner
 from agy.cli import main
 
@@ -76,32 +74,44 @@ def test_cli_obs_commands(tmp_path):
     # Setup mock sqlite DB
     db_file = tmp_path / "test_cli_vault_db.sqlite"
     conn = sqlite3.connect(db_file)
-    conn.execute("CREATE TABLE notes (id TEXT PRIMARY KEY, vault_id TEXT, path TEXT, title TEXT, modified_at TIMESTAMP)")
-    conn.execute("CREATE TABLE links (id INTEGER PRIMARY KEY AUTOINCREMENT, source_note_id TEXT, target_note_id TEXT, target_path TEXT, link_type TEXT)")
-    conn.execute("CREATE TABLE graph_metrics (note_id TEXT PRIMARY KEY, pagerank REAL, in_degree INTEGER, out_degree INTEGER)")
-    
+    conn.execute(
+        "CREATE TABLE notes (id TEXT PRIMARY KEY, vault_id TEXT, path TEXT, title TEXT, modified_at TIMESTAMP)"
+    )
+    conn.execute(
+        "CREATE TABLE links (id INTEGER PRIMARY KEY AUTOINCREMENT, source_note_id TEXT, target_note_id TEXT, target_path TEXT, link_type TEXT)"
+    )
+    conn.execute(
+        "CREATE TABLE graph_metrics (note_id TEXT PRIMARY KEY, pagerank REAL, in_degree INTEGER, out_degree INTEGER)"
+    )
+
     # Insert one orphan note
-    conn.execute("INSERT INTO notes VALUES ('note1', 'vault-1', 'path1.md', 'Orphan Note', '2026-06-12 12:00:00')")
+    conn.execute(
+        "INSERT INTO notes VALUES ('note1', 'vault-1', 'path1.md', 'Orphan Note', '2026-06-12 12:00:00')"
+    )
     # Insert one hub note
-    conn.execute("INSERT INTO notes VALUES ('note2', 'vault-1', 'path2.md', 'Hub Note', '2026-06-12 12:01:00')")
+    conn.execute(
+        "INSERT INTO notes VALUES ('note2', 'vault-1', 'path2.md', 'Hub Note', '2026-06-12 12:01:00')"
+    )
     conn.execute("INSERT INTO graph_metrics VALUES ('note2', 0.8, 1, 1)")
     # Insert one broken link
-    conn.execute("INSERT INTO links (source_note_id, target_note_id, target_path, link_type) VALUES ('note2', NULL, 'missing.md', 'broken')")
+    conn.execute(
+        "INSERT INTO links (source_note_id, target_note_id, target_path, link_type) VALUES ('note2', NULL, 'missing.md', 'broken')"
+    )
     conn.commit()
     conn.close()
 
     runner = CliRunner()
-    
+
     # Test orphans command
     result = runner.invoke(main, ["obs", "--db-path", str(db_file), "orphans"])
     assert result.exit_code == 0
     assert "Orphan Note" in result.output
-    
+
     # Test hubs command
     result = runner.invoke(main, ["obs", "--db-path", str(db_file), "hubs"])
     assert result.exit_code == 0
     assert "Hub Note" in result.output
-    
+
     # Test health command
     result = runner.invoke(main, ["obs", "--db-path", str(db_file), "health"])
     assert result.exit_code == 0
@@ -111,32 +121,145 @@ def test_cli_obs_commands(tmp_path):
 def test_cli_atlas_commands(tmp_path):
     sessions_file = tmp_path / "sessions.yaml"
     registry_file = tmp_path / "registry.yaml"
-    
-    yaml.safe_dump([
+
+    yaml.safe_dump(
+        [
+            {
+                "id": "session-1",
+                "project": "flow-cli",
+                "task": "Work session",
+                "startTime": "2026-06-12T14:00:00Z",
+                "state": "active",
+                "context": {"description": "Implementing plugin integrations"},
+            }
+        ],
+        open(sessions_file, "w"),
+    )
+
+    yaml.safe_dump(
         {
-            "id": "session-1",
-            "project": "flow-cli",
-            "task": "Work session",
-            "startTime": "2026-06-12T14:00:00Z",
-            "state": "active",
-            "context": {"description": "Implementing plugin integrations"}
-        }
-    ], open(sessions_file, "w"))
-    
-    yaml.safe_dump({
-        "breadcrumbs": [{"text": "First breadcrumb", "type": "note", "project": "flow-cli", "timestamp": "2026-06-12T14:00:00Z"}],
-        "captures": [{"text": "inbox item", "status": "inbox"}]
-    }, open(registry_file, "w"))
+            "breadcrumbs": [
+                {
+                    "text": "First breadcrumb",
+                    "type": "note",
+                    "project": "flow-cli",
+                    "timestamp": "2026-06-12T14:00:00Z",
+                }
+            ],
+            "captures": [{"text": "inbox item", "status": "inbox"}],
+        },
+        open(registry_file, "w"),
+    )
 
     runner = CliRunner()
-    
+
     # Test status command
-    result = runner.invoke(main, ["atlas", "--sessions-path", str(sessions_file), "--registry-path", str(registry_file), "status"])
+    result = runner.invoke(
+        main,
+        [
+            "atlas",
+            "--sessions-path",
+            str(sessions_file),
+            "--registry-path",
+            str(registry_file),
+            "status",
+        ],
+    )
     assert result.exit_code == 0
     assert "flow-cli" in result.output
     assert "Implementing plugin integrations" in result.output
-    
+
     # Test trail command
-    result = runner.invoke(main, ["atlas", "--sessions-path", str(sessions_file), "--registry-path", str(registry_file), "trail"])
+    result = runner.invoke(
+        main,
+        [
+            "atlas",
+            "--sessions-path",
+            str(sessions_file),
+            "--registry-path",
+            str(registry_file),
+            "trail",
+        ],
+    )
     assert result.exit_code == 0
     assert "First breadcrumb" in result.output
+
+    # Test start-session command
+    result = runner.invoke(
+        main,
+        [
+            "atlas",
+            "--sessions-path",
+            str(sessions_file),
+            "--registry-path",
+            str(registry_file),
+            "start-session",
+            "--project",
+            "test-proj",
+            "--task",
+            "Write code",
+            "--desc",
+            "Implementing CLI",
+        ],
+    )
+    assert result.exit_code == 0
+    assert "Started active session" in result.output
+    assert "test-proj" in result.output
+
+    # Test log-crumb command
+    result = runner.invoke(
+        main,
+        [
+            "atlas",
+            "--sessions-path",
+            str(sessions_file),
+            "--registry-path",
+            str(registry_file),
+            "log-crumb",
+            "Adding a test",
+            "--type",
+            "test",
+            "--project",
+            "test-proj",
+        ],
+    )
+    assert result.exit_code == 0
+    assert "Logged breadcrumb" in result.output
+    assert "Adding a test" in result.output
+
+
+def test_cli_rforge_commands(tmp_path, mocker):
+    # Setup mock DESCRIPTION file to look like an R package
+    pkg_dir = tmp_path / "my_r_package"
+    pkg_dir.mkdir()
+    (pkg_dir / "DESCRIPTION").write_text("Package: myrpackage\n")
+
+    # Mock RForgeBridge methods
+    mock_check = mocker.patch("agy.plugins.rforge.RForgeBridge.check_package")
+    mock_check.return_value = {"success": True, "stdout": "Check passed", "stderr": ""}
+
+    mock_test = mocker.patch("agy.plugins.rforge.RForgeBridge.test_package")
+    mock_test.return_value = {"success": True, "stdout": "Tests passed", "stderr": ""}
+
+    mock_doc = mocker.patch("agy.plugins.rforge.RForgeBridge.document_package")
+    mock_doc.return_value = {"success": True, "stdout": "Docs compiled", "stderr": ""}
+
+    runner = CliRunner()
+
+    # Test check command
+    result = runner.invoke(main, ["rforge", "--pkg-dir", str(pkg_dir), "check"])
+    assert result.exit_code == 0
+    assert "Package check passed successfully" in result.output
+    mock_check.assert_called_once()
+
+    # Test test command
+    result = runner.invoke(main, ["rforge", "--pkg-dir", str(pkg_dir), "test"])
+    assert result.exit_code == 0
+    assert "Package unit tests passed" in result.output
+    mock_test.assert_called_once()
+
+    # Test document command
+    result = runner.invoke(main, ["rforge", "--pkg-dir", str(pkg_dir), "document"])
+    assert result.exit_code == 0
+    assert "Documentation compiled successfully" in result.output
+    mock_doc.assert_called_once()

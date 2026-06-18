@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+  pull_request:
+    branches:
+      - main
+      - dev
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v4
+
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+
+      - name: Cache R Packages
+        uses: actions/cache@v4
+        with:
+          path: /usr/local/lib/R/site-library
+          key: ${{ runner.os }}-r-libs-${{ hashFiles('**/pyproject.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-r-libs-
+
+      - name: Install R System Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev gfortran libfontconfig1-dev libharfbuzz-dev libfribidi-dev libfreetype6-dev libpng-dev libtiff-dev libjpeg-dev
+
+      - name: Install R Packages
+        run: |
+          Rscript -e '
+            libs <- c("dplyr", "ggplot2", "dagitty", "ggdag")
+            missing <- libs[!libs %in% installed.packages()[,"Package"]]
+            if (length(missing) > 0) {
+              install.packages(missing, repos="https://packagemanager.posit.co/cran/__linux__/jammy/latest")
+            }
+          '
+
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          version: "latest"
+
+      - name: Install Python Dependencies
+        run: |
+          uv sync --all-extras
+
+      - name: Run Pytest Suite
+        run: |
+          uv run pytest --cov=src --cov-report=xml
+
+      - name: Run Linters & Formatters Check
+        run: |
+          uv run black --check src tests
+          uv run ruff check src tests

@@ -3,6 +3,7 @@ import sqlite3
 import re
 from typing import List, Dict, Any
 
+
 class ObsidianBridge:
     """Database connector and query executor for Obsidian vaults."""
 
@@ -21,7 +22,9 @@ class ObsidianBridge:
                         with open(config_path, "r") as f:
                             content = f.read()
                             # In case db path is defined in config file in the future
-                            match = re.search(r'^OBS_DB=["\']?([^"\']+)["\']?', content, re.MULTILINE)
+                            match = re.search(
+                                r'^OBS_DB=["\']?([^"\']+)["\']?', content, re.MULTILINE
+                            )
                             if match:
                                 self.db_path = os.path.expanduser(match.group(1))
                     except Exception:
@@ -41,19 +44,19 @@ class ObsidianBridge:
             with self.get_connection() as conn:
                 # Try querying the orphaned_notes view first
                 try:
-                    cursor = conn.execute("SELECT id, title, path, vault_id, modified_at FROM orphaned_notes")
+                    cursor = conn.execute(
+                        "SELECT id, title, path, vault_id, modified_at FROM orphaned_notes"
+                    )
                     return [dict(row) for row in cursor.fetchall()]
                 except sqlite3.OperationalError:
                     # Fallback to raw query if view doesn't exist
-                    cursor = conn.execute(
-                        """
+                    cursor = conn.execute("""
                         SELECT n.id, n.title, n.path, n.vault_id, n.modified_at
                         FROM notes n
                         LEFT JOIN links l_out ON n.id = l_out.source_note_id
                         LEFT JOIN links l_in ON n.id = l_in.target_note_id
                         WHERE l_out.id IS NULL AND l_in.id IS NULL
-                        """
-                    )
+                        """)
                     return [dict(row) for row in cursor.fetchall()]
         except FileNotFoundError:
             return []
@@ -88,19 +91,19 @@ class ObsidianBridge:
             with self.get_connection() as conn:
                 # Try querying broken_links view first
                 try:
-                    cursor = conn.execute("SELECT source_path, source_title, target_path, broken_count FROM broken_links")
+                    cursor = conn.execute(
+                        "SELECT source_path, source_title, target_path, broken_count FROM broken_links"
+                    )
                     return [dict(row) for row in cursor.fetchall()]
                 except sqlite3.OperationalError:
                     # Fallback to raw query if view doesn't exist
-                    cursor = conn.execute(
-                        """
+                    cursor = conn.execute("""
                         SELECT n.path as source_path, n.title as source_title, l.target_path, COUNT(*) as broken_count
                         FROM links l
                         JOIN notes n ON l.source_note_id = n.id
                         WHERE l.link_type = 'broken' OR l.target_note_id IS NULL
                         GROUP BY l.source_note_id, l.target_path
-                        """
-                    )
+                        """)
                     return [dict(row) for row in cursor.fetchall()]
         except FileNotFoundError:
             return []

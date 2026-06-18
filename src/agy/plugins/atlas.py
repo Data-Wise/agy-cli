@@ -3,6 +3,7 @@ import datetime
 import yaml
 from typing import List, Dict, Any, Optional
 
+
 class AtlasBridge:
     """Reader and parser for Atlas state registries and active sessions."""
 
@@ -19,8 +20,8 @@ class AtlasBridge:
         if not ts_str:
             return None
         # Replace Z with +00:00 for Python 3.9/3.10 compatibility
-        if ts_str.endswith('Z'):
-            ts_str = ts_str[:-1] + '+00:00'
+        if ts_str.endswith("Z"):
+            ts_str = ts_str[:-1] + "+00:00"
         try:
             return datetime.datetime.fromisoformat(ts_str)
         except ValueError:
@@ -76,7 +77,7 @@ class AtlasBridge:
                     "startTime": start_time_str,
                     "duration": duration,
                     "context": context,
-                    "description": context_desc or session.get("task") or "Active work session"
+                    "description": context_desc or session.get("task") or "Active work session",
                 }
         return None
 
@@ -110,3 +111,100 @@ class AtlasBridge:
             if item.get("status") == "inbox":
                 inbox_items.append(item)
         return inbox_items
+
+    def _save_yaml_file(self, file_path: str, data: Any):
+        os.makedirs(os.path.dirname(os.path.abspath(file_path)), exist_ok=True)
+        try:
+            with open(file_path, "w", encoding="utf-8") as f:
+                yaml.safe_dump(data, f)
+            return True
+        except Exception:
+            return False
+
+    def create_session(self, project: str, task: str, description: str) -> Dict[str, Any]:
+        """
+        Creates and starts a new active session, ending all other active sessions.
+        """
+        data = self._load_yaml_file(self.sessions_path)
+        if data is None or not isinstance(data, list):
+            sessions = []
+        else:
+            sessions = data
+
+        now_str = datetime.datetime.now(datetime.timezone.utc).isoformat().replace("+00:00", "Z")
+
+        # 1. End any currently active session
+        for session in sessions:
+            if isinstance(session, dict) and session.get("state") == "active":
+                session["state"] = "ended"
+                session["endTime"] = now_str
+                session["outcome"] = "completed"
+
+        # 2. Add new session
+        import uuid
+
+        session_id = f"session-{uuid.uuid4().hex[:8]}"
+        new_session = {
+            "id": session_id,
+            "project": project,
+            "task": task,
+            "startTime": now_str,
+            "endTime": None,
+            "state": "active",
+            "outcome": None,
+            "context": {"description": description},
+        }
+        sessions.append(new_session)
+
+        # 3. Save file
+        self._save_yaml_file(self.sessions_path, sessions)
+
+        return {
+            "id": session_id,
+            "project": project,
+            "task": task,
+            "startTime": now_str,
+            "description": description,
+        }
+
+    def add_breadcrumb(
+        self, text: str, type_str: str = "command", project: Optional[str] = None
+    ) -> Dict[str, Any]:
+        """
+        Adds a new breadcrumb to the registry trail.
+        """
+        data = self._load_yaml_file(self.registry_path)
+        if data is None or not isinstance(data, dict):
+            registry = {"breadcrumbs": [], "captures": []}
+        else:
+            registry = data
+
+        if "breadcrumbs" not in registry or not isinstance(registry["breadcrumbs"], list):
+            registry["breadcrumbs"] = []
+
+        now_str = datetime.datetime.now(datetime.timezone.utc).isoformat().replace("+00:00", "Z")
+
+        # Resolve project name
+        proj_name = project
+        if not proj_name:
+            active = self.get_active_session()
+            proj_name = active.get("project") if active else "N/A"
+
+        import uuid
+
+        crumb_id = f"crumb-{uuid.uuid4().hex[:8]}"
+        new_crumb = {
+            "id": crumb_id,
+            "text": text,
+            "type": type_str,
+            "project": proj_name,
+            "timestamp": now_str,
+        }
+
+        # Prepend to breadcrumbs for LIFO order
+        registry["breadcrumbs"].insert(0, new_crumb)
+
+        # Save registry back
+        self._save_yaml_file(self.registry_path, registry)
+
+        return new_crumb

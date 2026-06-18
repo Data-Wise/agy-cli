@@ -18,15 +18,24 @@
 
 ---
 
-## 🚀 Installation & Environment Setup
+## 🚀 Installation & Setup
 
 This project uses Python 3.10+ and requires R (with `dplyr`, `ggdag`, and `dagitty` installed).
 
+### Option 1: Homebrew (Recommended)
+Install the compiled `agy` CLI tool directly from our custom tap:
 ```bash
-# Create virtual environment and install packages
-uv venv
+brew tap data-wise/tap
+brew install agy
+```
+
+### Option 2: Source Installation (For Development)
+Clone the repository and sync the Python virtual environment:
+```bash
+git clone git@github.com:Data-Wise/agy-cli.git
+cd agy-cli
+uv sync --all-extras
 source .venv/bin/activate
-uv pip install -e ".[dev]"
 ```
 
 ---

@@ -1,4 +1,3 @@
-import pytest
 from agy.core.dag_compiler import parse_dag_string, compile_to_r
 
 
