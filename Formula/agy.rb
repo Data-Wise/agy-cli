@@ -11,6 +11,16 @@ class Agy < Formula
 
   def install
     venv = virtualenv_create(libexec, "python3.10")
+    
+    # Install dependencies explicitly to ensure correct version pinning in virtualenv
+    venv.pip_install "click>=8.1.0"
+    venv.pip_install "rich>=13.7.0"
+    venv.pip_install "PyYAML>=6.0"
+    venv.pip_install "networkx>=3.2"
+    venv.pip_install "pandas>=2.0.0"
+    venv.pip_install "numpy>=1.24.0"
+    venv.pip_install "requests>=2.31.0"
+    
     venv.pip_install buildpath
     bin.install_symlink libexec/"bin/agy"
   end
