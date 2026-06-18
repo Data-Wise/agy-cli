@@ -12,13 +12,13 @@
         <meta name="author" content="Data-Wise Research">
       
       
-        <link rel="canonical" href="https://data-wise.github.io/agy-cli/specs/PLAN-causal-engine/">
+        <link rel="canonical" href="https://data-wise.github.io/agy-cli/tutorials/02-causal-assumptions/">
       
       
-        <link rel="prev" href="../SPEC-worktree-rules/">
+        <link rel="prev" href="../01-getting-started/">
       
       
-        <link rel="next" href="../PLAN-plugin-integrations/">
+        <link rel="next" href="../03-dag-compiler/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>Causal Engine Plan - agy-cli</title>
+        <title>Verify Assumptions (eval) - agy-cli</title>
       
     
     
@@ -100,7 +100,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#plan-core-causal-inference-engine-implementation" class="md-skip">
+        <a href="#tutorial-2-verify-causal-assumptions" class="md-skip">
           Skip to content
         </a>
       
@@ -136,7 +136,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Causal Engine Plan
+              Verify Assumptions (eval)
             
           </span>
         </div>
@@ -239,11 +239,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../tutorials/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
           
   
   
@@ -283,13 +285,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../specs/" class="md-tabs__link">
           
   
   
@@ -407,6 +407,8 @@
       
   
   
+    
+  
   
   
     
@@ -428,22 +430,23 @@
     
     
       
+        
+        
+      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../tutorials/" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   
@@ -461,13 +464,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -497,10 +500,13 @@
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
@@ -509,7 +515,7 @@
         <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
         
           
-          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="">
             
   
   
@@ -545,7 +551,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tutorials/01-getting-started/" class="md-nav__link">
+      <a href="../01-getting-started/" class="md-nav__link">
         
   
   
@@ -578,8 +584,10 @@
                 
   
   
+    
   
   
+  
     
     
       
@@ -594,20 +602,21 @@
     
       
       
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
         
           
+          
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="">
             
   
   
@@ -625,7 +634,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -640,10 +649,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../tutorials/02-causal-assumptions/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verify Assumptions (eval)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -659,6 +695,83 @@
   
 
       </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Background
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-1-create-a-study-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1 — Create a Study Design
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-run-agy-eval" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2 — Run agy eval
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-interpret-violations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3 — Interpret Violations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ What's Next
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -671,7 +784,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tutorials/03-dag-compiler/" class="md-nav__link">
+      <a href="../03-dag-compiler/" class="md-nav__link">
         
   
   
@@ -747,10 +860,13 @@
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
@@ -759,7 +875,7 @@
         <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4" >
         
           
-          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="">
             
   
   
@@ -869,10 +985,13 @@
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
@@ -881,7 +1000,7 @@
         <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_5" >
         
           
-          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="">
             
   
   
@@ -1123,8 +1242,6 @@
       
   
   
-    
-  
   
   
     
@@ -1148,23 +1265,22 @@
     
     
       
-        
-        
-      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
+            <a href="../../specs/" class="md-nav__link ">
               
   
   
@@ -1182,13 +1298,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1208,7 +1324,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../SPEC-agy-cli-roadmap/" class="md-nav__link">
+      <a href="../../specs/SPEC-agy-cli-roadmap/" class="md-nav__link">
         
   
   
@@ -1236,7 +1352,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../SPEC-agy-cli-optimization/" class="md-nav__link">
+      <a href="../../specs/SPEC-agy-cli-optimization/" class="md-nav__link">
         
   
   
@@ -1264,7 +1380,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../SPEC-worktree-rules/" class="md-nav__link">
+      <a href="../../specs/SPEC-worktree-rules/" class="md-nav__link">
         
   
   
@@ -1289,37 +1405,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Causal Engine Plan
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../specs/PLAN-causal-engine/" class="md-nav__link">
         
   
   
@@ -1335,100 +1424,6 @@
   
 
       </a>
-      
-        
-
-  
-
-<nav class="md-nav md-nav--secondary" aria-label="On this page">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      On this page
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#file-structure" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        File Structure
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#implementation-steps" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🛠️ Implementation Steps
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🛠️ Implementation Steps">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#task-1-r-process-bridge-positivity-checker" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Task 1: R Process Bridge &amp; Positivity Checker
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#task-2-backdoor-exchangeability-sutva-validator" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Task 2: Backdoor Exchangeability &amp; SUTVA Validator
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#task-3-dag-compiler-to-r-code" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Task 3: DAG Compiler to R Code
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#task-4-cli-integration" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Task 4: CLI Integration
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1441,7 +1436,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../PLAN-plugin-integrations/" class="md-nav__link">
+      <a href="../../specs/PLAN-plugin-integrations/" class="md-nav__link">
         
   
   
@@ -1604,10 +1599,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#file-structure" class="md-nav__link">
+  <a href="#background" class="md-nav__link">
     <span class="md-ellipsis">
       
-        File Structure
+        Background
       
     </span>
   </a>
@@ -1615,63 +1610,46 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#implementation-steps" class="md-nav__link">
+  <a href="#step-1-create-a-study-design" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🛠️ Implementation Steps
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🛠️ Implementation Steps">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#task-1-r-process-bridge-positivity-checker" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Task 1: R Process Bridge &amp; Positivity Checker
+        Step 1 — Create a Study Design
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#task-2-backdoor-exchangeability-sutva-validator" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#step-2-run-agy-eval" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Task 2: Backdoor Exchangeability &amp; SUTVA Validator
+        Step 2 — Run agy eval
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#task-3-dag-compiler-to-r-code" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#step-3-interpret-violations" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Task 3: DAG Compiler to R Code
+        Step 3 — Interpret Violations
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#task-4-cli-integration" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Task 4: CLI Integration
+        ✅ What's Next
       
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1695,114 +1673,71 @@
   
 
 
-<h1 id="plan-core-causal-inference-engine-implementation">PLAN: Core Causal Inference Engine Implementation<a class="headerlink" href="#plan-core-causal-inference-engine-implementation" title="Permanent link">&para;</a></h1>
-<p>This plan outlines the task-by-task execution steps to implement the core causal inference and R integration features in <strong>agy-cli</strong>.</p>
-<p><strong>Goal:</strong> Implement Python CLI commands and R integration for checking Positivity (<span class="arithmatex">\(0 &lt; P(W=1|X) &lt; 1\)</span>), backdoor Exchangeability (<span class="arithmatex">\(Y(w) \perp\!\!\perp W \mid X\)</span>), and SUTVA assumptions, along with compiling causal DAGs to R code.</p>
-<p><strong>Tech Stack:</strong> Python 3.9+, Click, Rich, NetworkX, R 4.4+, tidyverse, ggdag, dagitty.</p>
+<h1 id="tutorial-2-verify-causal-assumptions">Tutorial 2 · Verify Causal Assumptions<a class="headerlink" href="#tutorial-2-verify-causal-assumptions" title="Permanent link">&para;</a></h1>
+<p><strong>Goal:</strong> Use <code>agy eval</code> to check Positivity, Backdoor Exchangeability, and SUTVA on a study design YAML.</p>
 <hr />
-<h2 id="file-structure">File Structure<a class="headerlink" href="#file-structure" title="Permanent link">&para;</a></h2>
+<h2 id="background">Background<a class="headerlink" href="#background" title="Permanent link">&para;</a></h2>
+<p>The engine enforces three canonical identification assumptions:</p>
+<p><strong>Positivity (Overlap)</strong></p>
+<div class="arithmatex">\[0 &lt; P(W = w \mid X = x) &lt; 1 \quad \forall\, x \in \mathcal{X},\; w \in \mathcal{W}\]</div>
+<p><strong>Backdoor Exchangeability (Unconfoundedness)</strong></p>
+<div class="arithmatex">\[Y(w) \perp\!\!\!\perp W \mid X\]</div>
+<p><strong>SUTVA</strong></p>
+<div class="arithmatex">\[Y_i(W) = Y_i(W_i) \quad \forall\, i\]</div>
+<p>When all three hold, the ATE is nonparametrically identified:</p>
+<div class="arithmatex">\[\tau_{\text{ATE}} = \mathbb{E}_X\!\left[\mathbb{E}[Y \mid W=1,X] - \mathbb{E}[Y \mid W=0,X]\right]\]</div>
+<hr />
+<h2 id="step-1-create-a-study-design">Step 1 — Create a Study Design<a class="headerlink" href="#step-1-create-a-study-design" title="Permanent link">&para;</a></h2>
+<div class="language-yaml highlight"><span class="filename">study_design.yaml</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">treatment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">W</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nt">outcome</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Y</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nt">covariates</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">age</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">sex</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">income</span><span class="p p-Indicator">]</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nt">dag</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;age</span><span class="nv"> </span><span class="s">-&gt;</span><span class="nv"> </span><span class="s">W,</span><span class="nv"> </span><span class="s">sex</span><span class="nv"> </span><span class="s">-&gt;</span><span class="nv"> </span><span class="s">W,</span><span class="nv"> </span><span class="s">income</span><span class="nv"> </span><span class="s">-&gt;</span><span class="nv"> </span><span class="s">W,</span><span class="nv"> </span><span class="s">age</span><span class="nv"> </span><span class="s">-&gt;</span><span class="nv"> </span><span class="s">Y,</span><span class="nv"> </span><span class="s">income</span><span class="nv"> </span><span class="s">-&gt;</span><span class="nv"> </span><span class="s">Y,</span><span class="nv"> </span><span class="s">W</span><span class="nv"> </span><span class="s">-&gt;</span><span class="nv"> </span><span class="s">Y&quot;</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="nt">sutva_responses</span><span class="p">:</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">  </span><span class="nt">interference</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;no&quot;</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">  </span><span class="nt">treatment_variation</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;no&quot;</span>
+</span></code></pre></div>
+<hr />
+<h2 id="step-2-run-agy-eval">Step 2 — Run <code>agy eval</code><a class="headerlink" href="#step-2-run-agy-eval" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>agy<span class="w"> </span><span class="nb">eval</span><span class="w"> </span>study_design.yaml
+</span></code></pre></div>
+<p>Sample output:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>[✓] Positivity     — no violations detected across 3 covariate strata
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>[✓] Exchangeability — {age, sex, income} d-separates W ⊥ Y in backdoor graph
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>[✓] SUTVA          — no interference, single treatment version
+</span></code></pre></div>
+<hr />
+<h2 id="step-3-interpret-violations">Step 3 — Interpret Violations<a class="headerlink" href="#step-3-interpret-violations" title="Permanent link">&para;</a></h2>
+<p>If positivity is violated:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>[✗] Positivity — violation in stratum {age=18, sex=F, income=low}
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    P(W=1|X) = 0.0  →  No treated units in this cell
+</span></code></pre></div>
+<p><strong>Fix:</strong> Trim the dataset to the region of common support, or use a positivity-robust estimator.</p>
+<hr />
+<h2 id="whats-next">✅ What's Next<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>File</th>
-<th>Status</th>
-<th>Responsibility</th>
+<th>Ready to...</th>
+<th>Go to</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>src/agy/core/evaluator.py</code></td>
-<td>Create</td>
-<td>Implements Positivity, Exchangeability, and SUTVA validators. Spawns subprocess R bridges.</td>
+<td>Compile a DAG to R code</td>
+<td><a href="../03-dag-compiler/">Tutorial 3 → DAG Compiler</a></td>
 </tr>
 <tr>
-<td><code>src/agy/core/dag_compiler.py</code></td>
-<td>Create</td>
-<td>Parses textual graphs and compiles them to R ggdag/dagitty code.</td>
+<td>Understand the math deeply</td>
+<td><a href="../../guides/causal_inference/">Causal Inference Reference</a></td>
 </tr>
 <tr>
-<td><code>src/agy/cli.py</code></td>
-<td>Modify</td>
-<td>Connects CLI subcommands <code>eval</code> and <code>dag</code> to the core layer.</td>
-</tr>
-<tr>
-<td><code>tests/test_evaluator.py</code></td>
-<td>Create</td>
-<td>Unit tests for positivity and exchangeability checks.</td>
-</tr>
-<tr>
-<td><code>tests/test_dag_compiler.py</code></td>
-<td>Create</td>
-<td>Unit tests for DAG text parsing and R code compilation.</td>
+<td>Measure covariate balance</td>
+<td><a href="../../guides/balance_tutorial/">Balance &amp; SMD</a></td>
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="implementation-steps">🛠️ Implementation Steps<a class="headerlink" href="#implementation-steps" title="Permanent link">&para;</a></h2>
-<h3 id="task-1-r-process-bridge-positivity-checker">Task 1: R Process Bridge &amp; Positivity Checker<a class="headerlink" href="#task-1-r-process-bridge-positivity-checker" title="Permanent link">&para;</a></h3>
-<p>Implement a subprocess wrapper that invokes R to run statistical evaluations, and implement the positivity assumption checker.</p>
-<ul>
-<li>[ ] <strong>Step 1.1: Implement R Process Bridge in <code>src/agy/core/evaluator.py</code></strong><ul>
-<li>Write <code>RBridge</code> class that starts an interactive R process via <code>subprocess.Popen</code> or similar, runs command strings, and returns stdout/stderr.</li>
-</ul>
-</li>
-<li>[ ] <strong>Step 1.2: Implement Positivity Checker</strong><ul>
-<li>Add <code>check_positivity(data_path, treatment, covariates)</code> function.</li>
-<li>Pass the CSV path to R, group by covariates, calculate treatment probability for each group, and flag any strata violating <span class="arithmatex">\(0 &lt; P(W=1|X) &lt; 1\)</span>.</li>
-</ul>
-</li>
-<li>[ ] <strong>Step 1.3: Add Positivity Unit Tests</strong><ul>
-<li>Create <code>tests/test_evaluator.py</code> with mock datasets (one violating positivity, one satisfying it) and assert correct detections.</li>
-</ul>
-</li>
-</ul>
-<h3 id="task-2-backdoor-exchangeability-sutva-validator">Task 2: Backdoor Exchangeability &amp; SUTVA Validator<a class="headerlink" href="#task-2-backdoor-exchangeability-sutva-validator" title="Permanent link">&para;</a></h3>
-<p>Implement backdoor path checks using NetworkX in Python and verify conditioning sets.</p>
-<ul>
-<li>[ ] <strong>Step 2.1: Implement Backdoor Path Checker in <code>src/agy/core/evaluator.py</code></strong><ul>
-<li>Load causal graph from input or text and build a NetworkX <code>DiGraph</code>.</li>
-<li>Write <code>check_exchangeability(graph, treatment, outcome, covariates)</code> using NetworkX's d-separation functions to check if covariates <span class="arithmatex">\(X\)</span> block all backdoor paths:
-    $<span class="arithmatex">\(Y(w) \perp\!\!\perp W \mid X\)</span>$</li>
-</ul>
-</li>
-<li>[ ] <strong>Step 2.2: Implement SUTVA Questionnaire Validator</strong><ul>
-<li>Add <code>check_sutva(project_path)</code> which scans study metadata or asks interactive CLI questions (e.g. check for spillover/interference or variant treatment definitions).</li>
-</ul>
-</li>
-<li>[ ] <strong>Step 2.3: Add Exchangeability &amp; SUTVA Unit Tests</strong><ul>
-<li>Add test cases to <code>tests/test_evaluator.py</code> validating d-separation assertions on different DAG structures.</li>
-</ul>
-</li>
-</ul>
-<h3 id="task-3-dag-compiler-to-r-code">Task 3: DAG Compiler to R Code<a class="headerlink" href="#task-3-dag-compiler-to-r-code" title="Permanent link">&para;</a></h3>
-<p>Implement a parser for textual graph configurations and generate ggdag/dagitty R code.</p>
-<ul>
-<li>[ ] <strong>Step 3.1: Implement Text Parser in <code>src/agy/core/dag_compiler.py</code></strong><ul>
-<li>Parse string inputs like <code>W -&gt; Y, X -&gt; W, X -&gt; Y</code> into nodes and edges.</li>
-</ul>
-</li>
-<li>[ ] <strong>Step 3.2: Implement R Code Generator</strong><ul>
-<li>Write <code>compile_to_r(nodes, edges)</code> returning standard R code utilizing <code>dagitty::dagitty()</code> and <code>ggdag::ggdag()</code>.</li>
-</ul>
-</li>
-<li>[ ] <strong>Step 3.3: Add DAG Compiler Unit Tests</strong><ul>
-<li>Create <code>tests/test_dag_compiler.py</code> asserting compiled R strings match expected syntax.</li>
-</ul>
-</li>
-</ul>
-<h3 id="task-4-cli-integration">Task 4: CLI Integration<a class="headerlink" href="#task-4-cli-integration" title="Permanent link">&para;</a></h3>
-<p>Hook the CLI commands up to the core business logic.</p>
-<ul>
-<li>[ ] <strong>Step 4.1: Modify <code>src/agy/cli.py</code></strong><ul>
-<li>Update <code>eval</code> command to accept <code>--treatment</code>, <code>--outcome</code>, <code>--covariates</code>, and <code>--data</code> options and call <code>evaluator.py</code>.</li>
-<li>Update <code>dag</code> command to compile description strings and optionally write them to the specified <code>--output</code> R script.</li>
-</ul>
-</li>
-<li>[ ] <strong>Step 4.2: Verify with manual CLI checks</strong><ul>
-<li>Run <code>python3 -m src.agy.cli status</code> to verify Click commands.</li>
-</ul>
-</li>
-</ul>
 
 
 
@@ -1840,7 +1775,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../SPEC-worktree-rules/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Worktree Rules">
+          <a href="../01-getting-started/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Installation &amp; Quick Start">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1850,20 +1785,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Worktree Rules
+                Installation & Quick Start
               </div>
             </div>
           </a>
         
         
           
-          <a href="../PLAN-plugin-integrations/" class="md-footer__link md-footer__link--next" aria-label="Next: Plugin Integration Plan">
+          <a href="../03-dag-compiler/" class="md-footer__link md-footer__link--next" aria-label="Next: Draw &amp; Compile DAGs (dag)">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Plugin Integration Plan
+                Draw & Compile DAGs (dag)
               </div>
             </div>
             <div class="md-footer__button md-icon">

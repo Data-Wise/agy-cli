@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://data-wise.github.io/agy-cli/guides/plugins/">
       
       
-        <link rel="prev" href="../rforge_tutorial/">
+        <link rel="prev" href="../balance_tutorial/">
       
       
         <link rel="next" href="../sandbox/">
@@ -29,7 +29,7 @@
     
     
       
-        <title>Plugins Setup - agy-cli</title>
+        <title>Connect Vault & Plugins - agy-cli</title>
       
     
     
@@ -39,6 +39,26 @@
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
+  
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+  
+  <style>:root{--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M1%207.775V2.75C1%201.784%201.784%201%202.75%201h5.025c.464%200%20.91.184%201.238.513l6.25%206.25a1.75%201.75%200%200%201%200%202.474l-5.026%205.026a1.75%201.75%200%200%201-2.474%200l-6.25-6.25A1.75%201.75%200%200%201%201%207.775m1.5%200c0%20.066.026.13.073.177l6.25%206.25a.25.25%200%200%200%20.354%200l5.025-5.025a.25.25%200%200%200%200-.354l-6.25-6.25a.25.25%200%200%200-.177-.073H2.75a.25.25%200%200%200-.25.25ZM6%205a1%201%200%201%201%200%202%201%201%200%200%201%200-2%22/%3E%3C/svg%3E');--md-admonition-icon--tip:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M3.499.75a.75.75%200%200%201%201.5%200v.996C5.9%202.903%206.793%203.65%207.662%204.376l.24.202c-.036-.694.055-1.422.426-2.163C9.1.873%2010.794-.045%2012.622.26%2014.408.558%2016%201.94%2016%204.25c0%201.278-.954%202.575-2.44%202.734l.146.508.065.22c.203.701.412%201.455.476%202.226.142%201.707-.4%203.03-1.487%203.898C11.714%2014.671%2010.27%2015%208.75%2015h-6a.75.75%200%200%201%200-1.5h1.376a4.5%204.5%200%200%201-.563-1.191%203.84%203.84%200%200%201-.05-2.063%204.65%204.65%200%200%201-2.025-.293.75.75%200%200%201%20.525-1.406c1.357.507%202.376-.006%202.698-.318l.009-.01a.747.747%200%200%201%201.06%200%20.75.75%200%200%201-.012%201.074c-.912.92-.992%201.835-.768%202.586.221.74.745%201.337%201.196%201.621H8.75c1.343%200%202.398-.296%203.074-.836.635-.507%201.036-1.31.928-2.602-.05-.603-.216-1.224-.422-1.93l-.064-.221c-.12-.407-.246-.84-.353-1.29a2.4%202.4%200%200%201-.507-.441%203.1%203.1%200%200%201-.633-1.248.75.75%200%200%201%201.455-.364c.046.185.144.436.31.627.146.168.353.305.712.305.738%200%201.25-.615%201.25-1.25%200-1.47-.95-2.315-2.123-2.51-1.172-.196-2.227.387-2.706%201.345-.46.92-.27%201.774.019%203.062l.042.19.01.05c.348.443.666.949.94%201.553a.75.75%200%201%201-1.365.62c-.553-1.217-1.32-1.94-2.3-2.768L6.7%205.527c-.814-.68-1.75-1.462-2.692-2.619a3.7%203.7%200%200%200-1.023.88c-.406.495-.663%201.036-.722%201.508.116.122.306.21.591.239.388.038.797-.06%201.032-.19a.75.75%200%200%201%20.728%201.31c-.515.287-1.23.439-1.906.373-.682-.067-1.473-.38-1.879-1.193L.75%205.677V5.5c0-.984.48-1.94%201.077-2.664.46-.559%201.05-1.055%201.673-1.353z%22/%3E%3C/svg%3E');--md-admonition-icon--warning:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M6.457%201.047c.659-1.234%202.427-1.234%203.086%200l6.082%2011.378A1.75%201.75%200%200%201%2014.082%2015H1.918a1.75%201.75%200%200%201-1.543-2.575Zm1.763.707a.25.25%200%200%200-.44%200L1.698%2013.132a.25.25%200%200%200%20.22.368h12.164a.25.25%200%200%200%20.22-.368Zm.53%203.996v2.5a.75.75%200%200%201-1.5%200v-2.5a.75.75%200%200%201%201.5%200M9%2011a1%201%200%201%201-2%200%201%201%200%200%201%202%200%22/%3E%3C/svg%3E');}</style>
+
 
 
     
@@ -116,7 +136,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Plugins Setup
+              Connect Vault & Plugins
             
           </span>
         </div>
@@ -157,6 +177,8 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
         </button>
       </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
       
     </form>
     <div class="md-search__output">
@@ -223,13 +245,13 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+        <a href="../../tutorials/" class="md-tabs__link">
           
   
   
     
   
-  Guides
+  Tutorials
 
         </a>
       </li>
@@ -245,13 +267,13 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../contributing/BRANCH-WORKFLOW/" class="md-tabs__link">
+        <a href="../../reference/" class="md-tabs__link">
           
   
   
     
   
-  Contributing
+  Reference
 
         </a>
       </li>
@@ -267,13 +289,35 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../specs/SPEC-agy-cli-roadmap/" class="md-tabs__link">
+        <a href="../../specs/" class="md-tabs__link">
           
   
   
     
   
   Specs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../contributing/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Contributing
 
         </a>
       </li>
@@ -382,8 +426,6 @@
       
         
       
-        
-      
     
     
     
@@ -404,14 +446,14 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
+            <a href="../../tutorials/" class="md-nav__link ">
               
   
   
   <span class="md-ellipsis">
     
   
-    Guides
+    Tutorials
   
 
     
@@ -433,7 +475,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Guides
+    Tutorials
   
 
           </label>
@@ -480,7 +522,7 @@
   <span class="md-ellipsis">
     
   
-    CLI Reference
+    1 · Get Started
   
 
     
@@ -496,7 +538,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    CLI Reference
+    1 · Get Started
   
 
           </label>
@@ -509,14 +551,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../commands/" class="md-nav__link">
+      <a href="../../tutorials/01-getting-started/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Command Reference
+    Installation & Quick Start
   
 
     
@@ -581,7 +623,7 @@
   <span class="md-ellipsis">
     
   
-    Causal Inference
+    2 · Causal Inference
   
 
     
@@ -597,7 +639,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Causal Inference
+    2 · Causal Inference
   
 
           </label>
@@ -610,14 +652,42 @@
   
   
     <li class="md-nav__item">
-      <a href="../causal_inference/" class="md-nav__link">
+      <a href="../../tutorials/02-causal-assumptions/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Assumptions Verification
+    Verify Assumptions (eval)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/03-dag-compiler/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Draw & Compile DAGs (dag)
   
 
     
@@ -646,131 +716,6 @@
     
   
     Covariate Balance & SMD
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../asymptotic_theory/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Asymptotic Theory & EIF
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-      
-        
-      
-    
-    
-    
-      
-      
-        
-          
-          
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    R Integration
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_4">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    R Integration
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../rforge_tutorial/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    R Package Validation
   
 
     
@@ -823,17 +768,17 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" checked>
         
           
-          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="">
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="">
             
   
   
   <span class="md-ellipsis">
     
   
-    Obsidian & Atlas
+    3 · Obsidian Integration
   
 
     
@@ -844,12 +789,12 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_2_5">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_4">
             <span class="md-nav__icon md-icon"></span>
             
   
-    Obsidian & Atlas
+    3 · Obsidian Integration
   
 
           </label>
@@ -878,7 +823,7 @@
   <span class="md-ellipsis">
     
   
-    Plugins Setup
+    Connect Vault & Plugins
   
 
     
@@ -896,7 +841,7 @@
   <span class="md-ellipsis">
     
   
-    Plugins Setup
+    Connect Vault & Plugins
   
 
     
@@ -908,7 +853,9 @@
       
         
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
   
   
   
@@ -917,7 +864,7 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Table of contents
+      On this page
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
@@ -1156,7 +1103,7 @@
   <span class="md-ellipsis">
     
   
-    Testing & Sandbox Vaults
+    Sandbox & Test Vaults
   
 
     
@@ -1207,17 +1154,17 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_6" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_5" >
         
           
-          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="">
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="">
             
   
   
   <span class="md-ellipsis">
     
   
-    Development
+    4 · R Integration
   
 
     
@@ -1228,12 +1175,12 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_6">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
             <span class="md-nav__icon md-icon"></span>
             
   
-    Development
+    4 · R Integration
   
 
           </label>
@@ -1246,14 +1193,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../development_workflows/" class="md-nav__link">
+      <a href="../rforge_tutorial/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    CI Workflows
+    R Package Validation
   
 
     
@@ -1290,6 +1237,14 @@
   
     
     
+      
+        
+          
+        
+      
+        
+      
+        
       
         
       
@@ -1311,14 +1266,15 @@
         <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
-            
+          <div class="md-nav__link md-nav__container">
+            <a href="../../reference/" class="md-nav__link ">
+              
   
   
   <span class="md-ellipsis">
     
   
-    Contributing
+    Reference
   
 
     
@@ -1326,19 +1282,27 @@
   
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
   
-    Contributing
+    Reference
   
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
             
               
                 
@@ -1347,14 +1311,70 @@
   
   
     <li class="md-nav__item">
-      <a href="../../contributing/BRANCH-WORKFLOW/" class="md-nav__link">
+      <a href="../commands/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Branch Workflow
+    Command Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../asymptotic_theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Asymptotic Theory & EIF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../development_workflows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development & CI Workflows
   
 
     
@@ -1383,6 +1403,10 @@
   
     
     
+      
+        
+          
+        
       
         
       
@@ -1412,8 +1436,9 @@
         <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
-            
+          <div class="md-nav__link md-nav__container">
+            <a href="../../specs/" class="md-nav__link ">
+              
   
   
   <span class="md-ellipsis">
@@ -1427,8 +1452,14 @@
   
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
@@ -1440,6 +1471,8 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
             
               
                 
@@ -1567,7 +1600,113 @@
   <span class="md-ellipsis">
     
   
-    Plugin Plan
+    Plugin Integration Plan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../contributing/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contributing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/BRANCH-WORKFLOW/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Branch Workflow
   
 
     
@@ -1601,7 +1740,9 @@
                   <div class="md-sidebar__inner">
                     
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
   
   
   
@@ -1610,7 +1751,7 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Table of contents
+      On this page
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
@@ -1846,57 +1987,57 @@
   
 
 
-<h1 id="plugins-obsidian-atlas-integrations">Plugins: Obsidian &amp; Atlas Integrations</h1>
+<h1 id="plugins-obsidian-atlas-integrations">Plugins: Obsidian &amp; Atlas Integrations<a class="headerlink" href="#plugins-obsidian-atlas-integrations" title="Permanent link">&para;</a></h1>
 <p>The <code>agy</code> CLI implements an in-process plugin architecture designed to integrate knowledge vaults and active developer sessions.</p>
 <hr />
-<h2 id="obsidian-knowledge-bridge-agy-obs">🪨 Obsidian Knowledge Bridge (<code>agy obs</code>)</h2>
+<h2 id="obsidian-knowledge-bridge-agy-obs">🪨 Obsidian Knowledge Bridge (<code>agy obs</code>)<a class="headerlink" href="#obsidian-knowledge-bridge-agy-obs" title="Permanent link">&para;</a></h2>
 <p>The Obsidian plugin runs sqlite queries targeting local vault indexes to maintain knowledge graph health.</p>
-<h3 id="commands">Commands</h3>
-<h4 id="1-list-orphan-notes">1. List Orphan Notes</h4>
+<h3 id="commands">Commands<a class="headerlink" href="#commands" title="Permanent link">&para;</a></h3>
+<h4 id="1-list-orphan-notes">1. List Orphan Notes<a class="headerlink" href="#1-list-orphan-notes" title="Permanent link">&para;</a></h4>
 <p>Finds notes with no incoming or outgoing connections (<span class="arithmatex">\(k_{in} = 0\)</span> and <span class="arithmatex">\(k_{out} = 0\)</span>).
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>agy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span>~/vault_db.sqlite<span class="w"> </span>orphans
 </span></code></pre></div></p>
-<h4 id="2-find-central-hub-notes">2. Find central Hub Notes</h4>
+<h4 id="2-find-central-hub-notes">2. Find central Hub Notes<a class="headerlink" href="#2-find-central-hub-notes" title="Permanent link">&para;</a></h4>
 <p>Identifies hub notes ranked by PageRank or connection degrees.
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>agy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span>~/vault_db.sqlite<span class="w"> </span>hubs<span class="w"> </span>--sort<span class="w"> </span>pagerank<span class="w"> </span>--limit<span class="w"> </span><span class="m">5</span>
 </span></code></pre></div></p>
-<h4 id="3-graph-health-audit">3. Graph Health Audit</h4>
+<h4 id="3-graph-health-audit">3. Graph Health Audit<a class="headerlink" href="#3-graph-health-audit" title="Permanent link">&para;</a></h4>
 <p>Detects broken internal note links.
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>agy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span>~/vault_db.sqlite<span class="w"> </span>health
 </span></code></pre></div></p>
 <hr />
-<h2 id="atlas-session-synchronizer-agy-atlas">🗺️ Atlas Session Synchronizer (<code>agy atlas</code>)</h2>
+<h2 id="atlas-session-synchronizer-agy-atlas">🗺️ Atlas Session Synchronizer (<code>agy atlas</code>)<a class="headerlink" href="#atlas-session-synchronizer-agy-atlas" title="Permanent link">&para;</a></h2>
 <p>The Atlas plugin reads session logs to bridge CLI activities with background workspace context.</p>
-<h3 id="commands_1">Commands</h3>
-<h4 id="1-show-session-status">1. Show Session Status</h4>
+<h3 id="commands_1">Commands<a class="headerlink" href="#commands_1" title="Permanent link">&para;</a></h3>
+<h4 id="1-show-session-status">1. Show Session Status<a class="headerlink" href="#1-show-session-status" title="Permanent link">&para;</a></h4>
 <p>Displays the active workspace project, task, start time, and current duration.
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>agy<span class="w"> </span>atlas<span class="w"> </span>--sessions-path<span class="w"> </span>~/sessions.yaml<span class="w"> </span>status
 </span></code></pre></div></p>
-<h4 id="2-view-breadcrumb-trail">2. View Breadcrumb Trail</h4>
+<h4 id="2-view-breadcrumb-trail">2. View Breadcrumb Trail<a class="headerlink" href="#2-view-breadcrumb-trail" title="Permanent link">&para;</a></h4>
 <p>Prints the most recent developer breadcrumbs (commands executed or files touched).
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>agy<span class="w"> </span>atlas<span class="w"> </span>--registry-path<span class="w"> </span>~/registry.yaml<span class="w"> </span>trail<span class="w"> </span>--limit<span class="w"> </span><span class="m">10</span>
 </span></code></pre></div></p>
-<h4 id="3-start-a-new-active-session">3. Start a new Active Session</h4>
+<h4 id="3-start-a-new-active-session">3. Start a new Active Session<a class="headerlink" href="#3-start-a-new-active-session" title="Permanent link">&para;</a></h4>
 <p>Creates and registers a new active workspace project session.
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>agy<span class="w"> </span>atlas<span class="w"> </span>--sessions-path<span class="w"> </span>~/sessions.yaml<span class="w"> </span>start-session<span class="w"> </span>--project<span class="w"> </span>causal-analysis<span class="w"> </span>--task<span class="w"> </span><span class="s2">&quot;Data modeling&quot;</span><span class="w"> </span>--desc<span class="w"> </span><span class="s2">&quot;Fitting propensity scores&quot;</span>
 </span></code></pre></div></p>
-<h4 id="4-log-breadcrumbs">4. Log Breadcrumbs</h4>
+<h4 id="4-log-breadcrumbs">4. Log Breadcrumbs<a class="headerlink" href="#4-log-breadcrumbs" title="Permanent link">&para;</a></h4>
 <p>Appends a custom breadcrumb item to the registry trail.
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>agy<span class="w"> </span>atlas<span class="w"> </span>--registry-path<span class="w"> </span>~/registry.yaml<span class="w"> </span>log-crumb<span class="w"> </span><span class="s2">&quot;Ran check_covariate_balance&quot;</span><span class="w"> </span>--type<span class="w"> </span><span class="s2">&quot;command&quot;</span>
 </span></code></pre></div></p>
 <hr />
-<h2 id="r-package-validation-bridge-agy-rforge">🛠️ R Package Validation Bridge (<code>agy rforge</code>)</h2>
+<h2 id="r-package-validation-bridge-agy-rforge">🛠️ R Package Validation Bridge (<code>agy rforge</code>)<a class="headerlink" href="#r-package-validation-bridge-agy-rforge" title="Permanent link">&para;</a></h2>
 <p>The RForge plugin implements an in-process bridge that executes package checks, document compiling, and unit testing within an R subprocess.</p>
-<h3 id="commands_2">Commands</h3>
-<h4 id="1-compile-documentation">1. Compile Documentation</h4>
+<h3 id="commands_2">Commands<a class="headerlink" href="#commands_2" title="Permanent link">&para;</a></h3>
+<h4 id="1-compile-documentation">1. Compile Documentation<a class="headerlink" href="#1-compile-documentation" title="Permanent link">&para;</a></h4>
 <p>Runs <code>devtools::document()</code> to update help documents and namespaces from Roxygen2 syntax.
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>agy<span class="w"> </span>rforge<span class="w"> </span>--pkg-dir<span class="w"> </span>/path/to/package<span class="w"> </span>document
 </span></code></pre></div></p>
-<h4 id="2-run-tests">2. Run Tests</h4>
+<h4 id="2-run-tests">2. Run Tests<a class="headerlink" href="#2-run-tests" title="Permanent link">&para;</a></h4>
 <p>Runs unit testing suites using <code>devtools::test()</code>.
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>agy<span class="w"> </span>rforge<span class="w"> </span>--pkg-dir<span class="w"> </span>/path/to/package<span class="w"> </span><span class="nb">test</span>
 </span></code></pre></div></p>
-<h4 id="3-run-package-checks">3. Run Package Checks</h4>
+<h4 id="3-run-package-checks">3. Run Package Checks<a class="headerlink" href="#3-run-package-checks" title="Permanent link">&para;</a></h4>
 <p>Executes check validations utilizing <code>devtools::check(document = FALSE)</code>.
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>agy<span class="w"> </span>rforge<span class="w"> </span>--pkg-dir<span class="w"> </span>/path/to/package<span class="w"> </span>check
 </span></code></pre></div></p>
@@ -1932,6 +2073,46 @@
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../balance_tutorial/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Covariate Balance &amp; SMD">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Covariate Balance & SMD
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../sandbox/" class="md-footer__link md-footer__link--next" aria-label="Next: Sandbox &amp; Test Vaults">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Sandbox & Test Vaults
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
@@ -1957,7 +2138,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.top", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "content.code.copy", "content.code.annotate", "content.tabs.link", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.expand", "navigation.footer", "content.code.copy", "content.code.annotate", "content.tabs.link", "search.highlight", "search.share", "search.suggest", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
