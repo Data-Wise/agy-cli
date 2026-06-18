@@ -10,11 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    outputs:
+      version: ${{ steps.calc_meta.outputs.version }}
+      sha256: ${{ steps.calc_meta.outputs.sha256 }}
     steps:
       - name: Checkout Source
         uses: actions/checkout@v4
-        with:
-          ref: dev # We checkout dev so that we can update and commit the formula there
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -39,41 +40,26 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Update and Commit Homebrew Formula
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Calculate Version and SHA256
+        id: calc_meta
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          TAG_NAME=${GITHUB_REF#refs/tags/}
+          VERSION=${TAG_NAME#v}
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
           
-          # Run python update script to bump formula version and sha256
-          python -c '
-          import re, urllib.request, hashlib, os
-          ref = os.environ.get("GITHUB_REF", "")
-          version = ref.split("/")[-1].replace("v", "")
-          repo = os.environ.get("GITHUB_REPOSITORY", "Data-Wise/agy-cli")
-          tarball_url = f"https://github.com/{repo}/archive/refs/tags/v{version}.tar.gz"
-          
-          print(f"Downloading tarball from: {tarball_url}")
-          req = urllib.request.Request(
-              tarball_url, 
-              headers={"User-Agent": "Mozilla/5.0"}
-          )
-          with urllib.request.urlopen(req) as response:
-              data = response.read()
-          sha256_val = hashlib.sha256(data).hexdigest()
-          print(f"Calculated SHA256: {sha256_val}")
-          
-          path = "Formula/agy.rb"
-          with open(path, "r") as f:
-              content = f.read()
-          content = re.sub(r"url\s+\"[^\"]+\"", f"url \"{tarball_url}\"", content)
-          content = re.sub(r"sha256\s+\"[0-9a-fA-F]{64}\"", f"sha256 \"{sha256_val}\"", content)
-          with open(path, "w") as f:
-              f.write(content)
-          '
-          
-          git add Formula/agy.rb
-          git commit -m "chore: bump Homebrew formula to ${GITHUB_REF#refs/tags/}"
-          git push origin dev
+          TARBALL_URL="https://github.com/${{ github.repository }}/archive/refs/tags/${TAG_NAME}.tar.gz"
+          echo "Downloading from: ${TARBALL_URL}"
+          curl -sL -o tarball.tar.gz "${TARBALL_URL}"
+          SHA256=$(sha256sum tarball.tar.gz | cut -d ' ' -f 1)
+          echo "sha256=${SHA256}" >> $GITHUB_OUTPUT
 
+  update-homebrew:
+    needs: release
+    uses: Data-Wise/homebrew-tap/.github/workflows/update-formula.yml@main
+    with:
+      formula_name: agy
+      version: ${{ needs.release.outputs.version }}
+      sha256: ${{ needs.release.outputs.sha256 }}
+      auto_merge: true
+    secrets:
+      tap_token: ${{ secrets.HOMEBREW_TAP_GITHUB_TOKEN }}
