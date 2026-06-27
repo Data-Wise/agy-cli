@@ -2,110 +2,110 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://data-wise.github.io/agy-cli/</loc>
-         <lastmod>2026-06-18</lastmod>
+         <lastmod>2026-06-27</lastmod>
     </url>
     <url>
          <loc>https://data-wise.github.io/agy-cli/404/</loc>
-         <lastmod>2026-06-18</lastmod>
+         <lastmod>2026-06-27</lastmod>
     </url>
     <url>
          <loc>https://data-wise.github.io/agy-cli/changelog/</loc>
-         <lastmod>2026-06-18</lastmod>
+         <lastmod>2026-06-27</lastmod>
     </url>
     <url>
          <loc>https://data-wise.github.io/agy-cli/contributing/</loc>
-         <lastmod>2026-06-18</lastmod>
+         <lastmod>2026-06-27</lastmod>
     </url>
     <url>
          <loc>https://data-wise.github.io/agy-cli/contributing/BRANCH-WORKFLOW/</loc>
-         <lastmod>2026-06-18</lastmod>
+         <lastmod>2026-06-27</lastmod>
     </url>
     <url>
          <loc>https://data-wise.github.io/agy-cli/guides/</loc>
-         <lastmod>2026-06-18</lastmod>
+         <lastmod>2026-06-27</lastmod>
     </url>
     <url>
          <loc>https://data-wise.github.io/agy-cli/guides/asymptotic_theory/</loc>
-         <lastmod>2026-06-18</lastmod>
+         <lastmod>2026-06-27</lastmod>
     </url>
     <url>
          <loc>https://data-wise.github.io/agy-cli/guides/balance_tutorial/</loc>
-         <lastmod>2026-06-18</lastmod>
+         <lastmod>2026-06-27</lastmod>
     </url>
     <url>
          <loc>https://data-wise.github.io/agy-cli/guides/causal_inference/</loc>
-         <lastmod>2026-06-18</lastmod>
+         <lastmod>2026-06-27</lastmod>
     </url>
     <url>
          <loc>https://data-wise.github.io/agy-cli/guides/commands/</loc>
-         <lastmod>2026-06-18</lastmod>
+         <lastmod>2026-06-27</lastmod>
     </url>
     <url>
          <loc>https://data-wise.github.io/agy-cli/guides/development_workflows/</loc>
-         <lastmod>2026-06-18</lastmod>
+         <lastmod>2026-06-27</lastmod>
     </url>
     <url>
          <loc>https://data-wise.github.io/agy-cli/guides/plugins/</loc>
-         <lastmod>2026-06-18</lastmod>
+         <lastmod>2026-06-27</lastmod>
     </url>
     <url>
          <loc>https://data-wise.github.io/agy-cli/guides/rforge_tutorial/</loc>
-         <lastmod>2026-06-18</lastmod>
+         <lastmod>2026-06-27</lastmod>
     </url>
     <url>
          <loc>https://data-wise.github.io/agy-cli/guides/sandbox/</loc>
-         <lastmod>2026-06-18</lastmod>
+         <lastmod>2026-06-27</lastmod>
     </url>
     <url>
          <loc>https://data-wise.github.io/agy-cli/reference/</loc>
-         <lastmod>2026-06-18</lastmod>
+         <lastmod>2026-06-27</lastmod>
     </url>
     <url>
          <loc>https://data-wise.github.io/agy-cli/reference/worktree/</loc>
-         <lastmod>2026-06-18</lastmod>
+         <lastmod>2026-06-27</lastmod>
     </url>
     <url>
          <loc>https://data-wise.github.io/agy-cli/specs/</loc>
-         <lastmod>2026-06-18</lastmod>
+         <lastmod>2026-06-27</lastmod>
     </url>
     <url>
          <loc>https://data-wise.github.io/agy-cli/specs/PLAN-causal-engine/</loc>
-         <lastmod>2026-06-18</lastmod>
+         <lastmod>2026-06-27</lastmod>
     </url>
     <url>
          <loc>https://data-wise.github.io/agy-cli/specs/PLAN-plugin-integrations/</loc>
-         <lastmod>2026-06-18</lastmod>
+         <lastmod>2026-06-27</lastmod>
     </url>
     <url>
          <loc>https://data-wise.github.io/agy-cli/specs/SPEC-agy-cli-optimization/</loc>
-         <lastmod>2026-06-18</lastmod>
+         <lastmod>2026-06-27</lastmod>
     </url>
     <url>
          <loc>https://data-wise.github.io/agy-cli/specs/SPEC-agy-cli-roadmap/</loc>
-         <lastmod>2026-06-18</lastmod>
+         <lastmod>2026-06-27</lastmod>
     </url>
     <url>
          <loc>https://data-wise.github.io/agy-cli/specs/SPEC-worktree-rules/</loc>
-         <lastmod>2026-06-18</lastmod>
+         <lastmod>2026-06-27</lastmod>
     </url>
     <url>
          <loc>https://data-wise.github.io/agy-cli/tutorials/</loc>
-         <lastmod>2026-06-18</lastmod>
+         <lastmod>2026-06-27</lastmod>
     </url>
     <url>
          <loc>https://data-wise.github.io/agy-cli/tutorials/01-getting-started/</loc>
-         <lastmod>2026-06-18</lastmod>
+         <lastmod>2026-06-27</lastmod>
     </url>
     <url>
          <loc>https://data-wise.github.io/agy-cli/tutorials/02-causal-assumptions/</loc>
-         <lastmod>2026-06-18</lastmod>
+         <lastmod>2026-06-27</lastmod>
     </url>
     <url>
          <loc>https://data-wise.github.io/agy-cli/tutorials/03-dag-compiler/</loc>
-         <lastmod>2026-06-18</lastmod>
+         <lastmod>2026-06-27</lastmod>
     </url>
     <url>
          <loc>https://data-wise.github.io/agy-cli/tutorials/06-atlas-session/</loc>
-         <lastmod>2026-06-18</lastmod>
+         <lastmod>2026-06-27</lastmod>
     </url>
 </urlset>
