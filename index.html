@@ -1522,7 +1522,7 @@
 <div class="hero-badges">
 <p><a href="https://github.com/Data-Wise/agy-cli/actions/workflows/ci.yml"><img alt="Build" src="https://github.com/Data-Wise/agy-cli/actions/workflows/ci.yml/badge.svg" /></a>
 <a href="https://data-wise.github.io/agy-cli/"><img alt="Docs" src="https://github.com/Data-Wise/agy-cli/actions/workflows/docs.yml/badge.svg" /></a>
-<a href="https://github.com/Data-Wise/agy-cli/releases"><img alt="Version" src="https://img.shields.io/badge/version-0.1.0-22c55e?logo=semver&amp;logoColor=white" /></a>
+<a href="https://github.com/Data-Wise/agy-cli/releases"><img alt="Version" src="https://img.shields.io/badge/version-0.2.1-22c55e?logo=semver&amp;logoColor=white" /></a>
 <a href="https://www.python.org/"><img alt="Python" src="https://img.shields.io/badge/python-3.12%2B-4f46e5?logo=python&amp;logoColor=white" /></a>
 <a href="https://github.com/Data-Wise/agy-cli/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/badge/license-MIT-7c3aed" /></a>
 <a href="https://github.com/Data-Wise/homebrew-tap"><img alt="Homebrew" src="https://img.shields.io/badge/homebrew-data--wise%2Ftap-f97316?logo=homebrew&amp;logoColor=white" /></a></p>
@@ -1565,14 +1565,14 @@
 <div class="tabbed-block">
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>brew<span class="w"> </span>tap<span class="w"> </span>data-wise/tap
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>brew<span class="w"> </span>install<span class="w"> </span>agy
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>agy<span class="w"> </span>status
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>cagy<span class="w"> </span>status
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>git<span class="w"> </span>clone<span class="w"> </span>git@github.com:Data-Wise/agy-cli.git
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">cd</span><span class="w"> </span>agy-cli
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>uv<span class="w"> </span>sync<span class="w"> </span>--all-extras
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>uv<span class="w"> </span>run<span class="w"> </span>agy<span class="w"> </span>status
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>uv<span class="w"> </span>run<span class="w"> </span>cagy<span class="w"> </span>status
 </span></code></pre></div>
 </div>
 </div>
@@ -1585,14 +1585,14 @@
 <p><span class="twemoji lg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2m-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8z"/></svg></span> <strong>Assumptions Eval</strong></p>
 <hr />
 <p>Verify Positivity, Backdoor Exchangeability, and SUTVA. Supports propensity score matching and IPW weighting.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>agy<span class="w"> </span><span class="nb">eval</span><span class="w"> </span>study_design.yaml<span class="w"> </span>--method<span class="w"> </span>matching
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>cagy<span class="w"> </span><span class="nb">eval</span><span class="w"> </span>study_design.yaml<span class="w"> </span>--method<span class="w"> </span>matching
 </span></code></pre></div>
 </li>
 <li>
 <p><span class="twemoji lg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.5 17c-.13 0-.26 0-.39.04l-1.61-3.25a2.5 2.5 0 0 0-1.75-4.29c-.13 0-.25 0-.39.04l-1.63-3.25c.48-.45.77-1.08.77-1.79a2.5 2.5 0 0 0-5 0c0 .71.29 1.34.76 1.79L8.64 9.54c-.14-.04-.26-.04-.39-.04a2.5 2.5 0 0 0-1.75 4.29l-1.61 3.25C4.76 17 4.63 17 4.5 17a2.5 2.5 0 0 0 0 5A2.5 2.5 0 0 0 7 19.5c0-.7-.29-1.34-.76-1.79l1.62-3.25c.14.04.26.04.39.04s.25 0 .39-.04l1.63 3.25c-.47.45-.77 1.09-.77 1.79a2.5 2.5 0 0 0 5 0A2.5 2.5 0 0 0 12 17c-.13 0-.26 0-.39.04L10 13.79c.46-.45.75-1.08.75-1.79s-.29-1.34-.75-1.79l1.61-3.25c.13.04.26.04.39.04s.26 0 .39-.04L14 10.21c-.45.45-.75 1.09-.75 1.79a2.5 2.5 0 0 0 2.5 2.5c.13 0 .25 0 .39-.04l1.63 3.25c-.47.45-.77 1.09-.77 1.79a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0-2.5-2.5"/></svg></span> <strong>DAG Compiler</strong></p>
 <hr />
 <p>Compile edge-notation DAG strings to ready-to-run <code>ggdag</code>/<code>dagitty</code> R code.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>agy<span class="w"> </span>dag<span class="w"> </span><span class="s2">&quot;W -&gt; Y, X -&gt; W, X -&gt; Y&quot;</span><span class="w"> </span><span class="se">\</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>cagy<span class="w"> </span>dag<span class="w"> </span><span class="s2">&quot;W -&gt; Y, X -&gt; W, X -&gt; Y&quot;</span><span class="w"> </span><span class="se">\</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span>-t<span class="w"> </span>W<span class="w"> </span>-y<span class="w"> </span>Y<span class="w"> </span>-o<span class="w"> </span>dag.R
 </span></code></pre></div>
 </li>
@@ -1600,7 +1600,7 @@
 <p><span class="twemoji lg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.5c-1.35-.85-3.8-1.5-5.5-1.5-1.65 0-3.35.3-4.75 1.05-.1.05-.15.05-.25.05-.25 0-.5-.25-.5-.5V6c.6-.45 1.25-.75 2-1 1.11-.35 2.33-.5 3.5-.5 1.95 0 4.05.4 5.5 1.5 1.45-1.1 3.55-1.5 5.5-1.5 1.17 0 2.39.15 3.5.5.75.25 1.4.55 2 1v14.6c0 .25-.25.5-.5.5-.1 0-.15 0-.25-.05-1.4-.75-3.1-1.05-4.75-1.05-1.7 0-4.15.65-5.5 1.5M12 8v11.5c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5V7c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5m1 3.5c1.11-.68 2.6-1 4.5-1 .91 0 1.76.09 2.5.28V9.23c-.87-.15-1.71-.23-2.5-.23q-2.655 0-4.5.84zm4.5.17c-1.71 0-3.21.26-4.5.79v1.69c1.11-.65 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24v-1.5c-.87-.16-1.71-.23-2.5-.23m2.5 2.9c-.87-.16-1.71-.24-2.5-.24-1.83 0-3.33.27-4.5.8v1.69c1.11-.66 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24z"/></svg></span> <strong>Obsidian Vault Audit</strong></p>
 <hr />
 <p>Query your local Obsidian SQLite graph — find orphan notes, hub nodes by PageRank, and broken links.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>agy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span>~/vault.sqlite<span class="w"> </span>hubs<span class="w"> </span><span class="se">\</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>cagy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span>~/vault.sqlite<span class="w"> </span>hubs<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span>--sort<span class="w"> </span>pagerank<span class="w"> </span>--limit<span class="w"> </span><span class="m">10</span>
 </span></code></pre></div>
 </li>
@@ -1608,7 +1608,7 @@
 <p><span class="twemoji lg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4.29c-5.5 0-10 3-10 6.71 0 3.28 3.56 6 8.24 6.58v2.13h3.41v-2.12c.85-.09 1.64-.25 2.39-.48l1.38 2.6h3.86l-2.32-3.91C20.83 14.58 22 12.87 22 11c0-3.71-4.5-6.71-10-6.71m1.53 2.62c4.2 0 7.3 1.4 7.3 4.59 0 1.71-.92 2.91-2.42 3.65-.09-.05-.17-.1-.22-.15-.36-.16-.96-.34-.96-.34s2.98-.22 2.98-3.19-3.12-3.02-3.12-3.02h-6.85v7.16c-2.55-.74-4.31-2.31-4.31-4.11 0-2.54 3.4-4.59 7.6-4.59m.15 3.98h2.07s.95-.05.95.94c0 .97-.95.97-.95.97h-2.07zm-.03 4.41h.92c.18 0 .27.05.43.2.13.1.27.29.39.46-.55.07-1.13.1-1.74.1z"/></svg></span> <strong>R Package Harness</strong></p>
 <hr />
 <p>Run <code>devtools::check</code>, <code>devtools::test</code>, and <code>devtools::document</code> directly from the CLI.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>agy<span class="w"> </span>rforge<span class="w"> </span>--pkg-dir<span class="w"> </span>./mypackage<span class="w"> </span>check
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>cagy<span class="w"> </span>rforge<span class="w"> </span>--pkg-dir<span class="w"> </span>./mypackage<span class="w"> </span>check
 </span></code></pre></div>
 </li>
 </ul>

@@ -1621,12 +1621,12 @@
 <li><strong>Goal:</strong> Implement the math validation routines and DAG compilers.</li>
 <li><strong>Tasks:</strong><ul>
 <li>[x] <strong>R Process Bridge:</strong> Create an in-process subprocess wrapper to spawn R sessions and load <code>tidyverse</code>, <code>ggdag</code>, and <code>dagitty</code>.</li>
-<li>[x] <strong>Assumption Verifier (<code>agy eval</code>):</strong> Write algorithms to verify:<ul>
+<li>[x] <strong>Assumption Verifier (<code>cagy eval</code>):</strong> Write algorithms to verify:<ul>
 <li><strong>Positivity:</strong> Parse dataset columns to verify non-zero probabilities: <span class="arithmatex">\(0 &lt; P(W=1|X) &lt; 1\)</span>.</li>
 <li><strong>Exchangeability:</strong> Check that the backdoor path is blocked: <span class="arithmatex">\(Y(w) \perp\!\!\perp W \mid X\)</span>.</li>
 </ul>
 </li>
-<li>[x] <strong>DAG Compiler (<code>agy dag</code>):</strong> Convert string descriptions (e.g., <code>W -&gt; Y, X -&gt; W, X -&gt; Y</code>) into <code>dagitty</code> formatting and render ASCII visualization in terminal.</li>
+<li>[x] <strong>DAG Compiler (<code>cagy dag</code>):</strong> Convert string descriptions (e.g., <code>W -&gt; Y, X -&gt; W, X -&gt; Y</code>) into <code>dagitty</code> formatting and render ASCII visualization in terminal.</li>
 </ul>
 </li>
 </ul>
