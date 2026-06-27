@@ -88,7 +88,66 @@ Broken Links Detected
 
 ---
 
-## Step 4 — Automate Vault Health in CI
+## Step 4 — Visualize Note Graph
+
+Render your vault note connections as a Mermaid diagram or a nested ASCII tree. You can focus on a single note to map its neighborhood.
+
+### Renders Top Hub Connections (Mermaid Format)
+```bash
+cagy obs --db-path ~/vault.sqlite graph --format mermaid --limit 5
+```
+
+Output:
+```text
+graph TD
+    "MediationVerse Dashboard" --> "medfit"
+    "MediationVerse Dashboard" --> "medsim"
+    "medsim" --> "medfit"
+```
+
+### Renders Neighborhood Indented Tree (ASCII Format)
+Focus on a note to trace its outgoing link path recursively up to a custom depth:
+```bash
+cagy obs --db-path ~/vault.sqlite graph --format ascii --focus "MediationVerse Dashboard" --depth 2
+```
+
+Output:
+```text
+MediationVerse Dashboard
+├── medrobust
+├── medsim
+│   ├── medfit
+│   └── RMediation
+└── RMediation
+```
+
+---
+
+## Step 5 — Find Literature Gaps
+
+Identify isolated theoretical methods or disconnected applications/projects in your literature database. It classifies notes by tags or path substrings.
+
+```bash
+cagy obs --db-path ~/vault.sqlite gaps --method-tags "causal-inference,mediation,regression,assumptions" --setting-tags "project,data"
+```
+
+Output:
+```text
+Obsidian Vault Causal/Literature Audit Summary
+  • Classified 223 Method notes (matching tags: causal-inference,mediation,regression,assumptions)
+  • Classified 98 Setting/Project notes (matching tags: project,data)
+
+                 Isolated Methods (No Application/Project Links)
+┏━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Title                   ┃ Path                     ┃ Tags                    ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ Bounds of Sensitivity   │ Knowledge_Base/20_stati… │ assumptions             │
+└─────────────────────────┴──────────────────────────┴─────────────────────────┘
+```
+
+---
+
+## Step 6 — Automate Vault Health in CI
 
 Add a vault health check to your weekly review script:
 
@@ -96,7 +155,8 @@ Add a vault health check to your weekly review script:
 #!/bin/bash
 # vault_health.sh
 cagy obs --db-path "$OBSIDIAN_DB" health && \
-cagy obs --db-path "$OBSIDIAN_DB" orphans
+cagy obs --db-path "$OBSIDIAN_DB" orphans && \
+cagy obs --db-path "$OBSIDIAN_DB" gaps
 ```
 
 ```bash

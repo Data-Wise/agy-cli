@@ -6,7 +6,7 @@ This document lists all available commands in the `agy` CLI utility, detailing t
 
 ## 📌 Global Structure
 ```text
-agy [OPTIONS] COMMAND [ARGS]...
+cagy [OPTIONS] COMMAND [ARGS]...
 ```
 
 *   **`--version`**: Show the CLI engine version and exit.
@@ -80,6 +80,10 @@ cagy obs --db-path <DB_PATH> COMMAND [ARGS]...
 *   **`hubs`**: List central notes.
     *   *Options:* `-l, --limit <INT>` (default 10), `-s, --sort <pagerank|out_degree|in_degree|total_degree>`.
 *   **`health`**: List broken internal note links.
+*   **`graph`**: Renders note relationships as Mermaid or ASCII tree.
+    *   *Options:* `-f, --focus <TITLE>` (focus on node), `-d, --depth <INT>` (BFS depth, default 2), `-l, --limit <INT>` (top hubs when not focusing, default 30), `--format <mermaid|ascii>` (default `mermaid`), `-o, --out-file <PATH>` (write visualization to file).
+*   **`gaps`**: Audits notes to find isolated method notes or isolated application/project notes.
+    *   *Options:* `-m, --method-tags <LIST>` (comma-separated method tags, default: `causal-inference,mediation,regression,assumptions,MLE`), `-s, --setting-tags <LIST>` (comma-separated setting tags, default: `project,data,application`), `--method-path <PATH>` (substring to filter methods), `--setting-path <PATH>` (substring to filter settings).
 
 ---
 
