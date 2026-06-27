@@ -107,8 +107,7 @@ def test_get_vault_graph_with_focus(mock_extended_db):
 def test_get_literature_gaps(mock_extended_db):
     bridge = ObsidianBridge(db_path=mock_extended_db)
     res = bridge.get_literature_gaps(
-        method_tags=["mediation", "regression"],
-        setting_tags=["project", "data"]
+        method_tags=["mediation", "regression"], setting_tags=["project", "data"]
     )
 
     # Classifications
