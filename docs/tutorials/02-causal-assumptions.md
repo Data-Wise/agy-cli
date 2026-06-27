@@ -1,6 +1,12 @@
 # Tutorial 2 · Verify Causal Assumptions
 
-**Goal:** Use `cagy eval` to check Positivity, Backdoor Exchangeability, SUTVA, and Covariate Balance — with optional propensity score adjustment.
+⏱️ **10 minutes** • 🔵 Intermediate • ✓ 4 steps
+
+> **TL;DR** (30 seconds)
+> - **What:** Run `cagy eval` to audit positivity, exchangeability, SUTVA, and covariate balance.
+> - **Why:** Ensure that ATE is identified and adjust for covariate imbalance using Propensity Score Matching (PSM) or Inverse Probability Weighting (IPW).
+> - **How:** Configure `study_design.yaml` then run `cagy eval study_design.yaml --method matching`.
+> - **Next:** [Tutorial 3 · DAG Compiler](03-dag-compiler.md)
 
 ---
 

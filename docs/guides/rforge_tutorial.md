@@ -1,6 +1,12 @@
 # Tutorial 7 · R Package Harness
 
-**Goal:** Use `cagy rforge` to run `devtools::check`, `devtools::test`, and `devtools::document` directly from the CLI — without opening RStudio.
+⏱️ **5 minutes** • 🟢 Beginner • ✓ 3 steps
+
+> **TL;DR** (30 seconds)
+> - **What:** Run CRAN checks, document Roxygen2 comments, and execute package unit tests from your terminal using `cagy rforge`.
+> - **Why:** Integrate R package building workflows without leaving your shell or launching RStudio.
+> - **How:** Run `cagy rforge document` inside your R package directory.
+> - **Next:** [Tutorial 8 · Sandbox Vaults](sandbox.md)
 
 ---
 

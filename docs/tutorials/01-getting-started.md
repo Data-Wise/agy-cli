@@ -1,6 +1,12 @@
 # Tutorial 1 · Installation & Quick Start
 
-**Goal:** Install `agy`, verify the environment, run your first command. ~5 min.
+⏱️ **5 minutes** • 🟢 Beginner • ✓ 4 steps
+
+> **TL;DR** (30 seconds)
+> - **What:** Install `cagy` and run a baseline status check and a minimal causal evaluation.
+> - **Why:** Verify your Python/R environments are correctly set up for causal inference work.
+> - **How:** Run `brew install agy` (or install from source via `uv`) then `cagy status`.
+> - **Next:** [Tutorial 2 · Causal Assumptions](02-causal-assumptions.md)
 
 ---
 

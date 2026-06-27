@@ -1,6 +1,12 @@
 # Covariate Balance Tutorial (Standardized Mean Difference)
 
-**BLUF:** Standardized Mean Difference ($SMD$) measures covariate balance between treated and control groups. Any covariate with $SMD > 0.1$ is flagged as imbalanced.
+⏱️ **5 minutes** • 🟢 Beginner
+
+> **TL;DR** (30 seconds)
+> - **What:** Learn standard definitions and formulations of Standardized Mean Difference (SMD).
+> - **Why:** Correctly gauge covariate imbalance using the strict statistical threshold of $\text{SMD} \le 0.1$.
+> - **How:** Read this reference formulation for how the validation engine computes balance.
+> - **Next:** [Tutorial 5 · Obsidian Vault Audit](plugins.md)
 
 ---
 

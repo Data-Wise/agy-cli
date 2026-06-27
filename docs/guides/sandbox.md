@@ -1,6 +1,12 @@
 # Tutorial 8 · Sandbox Vaults
 
-**Goal:** Generate isolated test Obsidian vaults with mock causal datasets and optionally injected assumption violations — for stress-testing the validation engine.
+⏱️ **5 minutes** • 🟢 Beginner • ✓ 3 steps
+
+> **TL;DR** (30 seconds)
+> - **What:** Generate mock Obsidian database graphs, covariate balance CSV datasets, and Atlas YAML logs using `cagy sandbox`.
+> - **Why:** Safely stress-test assumptions and run validation diagnostics in an isolated test workspace.
+> - **How:** Run `cagy sandbox generate ./my-sandbox --violations positivity`.
+> - **Next:** [Command Reference](commands.md)
 
 ---
 

@@ -11,16 +11,11 @@
 
 > **Causal inference CLI for stats researchers** — verify assumptions, compile DAGs to R, audit Obsidian vaults, run R package checks.
 
----
-
-## 🎯 BLUF
-
-| Property | Value |
-|---|---|
-| **Startup** | $T < 10\text{ms}$ — entirely in-process |
-| **Assumptions** | Auto-verifies Positivity, Backdoor Exchangeability, SUTVA |
-| **Plugins** | Obsidian SQLite graphs · Atlas session sync · R devtools bridge |
-| **Report** | Auto-saves Markdown audit trail after every `eval` run |
+> **TL;DR** (30 seconds)
+> - **What:** `cagy` is an in-process causal inference workflow CLI engine.
+> - **Why:** Verify observational study causal assumptions, compile DAGs, audit Obsidian note databases, and manage Atlas sessions.
+> - **How:** Run `brew install agy` then `cagy status`.
+> - **Next:** Check out [Tutorial 1 · Installation & Quick Start](tutorials/01-getting-started.md)
 
 ---
 

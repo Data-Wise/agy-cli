@@ -1,6 +1,12 @@
 # Tutorial 3 · Draw & Compile DAGs
 
-**Goal:** Convert edge-notation DAG strings to `ggdag`/`dagitty` R code using `cagy dag`.
+⏱️ **5 minutes** • 🟢 Beginner • ✓ 4 steps
+
+> **TL;DR** (30 seconds)
+> - **What:** Compile shorthand edge-notation string representations of Directed Acyclic Graphs (DAGs) into publication-ready R `ggdag` / `dagitty` plots.
+> - **Why:** Visualize confounding paths, determine minimal backdoor adjustment sets, and prevent collider bias.
+> - **How:** Run `cagy dag "X -> W, X -> Y, W -> Y" -t W -y Y -o my_dag.R`.
+> - **Next:** [Asymptotic Theory & EIF](../guides/asymptotic_theory.md)
 
 ---
 

@@ -79,6 +79,7 @@ extra:
 
 nav:
   - Home: index.md
+  - ADHD Quick Start: ADHD-QUICK-START.md
 
   - Tutorials:
       - tutorials/index.md

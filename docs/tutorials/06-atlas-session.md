@@ -1,6 +1,12 @@
-# Tutorial 5 · Atlas Session Sync
+# Tutorial 6 · Atlas Session Sync
 
-**Goal:** Use `cagy atlas` to start work sessions, track breadcrumbs, and review your activity trail — an ADHD-friendly context log for long research workflows.
+⏱️ **5 minutes** • 🟢 Beginner • ✓ 4 steps
+
+> **TL;DR** (30 seconds)
+> - **What:** Start active work sessions, record timestamped logs (breadcrumbs), and track your developer trail using `cagy atlas`.
+> - **Why:** Externalize your working memory to solve context-switching and startup paralysis.
+> - **How:** Export `AGY_SESSIONS`/`AGY_REGISTRY` environment variables and run `cagy atlas status`.
+> - **Next:** [Tutorial 7 · R Package Harness](../guides/rforge_tutorial.md)
 
 ---
 
