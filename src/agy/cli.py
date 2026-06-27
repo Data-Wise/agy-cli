@@ -3,6 +3,7 @@ import json
 import yaml
 import os
 import sys
+import io
 import networkx as nx
 from importlib.metadata import version, PackageNotFoundError
 from rich.console import Console
@@ -438,6 +439,176 @@ def obs_health(ctx):
             str(link.get("broken_count", 1)),
         )
     console.print(table)
+
+
+@obs_group.command(name="graph")
+@click.option("--focus", "-f", type=str, help="Focus note title or path to traverse from.")
+@click.option("--depth", "-d", type=int, default=2, help="Traversal depth from focus note.")
+@click.option("--limit", "-l", type=int, default=30, help="Maximum hub notes to include when not focusing.")
+@click.option(
+    "--format",
+    type=click.Choice(["mermaid", "ascii"]),
+    default="mermaid",
+    help="Output format."
+)
+@click.option("--out-file", "-o", type=click.Path(), help="Path to write the graph visualization.")
+@click.pass_context
+def obs_graph(ctx, focus, depth, limit, format, out_file):
+    """Render Obsidian note connections as Mermaid or ASCII tree."""
+    bridge = ctx.obj["bridge"]
+    res = bridge.get_vault_graph(focus=focus, depth=depth, limit=limit)
+    nodes = res["nodes"]
+    edges = res["edges"]
+    focus_node = res["focus_node"]
+
+    if not nodes:
+        if focus:
+            console.print(f"[yellow]Focus note '{focus}' not found or has no connections.[/yellow]")
+        else:
+            console.print("[yellow]No notes found in graph.[/yellow]")
+        return
+
+    output_str = ""
+    if format == "mermaid":
+        lines = ["graph TD"]
+        seen_edges = set()
+        for e in edges:
+            s, t = e["source_title"], e["target_title"]
+            edge_key = (s, t)
+            if edge_key not in seen_edges:
+                seen_edges.add(edge_key)
+                lines.append(f'    "{s}" --> "{t}"')
+        
+        # Ensure all selected nodes are listed to show orphans if any
+        for n in nodes:
+            title = n["title"] or "Untitled"
+            has_edge = False
+            for e in edges:
+                if e["source_title"] == title or e["target_title"] == title:
+                    has_edge = True
+                    break
+            if not has_edge:
+                lines.append(f'    "{title}"')
+
+        output_str = "\n".join(lines)
+    else:
+        old_stdout = sys.stdout
+        sys.stdout = mystdout = io.StringIO()
+        
+        # Build adjacency mapping
+        adj = {}
+        for n in nodes:
+            adj[n["title"]] = []
+        for e in edges:
+            s, t = e["source_title"], e["target_title"]
+            if s in adj and t in adj:
+                adj[s].append(t)
+
+        visited = set()
+        def dfs(curr, prefix=""):
+            if curr in visited:
+                return
+            visited.add(curr)
+            children = adj.get(curr, [])
+            for i, child in enumerate(children):
+                is_last = (i == len(children) - 1)
+                branch = "└── " if is_last else "├── "
+                print(f"{prefix}{branch}{child}")
+                next_prefix = prefix + ("    " if is_last else "│   ")
+                dfs(child, next_prefix)
+
+        if focus_node:
+            print(focus_node["title"])
+            dfs(focus_node["title"])
+        else:
+            for n in nodes:
+                title = n["title"]
+                if title not in visited:
+                    if adj.get(title) or not any(title in children for children in adj.values()):
+                        print(title)
+                        dfs(title)
+        
+        sys.stdout = old_stdout
+        output_str = mystdout.getvalue()
+
+    if out_file:
+        try:
+            with open(out_file, "w") as f:
+                f.write(output_str)
+            console.print(f"[green]✔ Graph successfully saved to: {out_file}[/green]")
+        except Exception as e:
+            console.print(f"[bold red]Failed to write out-file:[/bold red] {e}")
+    else:
+        if format == "mermaid":
+            console.print(Panel(output_str, title="Mermaid Graph Visualization", border_style="cyan"))
+        else:
+            console.print(Panel(output_str, title="ASCII Graph Tree", border_style="cyan"))
+
+
+@obs_group.command(name="gaps")
+@click.option(
+    "--method-tags",
+    "-m",
+    default="causal-inference,mediation,regression,assumptions,MLE",
+    help="Comma-separated list of tags to identify Method notes."
+)
+@click.option(
+    "--setting-tags",
+    "-s",
+    default="project,data,application",
+    help="Comma-separated list of tags to identify Setting/Project notes."
+)
+@click.option("--method-path", type=str, help="Relative path substring to filter Method notes.")
+@click.option("--setting-path", type=str, help="Relative path substring to filter Setting notes.")
+@click.pass_context
+def obs_gaps(ctx, method_tags, setting_tags, method_path, setting_path):
+    """Find literature gaps by auditing unconnected methods vs settings."""
+    bridge = ctx.obj["bridge"]
+    m_tags = [t.strip() for t in method_tags.split(",") if t.strip()]
+    s_tags = [t.strip() for t in setting_tags.split(",") if t.strip()]
+
+    res = bridge.get_literature_gaps(
+        method_tags=m_tags,
+        setting_tags=s_tags,
+        method_path=method_path,
+        setting_path=setting_path
+    )
+
+    console.print(
+        f"\n[bold green]Obsidian Vault Causal/Literature Audit Summary[/bold green]\n"
+        f"  • Classified [cyan]{res['methods_count']}[/cyan] Method notes (matching tags: {method_tags})\n"
+        f"  • Classified [magenta]{res['settings_count']}[/magenta] Setting/Project notes (matching tags: {setting_tags})\n"
+    )
+
+    # 1. Table for isolated methods
+    table_m = Table(title="Isolated Methods (No Application/Project Links)", show_header=True, header_style="bold red")
+    table_m.add_column("Title", style="cyan")
+    table_m.add_column("Path", style="magenta")
+    table_m.add_column("Tags", style="green")
+
+    for m in res["isolated_methods"]:
+        table_m.add_row(m.get("title") or "Untitled", m.get("path") or "", m.get("tags") or "")
+
+    # 2. Table for isolated settings
+    table_s = Table(title="Isolated Settings/Projects (No Method Links)", show_header=True, header_style="bold red")
+    table_s.add_column("Title", style="magenta")
+    table_s.add_column("Path", style="cyan")
+    table_s.add_column("Tags", style="green")
+
+    for s in res["isolated_settings"]:
+        table_s.add_row(s.get("title") or "Untitled", s.get("path") or "", s.get("tags") or "")
+
+    if res["isolated_methods"]:
+        console.print(table_m)
+    else:
+        console.print("[green]✔ No isolated Method notes found. All methods are linked to applications.[/green]")
+
+    console.print()
+
+    if res["isolated_settings"]:
+        console.print(table_s)
+    else:
+        console.print("[green]✔ No isolated Setting/Project notes found. All projects are linked to methods.[/green]")
 
 
 @main.group(name="atlas")
