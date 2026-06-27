@@ -1928,12 +1928,12 @@
 <hr />
 <h2 id="1-status">1. <code>status</code><a class="headerlink" href="#1-status" title="Permanent link">&para;</a></h2>
 <p>Show the baseline status of the <code>agy-cli</code> engine.
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>agy<span class="w"> </span>status
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>cagy<span class="w"> </span>status
 </span></code></pre></div></p>
 <hr />
 <h2 id="2-eval">2. <code>eval</code><a class="headerlink" href="#2-eval" title="Permanent link">&para;</a></h2>
 <p>Concurrently evaluate observational study causal assumptions (Positivity, Exchangeability, SUTVA, and Covariate Balance).
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>agy<span class="w"> </span><span class="nb">eval</span><span class="w"> </span><span class="o">[</span>STUDY_DESIGN_FILE<span class="o">]</span><span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>cagy<span class="w"> </span><span class="nb">eval</span><span class="w"> </span><span class="o">[</span>STUDY_DESIGN_FILE<span class="o">]</span><span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
 </span></code></pre></div></p>
 <h3 id="options">Options<a class="headerlink" href="#options" title="Permanent link">&para;</a></h3>
 <ul>
@@ -1947,15 +1947,15 @@
 </ul>
 <h3 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h3>
 <p>Validate assumptions using inline settings:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>agy<span class="w"> </span><span class="nb">eval</span><span class="w"> </span>-t<span class="w"> </span>W<span class="w"> </span>-o<span class="w"> </span>Y<span class="w"> </span>-c<span class="w"> </span>X<span class="w"> </span>-d<span class="w"> </span>./data.csv<span class="w"> </span>-g<span class="w"> </span><span class="s2">&quot;X -&gt; W, X -&gt; Y, W -&gt; Y&quot;</span><span class="w"> </span>--non-interactive
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>cagy<span class="w"> </span><span class="nb">eval</span><span class="w"> </span>-t<span class="w"> </span>W<span class="w"> </span>-o<span class="w"> </span>Y<span class="w"> </span>-c<span class="w"> </span>X<span class="w"> </span>-d<span class="w"> </span>./data.csv<span class="w"> </span>-g<span class="w"> </span><span class="s2">&quot;X -&gt; W, X -&gt; Y, W -&gt; Y&quot;</span><span class="w"> </span>--non-interactive
 </span></code></pre></div></p>
 <p>Evaluate covariate balance after 1:1 propensity score matching:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>agy<span class="w"> </span><span class="nb">eval</span><span class="w"> </span>-t<span class="w"> </span>W<span class="w"> </span>-o<span class="w"> </span>Y<span class="w"> </span>-c<span class="w"> </span>X<span class="w"> </span>-d<span class="w"> </span>./data.csv<span class="w"> </span>-g<span class="w"> </span><span class="s2">&quot;X -&gt; W, X -&gt; Y, W -&gt; Y&quot;</span><span class="w"> </span>--non-interactive<span class="w"> </span>--method<span class="w"> </span>matching
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>cagy<span class="w"> </span><span class="nb">eval</span><span class="w"> </span>-t<span class="w"> </span>W<span class="w"> </span>-o<span class="w"> </span>Y<span class="w"> </span>-c<span class="w"> </span>X<span class="w"> </span>-d<span class="w"> </span>./data.csv<span class="w"> </span>-g<span class="w"> </span><span class="s2">&quot;X -&gt; W, X -&gt; Y, W -&gt; Y&quot;</span><span class="w"> </span>--non-interactive<span class="w"> </span>--method<span class="w"> </span>matching
 </span></code></pre></div></p>
 <hr />
 <h2 id="3-dag">3. <code>dag</code><a class="headerlink" href="#3-dag" title="Permanent link">&para;</a></h2>
 <p>Compile textual DAG descriptions to R code.
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>agy<span class="w"> </span>dag<span class="w"> </span>&lt;DAG_STRING&gt;<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>cagy<span class="w"> </span>dag<span class="w"> </span>&lt;DAG_STRING&gt;<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
 </span></code></pre></div></p>
 <h3 id="options_1">Options<a class="headerlink" href="#options_1" title="Permanent link">&para;</a></h3>
 <ul>
@@ -1965,12 +1965,12 @@
 </ul>
 <h3 id="examples_1">Examples<a class="headerlink" href="#examples_1" title="Permanent link">&para;</a></h3>
 <p>Generate and compile to an R file:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>agy<span class="w"> </span>dag<span class="w"> </span><span class="s2">&quot;W -&gt; Y, X -&gt; W, X -&gt; Y&quot;</span><span class="w"> </span>-t<span class="w"> </span>W<span class="w"> </span>-y<span class="w"> </span>Y<span class="w"> </span>-o<span class="w"> </span>my_dag.R
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>cagy<span class="w"> </span>dag<span class="w"> </span><span class="s2">&quot;W -&gt; Y, X -&gt; W, X -&gt; Y&quot;</span><span class="w"> </span>-t<span class="w"> </span>W<span class="w"> </span>-y<span class="w"> </span>Y<span class="w"> </span>-o<span class="w"> </span>my_dag.R
 </span></code></pre></div></p>
 <hr />
 <h2 id="4-obs-obsidian-bridge">4. <code>obs</code> (Obsidian Bridge)<a class="headerlink" href="#4-obs-obsidian-bridge" title="Permanent link">&para;</a></h2>
 <p>Directly query SQLite databases indexing local Obsidian vaults.
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>agy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span>&lt;DB_PATH&gt;<span class="w"> </span>COMMAND<span class="w"> </span><span class="o">[</span>ARGS<span class="o">]</span>...
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>cagy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span>&lt;DB_PATH&gt;<span class="w"> </span>COMMAND<span class="w"> </span><span class="o">[</span>ARGS<span class="o">]</span>...
 </span></code></pre></div></p>
 <h3 id="subcommands">Subcommands<a class="headerlink" href="#subcommands" title="Permanent link">&para;</a></h3>
 <ul>
@@ -1984,7 +1984,7 @@
 <hr />
 <h2 id="5-atlas-atlas-bridge">5. <code>atlas</code> (Atlas Bridge)<a class="headerlink" href="#5-atlas-atlas-bridge" title="Permanent link">&para;</a></h2>
 <p>Bridge CLI workspace sessions with the Atlas state synchronizer.
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>agy<span class="w"> </span>atlas<span class="w"> </span>--sessions-path<span class="w"> </span>&lt;SESSIONS_YAML&gt;<span class="w"> </span>--registry-path<span class="w"> </span>&lt;REGISTRY_YAML&gt;<span class="w"> </span>COMMAND<span class="w"> </span><span class="o">[</span>ARGS<span class="o">]</span>...
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>cagy<span class="w"> </span>atlas<span class="w"> </span>--sessions-path<span class="w"> </span>&lt;SESSIONS_YAML&gt;<span class="w"> </span>--registry-path<span class="w"> </span>&lt;REGISTRY_YAML&gt;<span class="w"> </span>COMMAND<span class="w"> </span><span class="o">[</span>ARGS<span class="o">]</span>...
 </span></code></pre></div></p>
 <h3 id="subcommands_1">Subcommands<a class="headerlink" href="#subcommands_1" title="Permanent link">&para;</a></h3>
 <ul>
@@ -2006,19 +2006,19 @@
 <hr />
 <h2 id="6-sandbox-sandbox-vaults">6. <code>sandbox</code> (Sandbox Vaults)<a class="headerlink" href="#6-sandbox-sandbox-vaults" title="Permanent link">&para;</a></h2>
 <p>Generate isolated sandbox vault environments containing mock data, notes, and configs.
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>agy<span class="w"> </span>sandbox<span class="w"> </span>generate<span class="w"> </span>&lt;VAULT_PATH&gt;<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>cagy<span class="w"> </span>sandbox<span class="w"> </span>generate<span class="w"> </span>&lt;VAULT_PATH&gt;<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
 </span></code></pre></div></p>
 <h3 id="options_2">Options<a class="headerlink" href="#options_2" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong><code>--violations</code></strong>: Inject positivity, exchangeability, and SUTVA violations.</li>
 </ul>
 <h3 id="examples_2">Examples<a class="headerlink" href="#examples_2" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>agy<span class="w"> </span>sandbox<span class="w"> </span>generate<span class="w"> </span>./my-sandbox-dir<span class="w"> </span>--violations
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>cagy<span class="w"> </span>sandbox<span class="w"> </span>generate<span class="w"> </span>./my-sandbox-dir<span class="w"> </span>--violations
 </span></code></pre></div>
 <hr />
 <h2 id="7-worktree-git-worktree-isolation">7. <code>worktree</code> (Git Worktree Isolation)<a class="headerlink" href="#7-worktree-git-worktree-isolation" title="Permanent link">&para;</a></h2>
 <p>Automate persistent git worktrees for clean context-isolated development.
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>agy<span class="w"> </span>worktree<span class="w"> </span>COMMAND<span class="w"> </span><span class="o">[</span>ARGS<span class="o">]</span>...
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>cagy<span class="w"> </span>worktree<span class="w"> </span>COMMAND<span class="w"> </span><span class="o">[</span>ARGS<span class="o">]</span>...
 </span></code></pre></div></p>
 <h3 id="subcommands_2">Subcommands<a class="headerlink" href="#subcommands_2" title="Permanent link">&para;</a></h3>
 <ul>
@@ -2029,7 +2029,7 @@
 <hr />
 <h2 id="8-rforge-r-package-bridge">8. <code>rforge</code> (R Package Bridge)<a class="headerlink" href="#8-rforge-r-package-bridge" title="Permanent link">&para;</a></h2>
 <p>Directly check, test, and document R packages using an in-process R bridge.
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>agy<span class="w"> </span>rforge<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span><span class="w"> </span>COMMAND<span class="w"> </span><span class="o">[</span>ARGS<span class="o">]</span>...
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>cagy<span class="w"> </span>rforge<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span><span class="w"> </span>COMMAND<span class="w"> </span><span class="o">[</span>ARGS<span class="o">]</span>...
 </span></code></pre></div></p>
 <h3 id="options_3">Options<a class="headerlink" href="#options_3" title="Permanent link">&para;</a></h3>
 <ul>

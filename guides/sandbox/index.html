@@ -817,10 +817,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-4-combine-with-agy-obs" class="md-nav__link">
+  <a href="#step-4-combine-with-cagy-obs" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 4 — Combine with agy obs
+        Step 4 — Combine with cagy obs
       
     </span>
   </a>
@@ -1482,10 +1482,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-4-combine-with-agy-obs" class="md-nav__link">
+  <a href="#step-4-combine-with-cagy-obs" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 4 — Combine with agy obs
+        Step 4 — Combine with cagy obs
       
     </span>
   </a>
@@ -1527,7 +1527,7 @@
 <p><strong>Goal:</strong> Generate isolated test Obsidian vaults with mock causal datasets and optionally injected assumption violations — for stress-testing the validation engine.</p>
 <hr />
 <h2 id="what-gets-generated">What Gets Generated<a class="headerlink" href="#what-gets-generated" title="Permanent link">&para;</a></h2>
-<p>A single <code>agy sandbox generate</code> call creates a complete self-contained test environment:</p>
+<p>A single <code>cagy sandbox generate</code> call creates a complete self-contained test environment:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>./my-sandbox/
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>├── vault_db.sqlite          ← Mock Obsidian SQLite graph
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>├── causal_data.csv          ← Observational dataset (treatment, outcome, covariates)
@@ -1538,7 +1538,7 @@
 </span></code></pre></div>
 <hr />
 <h2 id="step-1-generate-a-clean-vault">Step 1 — Generate a Clean Vault<a class="headerlink" href="#step-1-generate-a-clean-vault" title="Permanent link">&para;</a></h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>agy<span class="w"> </span>sandbox<span class="w"> </span>generate<span class="w"> </span>./test-vault
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>cagy<span class="w"> </span>sandbox<span class="w"> </span>generate<span class="w"> </span>./test-vault
 </span></code></pre></div>
 <p>Output:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>╭─ Sandbox Generator ────────────────────────────────────────────╮
@@ -1557,10 +1557,10 @@
 <hr />
 <h2 id="step-2-generate-with-injected-violations">Step 2 — Generate with Injected Violations<a class="headerlink" href="#step-2-generate-with-injected-violations" title="Permanent link">&para;</a></h2>
 <p>Inject Positivity, Exchangeability, and SUTVA violations for negative testing:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>agy<span class="w"> </span>sandbox<span class="w"> </span>generate<span class="w"> </span>./test-vault-violations<span class="w"> </span>--violations
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>cagy<span class="w"> </span>sandbox<span class="w"> </span>generate<span class="w"> </span>./test-vault-violations<span class="w"> </span>--violations
 </span></code></pre></div>
 <p>Then run eval on it to confirm the engine catches them:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>agy<span class="w"> </span><span class="nb">eval</span><span class="w"> </span>./test-vault-violations/study_design.yaml<span class="w"> </span>--non-interactive
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>cagy<span class="w"> </span><span class="nb">eval</span><span class="w"> </span>./test-vault-violations/study_design.yaml<span class="w"> </span>--non-interactive
 </span></code></pre></div>
 <p>Expected: all three assumption checks <strong>fail</strong> with violation details.</p>
 <hr />
@@ -1585,11 +1585,11 @@
 </span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>    <span class="c1"># ... assert violations are reported</span>
 </span></code></pre></div>
 <hr />
-<h2 id="step-4-combine-with-agy-obs">Step 4 — Combine with <code>agy obs</code><a class="headerlink" href="#step-4-combine-with-agy-obs" title="Permanent link">&para;</a></h2>
+<h2 id="step-4-combine-with-cagy-obs">Step 4 — Combine with <code>cagy obs</code><a class="headerlink" href="#step-4-combine-with-cagy-obs" title="Permanent link">&para;</a></h2>
 <p>The generated <code>vault_db.sqlite</code> is a valid Obsidian SQLite database — immediately auditable:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>agy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span>./test-vault/vault_db.sqlite<span class="w"> </span>health
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>agy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span>./test-vault/vault_db.sqlite<span class="w"> </span>orphans
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>agy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span>./test-vault/vault_db.sqlite<span class="w"> </span>hubs<span class="w"> </span>--sort<span class="w"> </span>pagerank
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>cagy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span>./test-vault/vault_db.sqlite<span class="w"> </span>health
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>cagy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span>./test-vault/vault_db.sqlite<span class="w"> </span>orphans
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>cagy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span>./test-vault/vault_db.sqlite<span class="w"> </span>hubs<span class="w"> </span>--sort<span class="w"> </span>pagerank
 </span></code></pre></div>
 <hr />
 <h2 id="whats-next">✅ What's Next<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h2>

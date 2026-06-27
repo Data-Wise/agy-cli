@@ -1502,10 +1502,10 @@
 
 
 <h1 id="tutorial-3-draw-compile-dags">Tutorial 3 · Draw &amp; Compile DAGs<a class="headerlink" href="#tutorial-3-draw-compile-dags" title="Permanent link">&para;</a></h1>
-<p><strong>Goal:</strong> Convert edge-notation DAG strings to <code>ggdag</code>/<code>dagitty</code> R code using <code>agy dag</code>.</p>
+<p><strong>Goal:</strong> Convert edge-notation DAG strings to <code>ggdag</code>/<code>dagitty</code> R code using <code>cagy dag</code>.</p>
 <hr />
 <h2 id="step-1-basic-dag-compilation">Step 1 — Basic DAG Compilation<a class="headerlink" href="#step-1-basic-dag-compilation" title="Permanent link">&para;</a></h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>agy<span class="w"> </span>dag<span class="w"> </span><span class="s2">&quot;X -&gt; W, X -&gt; Y, W -&gt; Y&quot;</span><span class="w"> </span>-t<span class="w"> </span>W<span class="w"> </span>-y<span class="w"> </span>Y
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>cagy<span class="w"> </span>dag<span class="w"> </span><span class="s2">&quot;X -&gt; W, X -&gt; Y, W -&gt; Y&quot;</span><span class="w"> </span>-t<span class="w"> </span>W<span class="w"> </span>-y<span class="w"> </span>Y
 </span></code></pre></div>
 <p>Outputs R code:</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nf">library</span><span class="p">(</span><span class="n">dagitty</span><span class="p">)</span>
@@ -1524,27 +1524,27 @@
 </span></code></pre></div>
 <hr />
 <h2 id="step-2-save-to-file">Step 2 — Save to File<a class="headerlink" href="#step-2-save-to-file" title="Permanent link">&para;</a></h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>agy<span class="w"> </span>dag<span class="w"> </span><span class="s2">&quot;X -&gt; W, X -&gt; Y, W -&gt; Y&quot;</span><span class="w"> </span>-t<span class="w"> </span>W<span class="w"> </span>-y<span class="w"> </span>Y<span class="w"> </span>-o<span class="w"> </span>my_dag.R
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>cagy<span class="w"> </span>dag<span class="w"> </span><span class="s2">&quot;X -&gt; W, X -&gt; Y, W -&gt; Y&quot;</span><span class="w"> </span>-t<span class="w"> </span>W<span class="w"> </span>-y<span class="w"> </span>Y<span class="w"> </span>-o<span class="w"> </span>my_dag.R
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>Rscript<span class="w"> </span>my_dag.R
 </span></code></pre></div>
 <hr />
 <h2 id="step-3-identify-adjustment-sets">Step 3 — Identify Adjustment Sets<a class="headerlink" href="#step-3-identify-adjustment-sets" title="Permanent link">&para;</a></h2>
-<p><code>agy dag</code> can also check backdoor adjustment sets. Given the DAG:</p>
+<p><code>cagy dag</code> can also check backdoor adjustment sets. Given the DAG:</p>
 <div class="arithmatex">\[X \to W,\quad X \to Y,\quad W \to Y\]</div>
 <p>The minimal sufficient adjustment set for the effect of <span class="arithmatex">\(W\)</span> on <span class="arithmatex">\(Y\)</span> is <span class="arithmatex">\(\{X\}\)</span>, since:</p>
 <div class="arithmatex">\[Y(w) \perp\!\!\!\perp W \mid X\]</div>
 <p>Run:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>agy<span class="w"> </span>dag<span class="w"> </span><span class="s2">&quot;X -&gt; W, X -&gt; Y, W -&gt; Y&quot;</span><span class="w"> </span>-t<span class="w"> </span>W<span class="w"> </span>-y<span class="w"> </span>Y<span class="w"> </span>--adjustment-sets
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>cagy<span class="w"> </span>dag<span class="w"> </span><span class="s2">&quot;X -&gt; W, X -&gt; Y, W -&gt; Y&quot;</span><span class="w"> </span>-t<span class="w"> </span>W<span class="w"> </span>-y<span class="w"> </span>Y<span class="w"> </span>--adjustment-sets
 </span></code></pre></div>
 <hr />
 <h2 id="step-4-complex-dags-mediators-colliders">Step 4 — Complex DAGs (Mediators, Colliders)<a class="headerlink" href="#step-4-complex-dags-mediators-colliders" title="Permanent link">&para;</a></h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>agy<span class="w"> </span>dag<span class="w"> </span><span class="s2">&quot;U -&gt; W, U -&gt; Y, X -&gt; W, W -&gt; M, M -&gt; Y&quot;</span><span class="w"> </span><span class="se">\</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>cagy<span class="w"> </span>dag<span class="w"> </span><span class="s2">&quot;U -&gt; W, U -&gt; Y, X -&gt; W, W -&gt; M, M -&gt; Y&quot;</span><span class="w"> </span><span class="se">\</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span>-t<span class="w"> </span>W<span class="w"> </span>-y<span class="w"> </span>Y<span class="w"> </span>--unobserved<span class="w"> </span>U
 </span></code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">Collider Bias</p>
 <p>Conditioning on a collider (a variable caused by both W and Y) <strong>opens</strong> a spurious path.
-<code>agy dag</code> will warn you if your adjustment set contains a collider.</p>
+<code>cagy dag</code> will warn you if your adjustment set contains a collider.</p>
 </div>
 <hr />
 <h2 id="whats-next">✅ What's Next<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h2>
@@ -1565,7 +1565,7 @@
 <td><a href="../../guides/asymptotic_theory/">Asymptotic Theory &amp; EIF</a></td>
 </tr>
 <tr>
-<td>Full CLI options for <code>agy dag</code></td>
+<td>Full CLI options for <code>cagy dag</code></td>
 <td><a href="../../guides/commands/">Command Reference</a></td>
 </tr>
 </tbody>

@@ -1580,14 +1580,14 @@
 
 
 <h1 id="worktree-workflow">Worktree Workflow<a class="headerlink" href="#worktree-workflow" title="Permanent link">&para;</a></h1>
-<p><strong>BLUF:</strong> <code>agy worktree</code> automates git worktrees for context-isolated feature development — each feature gets its own working directory off <code>dev</code>, no stashing, no context switching.</p>
+<p><strong>BLUF:</strong> <code>cagy worktree</code> automates git worktrees for context-isolated feature development — each feature gets its own working directory off <code>dev</code>, no stashing, no context switching.</p>
 <hr />
 <h2 id="why-worktrees">Why Worktrees?<a class="headerlink" href="#why-worktrees" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
 <th>Without worktrees</th>
-<th>With <code>agy worktree</code></th>
+<th>With <code>cagy worktree</code></th>
 </tr>
 </thead>
 <tbody>
@@ -1601,7 +1601,7 @@
 </tr>
 <tr>
 <td>Manual branch + directory setup</td>
-<td>One command: <code>agy worktree add &lt;name&gt;</code></td>
+<td>One command: <code>cagy worktree add &lt;name&gt;</code></td>
 </tr>
 <tr>
 <td>Easy to lose where you were</td>
@@ -1621,7 +1621,7 @@
 <hr />
 <h2 id="commands">Commands<a class="headerlink" href="#commands" title="Permanent link">&para;</a></h2>
 <h3 id="add-a-worktree">Add a worktree<a class="headerlink" href="#add-a-worktree" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>agy<span class="w"> </span>worktree<span class="w"> </span>add<span class="w"> </span>balance-smd
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>cagy<span class="w"> </span>worktree<span class="w"> </span>add<span class="w"> </span>balance-smd
 </span></code></pre></div>
 <p>Output:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>╭─ Worktree Manager ──────────────────────────────╮
@@ -1636,7 +1636,7 @@
 </span></code></pre></div>
 <hr />
 <h3 id="list-active-worktrees">List active worktrees<a class="headerlink" href="#list-active-worktrees" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>agy<span class="w"> </span>worktree<span class="w"> </span>list
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>cagy<span class="w"> </span>worktree<span class="w"> </span>list
 </span></code></pre></div>
 <p>Output:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a> Path                          │ Branch
@@ -1648,7 +1648,7 @@
 <hr />
 <h3 id="remove-a-worktree">Remove a worktree<a class="headerlink" href="#remove-a-worktree" title="Permanent link">&para;</a></h3>
 <p>When a feature is merged, clean up:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>agy<span class="w"> </span>worktree<span class="w"> </span>remove<span class="w"> </span>balance-smd
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>cagy<span class="w"> </span>worktree<span class="w"> </span>remove<span class="w"> </span>balance-smd
 </span></code></pre></div>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>✔ Removed worktree feature-balance-smd and branch feature-balance-smd.
 </span></code></pre></div>
@@ -1656,7 +1656,7 @@
 <hr />
 <h2 id="typical-workflow">Typical Workflow<a class="headerlink" href="#typical-workflow" title="Permanent link">&para;</a></h2>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># 1. Start new feature</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>agy<span class="w"> </span>worktree<span class="w"> </span>add<span class="w"> </span>my-feature
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>cagy<span class="w"> </span>worktree<span class="w"> </span>add<span class="w"> </span>my-feature
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
 </span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># 2. Switch to isolated directory</span>
 </span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="nb">cd</span><span class="w"> </span>../agy-cli-my-feature
@@ -1668,7 +1668,7 @@
 </span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>feature-my-feature
 </span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>
 </span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="c1"># 5. After merge, clean up</span>
-</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>agy<span class="w"> </span>worktree<span class="w"> </span>remove<span class="w"> </span>my-feature
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>cagy<span class="w"> </span>worktree<span class="w"> </span>remove<span class="w"> </span>my-feature
 </span></code></pre></div>
 <hr />
 <h2 id="see-also">See Also<a class="headerlink" href="#see-also" title="Permanent link">&para;</a></h2>

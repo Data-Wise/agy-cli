@@ -1546,7 +1546,7 @@
 
 
 <h1 id="tutorial-7-r-package-harness">Tutorial 7 · R Package Harness<a class="headerlink" href="#tutorial-7-r-package-harness" title="Permanent link">&para;</a></h1>
-<p><strong>Goal:</strong> Use <code>agy rforge</code> to run <code>devtools::check</code>, <code>devtools::test</code>, and <code>devtools::document</code> directly from the CLI — without opening RStudio.</p>
+<p><strong>Goal:</strong> Use <code>cagy rforge</code> to run <code>devtools::check</code>, <code>devtools::test</code>, and <code>devtools::document</code> directly from the CLI — without opening RStudio.</p>
 <hr />
 <h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
 <ul>
@@ -1556,7 +1556,7 @@
 <hr />
 <h2 id="step-1-compile-roxygen2-documentation">Step 1 — Compile Roxygen2 Documentation<a class="headerlink" href="#step-1-compile-roxygen2-documentation" title="Permanent link">&para;</a></h2>
 <p>Generate/update <code>.Rd</code> help files and <code>NAMESPACE</code> from <code>#'</code> comments:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>agy<span class="w"> </span>rforge<span class="w"> </span>--pkg-dir<span class="w"> </span>./my_r_package<span class="w"> </span>document
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>cagy<span class="w"> </span>rforge<span class="w"> </span>--pkg-dir<span class="w"> </span>./my_r_package<span class="w"> </span>document
 </span></code></pre></div>
 <p><strong>R equivalent:</strong> <code>devtools::document()</code></p>
 <p>Output:</p>
@@ -1566,7 +1566,7 @@
 <hr />
 <h2 id="step-2-run-unit-tests">Step 2 — Run Unit Tests<a class="headerlink" href="#step-2-run-unit-tests" title="Permanent link">&para;</a></h2>
 <p>Execute the test suite in <code>tests/testthat/</code>:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>agy<span class="w"> </span>rforge<span class="w"> </span>--pkg-dir<span class="w"> </span>./my_r_package<span class="w"> </span><span class="nb">test</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>cagy<span class="w"> </span>rforge<span class="w"> </span>--pkg-dir<span class="w"> </span>./my_r_package<span class="w"> </span><span class="nb">test</span>
 </span></code></pre></div>
 <p><strong>R equivalent:</strong> <code>devtools::test()</code></p>
 <p>Output on success:</p>
@@ -1580,7 +1580,7 @@
 <hr />
 <h2 id="step-3-check-package-integrity">Step 3 — Check Package Integrity<a class="headerlink" href="#step-3-check-package-integrity" title="Permanent link">&para;</a></h2>
 <p>Full CRAN-readiness check (skips re-documenting for speed):</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>agy<span class="w"> </span>rforge<span class="w"> </span>--pkg-dir<span class="w"> </span>./my_r_package<span class="w"> </span>check
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>cagy<span class="w"> </span>rforge<span class="w"> </span>--pkg-dir<span class="w"> </span>./my_r_package<span class="w"> </span>check
 </span></code></pre></div>
 <p><strong>R equivalent:</strong> <code>devtools::check(document = FALSE)</code></p>
 <p>Output:</p>
@@ -1595,9 +1595,9 @@ Common causes: missing <code>Imports</code> in <code>DESCRIPTION</code>, undocum
 <hr />
 <h2 id="step-4-full-validation-pipeline">Step 4 — Full Validation Pipeline<a class="headerlink" href="#step-4-full-validation-pipeline" title="Permanent link">&para;</a></h2>
 <p>Chain all three in sequence for a complete validation run:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>agy<span class="w"> </span>rforge<span class="w"> </span>--pkg-dir<span class="w"> </span>./my_r_package<span class="w"> </span>document<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>agy<span class="w"> </span>rforge<span class="w"> </span>--pkg-dir<span class="w"> </span>./my_r_package<span class="w"> </span><span class="nb">test</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>agy<span class="w"> </span>rforge<span class="w"> </span>--pkg-dir<span class="w"> </span>./my_r_package<span class="w"> </span>check
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>cagy<span class="w"> </span>rforge<span class="w"> </span>--pkg-dir<span class="w"> </span>./my_r_package<span class="w"> </span>document<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>cagy<span class="w"> </span>rforge<span class="w"> </span>--pkg-dir<span class="w"> </span>./my_r_package<span class="w"> </span><span class="nb">test</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>cagy<span class="w"> </span>rforge<span class="w"> </span>--pkg-dir<span class="w"> </span>./my_r_package<span class="w"> </span>check
 </span></code></pre></div>
 <hr />
 <h2 id="recommended-package-structure">Recommended Package Structure<a class="headerlink" href="#recommended-package-structure" title="Permanent link">&para;</a></h2>

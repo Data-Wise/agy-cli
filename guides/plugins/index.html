@@ -1524,10 +1524,10 @@
 
 
 <h1 id="tutorial-5-obsidian-vault-audit">Tutorial 5 · Obsidian Vault Audit<a class="headerlink" href="#tutorial-5-obsidian-vault-audit" title="Permanent link">&para;</a></h1>
-<p><strong>Goal:</strong> Use <code>agy obs</code> to query your local Obsidian SQLite graph — find orphan notes, hub nodes by PageRank, and broken internal links.</p>
+<p><strong>Goal:</strong> Use <code>cagy obs</code> to query your local Obsidian SQLite graph — find orphan notes, hub nodes by PageRank, and broken internal links.</p>
 <hr />
 <h2 id="background">Background<a class="headerlink" href="#background" title="Permanent link">&para;</a></h2>
-<p>When you enable the Obsidian <a href="https://github.com/coddingtonbear/obsidian-local-rest-api">Local REST API</a> or the built-in <strong>Obsidian Sync</strong>, the app writes a SQLite database (<code>vault_db.sqlite</code>) that <code>agy obs</code> queries directly.</p>
+<p>When you enable the Obsidian <a href="https://github.com/coddingtonbear/obsidian-local-rest-api">Local REST API</a> or the built-in <strong>Obsidian Sync</strong>, the app writes a SQLite database (<code>vault_db.sqlite</code>) that <code>cagy obs</code> queries directly.</p>
 <p>The graph is modelled as a directed network <span class="arithmatex">\(G = (V, E)\)</span> where:</p>
 <ul>
 <li><span class="arithmatex">\(V\)</span> = all notes in the vault</li>
@@ -1538,7 +1538,7 @@
 <hr />
 <h2 id="step-1-find-orphan-notes">Step 1 — Find Orphan Notes<a class="headerlink" href="#step-1-find-orphan-notes" title="Permanent link">&para;</a></h2>
 <p>Orphans have <span class="arithmatex">\(k_{in} = 0\)</span> <strong>and</strong> <span class="arithmatex">\(k_{out} = 0\)</span> — no connections at all.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>agy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span>~/Library/Application<span class="se">\ </span>Support/obsidian/vault_db.sqlite<span class="w"> </span>orphans
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>cagy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span>~/Library/Application<span class="se">\ </span>Support/obsidian/vault_db.sqlite<span class="w"> </span>orphans
 </span></code></pre></div>
 <p>Output:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a> Title              │ Path                       │ Modified At
@@ -1550,7 +1550,7 @@
 <hr />
 <h2 id="step-2-find-hub-notes">Step 2 — Find Hub Notes<a class="headerlink" href="#step-2-find-hub-notes" title="Permanent link">&para;</a></h2>
 <p>Hubs are high-centrality nodes. Sort by <code>pagerank</code> (default), <code>in_degree</code>, <code>out_degree</code>, or <code>total_degree</code>.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>agy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span>~/vault.sqlite<span class="w"> </span>hubs<span class="w"> </span>--sort<span class="w"> </span>pagerank<span class="w"> </span>--limit<span class="w"> </span><span class="m">10</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>cagy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span>~/vault.sqlite<span class="w"> </span>hubs<span class="w"> </span>--sort<span class="w"> </span>pagerank<span class="w"> </span>--limit<span class="w"> </span><span class="m">10</span>
 </span></code></pre></div>
 <p>Output:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a> Title               │ PageRank │ In  │ Out │ Total
@@ -1566,7 +1566,7 @@
 <hr />
 <h2 id="step-3-audit-broken-links">Step 3 — Audit Broken Links<a class="headerlink" href="#step-3-audit-broken-links" title="Permanent link">&para;</a></h2>
 <p>Broken links are <code>[[wikilinks]]</code> pointing to notes that don't exist.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>agy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span>~/vault.sqlite<span class="w"> </span>health
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>cagy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span>~/vault.sqlite<span class="w"> </span>health
 </span></code></pre></div>
 <p><strong>Healthy vault:</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>✔ Vault health check passed. No broken links found.
@@ -1583,8 +1583,8 @@
 <p>Add a vault health check to your weekly review script:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="ch">#!/bin/bash</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="c1"># vault_health.sh</span>
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>agy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OBSIDIAN_DB</span><span class="s2">&quot;</span><span class="w"> </span>health<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>agy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OBSIDIAN_DB</span><span class="s2">&quot;</span><span class="w"> </span>orphans
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>cagy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OBSIDIAN_DB</span><span class="s2">&quot;</span><span class="w"> </span>health<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>cagy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OBSIDIAN_DB</span><span class="s2">&quot;</span><span class="w"> </span>orphans
 </span></code></pre></div>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">OBSIDIAN_DB</span><span class="o">=</span>~/Library/Application<span class="se">\ </span>Support/obsidian/vault_db.sqlite
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>bash<span class="w"> </span>vault_health.sh

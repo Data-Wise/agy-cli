@@ -1431,10 +1431,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#r-compiler-integration-agy-dag" class="md-nav__link">
+  <a href="#r-compiler-integration-cagy-dag" class="md-nav__link">
     <span class="md-ellipsis">
       
-        💻 R Compiler Integration (agy dag)
+        💻 R Compiler Integration (cagy dag)
       
     </span>
   </a>
@@ -1462,7 +1462,7 @@
 
 
 <h1 id="causal-inference-assumptions-verification">Causal Inference Assumptions Verification<a class="headerlink" href="#causal-inference-assumptions-verification" title="Permanent link">&para;</a></h1>
-<p>To draw causal inferences from observational data, three primary assumptions must hold: <strong>Positivity</strong>, <strong>Exchangeability</strong>, and <strong>SUTVA</strong>. The <code>agy eval</code> command automates checking these assumptions.</p>
+<p>To draw causal inferences from observational data, three primary assumptions must hold: <strong>Positivity</strong>, <strong>Exchangeability</strong>, and <strong>SUTVA</strong>. The <code>cagy eval</code> command automates checking these assumptions.</p>
 <hr />
 <h2 id="1-positivity-overlap">1. Positivity (Overlap)<a class="headerlink" href="#1-positivity-overlap" title="Permanent link">&para;</a></h2>
 <h3 id="mathematical-definition">Mathematical Definition<a class="headerlink" href="#mathematical-definition" title="Permanent link">&para;</a></h3>
@@ -1485,13 +1485,13 @@ $<span class="arithmatex">\(Y(w) \perp\!\!\perp W \mid X\)</span>$</p>
 <p>The treatment assignment of any unit <span class="arithmatex">\(i\)</span> does not affect the potential outcome of another unit <span class="arithmatex">\(j\)</span> (no interference), and there is only a single version of the treatment:
 $<span class="arithmatex">\(Y_i(W) = Y_i(W_i)\)</span>$</p>
 <h3 id="verification-protocol_2">Verification Protocol<a class="headerlink" href="#verification-protocol_2" title="Permanent link">&para;</a></h3>
-<p>Because SUTVA cannot be verified purely from data matrices, <code>agy eval</code> uses structured survey questionnaire profiles (<code>sutva_responses</code> inside the design file) or prompts the user interactively in the terminal to evaluate:
+<p>Because SUTVA cannot be verified purely from data matrices, <code>cagy eval</code> uses structured survey questionnaire profiles (<code>sutva_responses</code> inside the design file) or prompts the user interactively in the terminal to evaluate:
 *   <strong>Interference/Spillover:</strong> Social, geographical, or resource contacts between units.
 *   <strong>Treatment Variation:</strong> Multiple unmeasured dosages or quality variations.</p>
 <hr />
-<h2 id="r-compiler-integration-agy-dag">💻 R Compiler Integration (<code>agy dag</code>)<a class="headerlink" href="#r-compiler-integration-agy-dag" title="Permanent link">&para;</a></h2>
+<h2 id="r-compiler-integration-cagy-dag">💻 R Compiler Integration (<code>cagy dag</code>)<a class="headerlink" href="#r-compiler-integration-cagy-dag" title="Permanent link">&para;</a></h2>
 <p>You can compile textual DAG descriptions (e.g. <code>X -&gt; W, X -&gt; Y, W -&gt; Y</code>) to clean R scripts using:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>agy<span class="w"> </span>dag<span class="w"> </span><span class="s2">&quot;X -&gt; W, X -&gt; Y, W -&gt; Y&quot;</span><span class="w"> </span>-t<span class="w"> </span>W<span class="w"> </span>-y<span class="w"> </span>Y<span class="w"> </span>-o<span class="w"> </span>my_dag.R
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>cagy<span class="w"> </span>dag<span class="w"> </span><span class="s2">&quot;X -&gt; W, X -&gt; Y, W -&gt; Y&quot;</span><span class="w"> </span>-t<span class="w"> </span>W<span class="w"> </span>-y<span class="w"> </span>Y<span class="w"> </span>-o<span class="w"> </span>my_dag.R
 </span></code></pre></div>
 This compiles to the following R structure:
 <div class="language-R highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nf">library</span><span class="p">(</span><span class="n">dagitty</span><span class="p">)</span>

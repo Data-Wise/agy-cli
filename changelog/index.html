@@ -1594,27 +1594,27 @@
 <h2 id="010-2024-06-01">[0.1.0] — 2024-06-01<a class="headerlink" href="#010-2024-06-01" title="Permanent link">&para;</a></h2>
 <h3 id="added_1">Added<a class="headerlink" href="#added_1" title="Permanent link">&para;</a></h3>
 <ul>
-<li><code>agy eval</code> — concurrent causal assumption validator (Positivity, Exchangeability, SUTVA, Covariate Balance)</li>
+<li><code>cagy eval</code> — concurrent causal assumption validator (Positivity, Exchangeability, SUTVA, Covariate Balance)</li>
 <li><code>--method matching</code> — 1:1 propensity score matching with pre/post SMD table</li>
 <li><code>--method weighting</code> — IPW reweighting</li>
 <li>Auto-saves Markdown audit report after every run</li>
-<li><code>agy dag</code> — compile edge-notation DAG strings to <code>ggdag</code>/<code>dagitty</code> R code</li>
-<li><code>agy obs</code> — Obsidian SQLite graph bridge</li>
+<li><code>cagy dag</code> — compile edge-notation DAG strings to <code>ggdag</code>/<code>dagitty</code> R code</li>
+<li><code>cagy obs</code> — Obsidian SQLite graph bridge</li>
 <li><code>orphans</code> — notes with <span class="arithmatex">\(k_{in} = 0\)</span>, <span class="arithmatex">\(k_{out} = 0\)</span></li>
 <li><code>hubs</code> — high-centrality notes by PageRank / degree</li>
 <li><code>health</code> — broken internal wikilinks</li>
-<li><code>agy atlas</code> — Atlas session synchronizer</li>
+<li><code>cagy atlas</code> — Atlas session synchronizer</li>
 <li><code>start-session</code> — named work context (project + task + description)</li>
 <li><code>status</code> — elapsed duration of active session</li>
 <li><code>trail</code> — ordered breadcrumb history</li>
 <li><code>log-crumb</code> — append timestamped activity entry</li>
-<li><code>agy rforge</code> — R package devtools bridge</li>
+<li><code>cagy rforge</code> — R package devtools bridge</li>
 <li><code>check</code> — <code>devtools::check(document = FALSE)</code></li>
 <li><code>test</code> — <code>devtools::test()</code></li>
 <li><code>document</code> — <code>devtools::document()</code></li>
-<li><code>agy sandbox generate</code> — isolated test vault with mock SQLite, CSV, and YAML</li>
+<li><code>cagy sandbox generate</code> — isolated test vault with mock SQLite, CSV, and YAML</li>
 <li><code>--violations</code> — inject Positivity, Exchangeability, and SUTVA violations</li>
-<li><code>agy worktree</code> — git worktree lifecycle manager</li>
+<li><code>cagy worktree</code> — git worktree lifecycle manager</li>
 <li><code>add</code> / <code>list</code> / <code>remove</code></li>
 <li>Rotating error log at <code>~/.config/obs/obs.log</code> (5 MB, 3 backups)</li>
 <li><code>AGY_LOG_FILE</code> environment variable override</li>
