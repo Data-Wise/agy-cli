@@ -4,6 +4,18 @@ on:
   push:
     tags:
       - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release (e.g. 0.3.1) - required if not run from a tag'
+        required: false
+        type: string
+        default: ''
+      dry_run:
+        description: 'Dry Run (preview build and version details, do not release)'
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   release:
@@ -32,6 +44,7 @@ jobs:
           python -m build
 
       - name: Create GitHub Release
+        if: github.event.inputs.dry_run != 'true'
         uses: softprops/action-gh-release@v2
         with:
           files: |
@@ -43,18 +56,32 @@ jobs:
       - name: Calculate Version and SHA256
         id: calc_meta
         run: |
-          TAG_NAME=${GITHUB_REF#refs/tags/}
-          VERSION=${TAG_NAME#v}
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            if [ -n "${{ github.event.inputs.version }}" ]; then
+              VERSION="${{ github.event.inputs.version }}"
+            else
+              VERSION=$(grep -m1 '^version = ' pyproject.toml | cut -d'"' -f2)
+            fi
+            # For dry runs, compute SHA from local build sdist or fallback
+            if [ -f "dist/agy_cli-${VERSION}.tar.gz" ]; then
+              SHA256=$(sha256sum "dist/agy_cli-${VERSION}.tar.gz" | cut -d ' ' -f 1)
+            else
+              SHA256="dry_run_placeholder_sha256_value_000000000000000000000000000"
+            fi
+          else
+            TAG_NAME=${GITHUB_REF#refs/tags/}
+            VERSION=${TAG_NAME#v}
+            TARBALL_URL="https://github.com/${{ github.repository }}/archive/refs/tags/${TAG_NAME}.tar.gz"
+            echo "Downloading from: ${TARBALL_URL}"
+            curl -sL -o tarball.tar.gz "${TARBALL_URL}"
+            SHA256=$(sha256sum tarball.tar.gz | cut -d ' ' -f 1)
+          fi
           echo "version=${VERSION}" >> $GITHUB_OUTPUT
-          
-          TARBALL_URL="https://github.com/${{ github.repository }}/archive/refs/tags/${TAG_NAME}.tar.gz"
-          echo "Downloading from: ${TARBALL_URL}"
-          curl -sL -o tarball.tar.gz "${TARBALL_URL}"
-          SHA256=$(sha256sum tarball.tar.gz | cut -d ' ' -f 1)
           echo "sha256=${SHA256}" >> $GITHUB_OUTPUT
 
   update-homebrew:
     needs: release
+    if: github.event.inputs.dry_run != 'true'
     uses: Data-Wise/homebrew-tap/.github/workflows/update-formula.yml@main
     with:
       formula_name: agy
