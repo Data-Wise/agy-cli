@@ -1919,7 +1919,7 @@
 <p>This document lists all available commands in the <code>agy</code> CLI utility, detailing their purposes, subcommands, options, and example invocations.</p>
 <hr />
 <h2 id="global-structure">📌 Global Structure<a class="headerlink" href="#global-structure" title="Permanent link">&para;</a></h2>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>agy [OPTIONS] COMMAND [ARGS]...
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>cagy [OPTIONS] COMMAND [ARGS]...
 </span></code></pre></div>
 <ul>
 <li><strong><code>--version</code></strong>: Show the CLI engine version and exit.</li>
@@ -1980,6 +1980,14 @@
 </ul>
 </li>
 <li><strong><code>health</code></strong>: List broken internal note links.</li>
+<li><strong><code>graph</code></strong>: Renders note relationships as Mermaid or ASCII tree.<ul>
+<li><em>Options:</em> <code>-f, --focus &lt;TITLE&gt;</code> (focus on node), <code>-d, --depth &lt;INT&gt;</code> (BFS depth, default 2), <code>-l, --limit &lt;INT&gt;</code> (top hubs when not focusing, default 30), <code>--format &lt;mermaid|ascii&gt;</code> (default <code>mermaid</code>), <code>-o, --out-file &lt;PATH&gt;</code> (write visualization to file).</li>
+</ul>
+</li>
+<li><strong><code>gaps</code></strong>: Audits notes to find isolated method notes or isolated application/project notes.<ul>
+<li><em>Options:</em> <code>-m, --method-tags &lt;LIST&gt;</code> (comma-separated method tags, default: <code>causal-inference,mediation,regression,assumptions,MLE</code>), <code>-s, --setting-tags &lt;LIST&gt;</code> (comma-separated setting tags, default: <code>project,data,application</code>), <code>--method-path &lt;PATH&gt;</code> (substring to filter methods), <code>--setting-path &lt;PATH&gt;</code> (substring to filter settings).</li>
+</ul>
+</li>
 </ul>
 <hr />
 <h2 id="5-atlas-atlas-bridge">5. <code>atlas</code> (Atlas Bridge)<a class="headerlink" href="#5-atlas-atlas-bridge" title="Permanent link">&para;</a></h2>

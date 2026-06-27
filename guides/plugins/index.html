@@ -733,10 +733,60 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-4-automate-vault-health-in-ci" class="md-nav__link">
+  <a href="#step-4-visualize-note-graph" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 4 — Automate Vault Health in CI
+        Step 4 — Visualize Note Graph
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 4 — Visualize Note Graph">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#renders-top-hub-connections-mermaid-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Renders Top Hub Connections (Mermaid Format)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#renders-neighborhood-indented-tree-ascii-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Renders Neighborhood Indented Tree (ASCII Format)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-5-find-literature-gaps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5 — Find Literature Gaps
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-6-automate-vault-health-in-ci" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 6 — Automate Vault Health in CI
       
     </span>
   </a>
@@ -1482,10 +1532,60 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-4-automate-vault-health-in-ci" class="md-nav__link">
+  <a href="#step-4-visualize-note-graph" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 4 — Automate Vault Health in CI
+        Step 4 — Visualize Note Graph
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 4 — Visualize Note Graph">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#renders-top-hub-connections-mermaid-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Renders Top Hub Connections (Mermaid Format)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#renders-neighborhood-indented-tree-ascii-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Renders Neighborhood Indented Tree (ASCII Format)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-5-find-literature-gaps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5 — Find Literature Gaps
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-6-automate-vault-health-in-ci" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 6 — Automate Vault Health in CI
       
     </span>
   </a>
@@ -1579,15 +1679,57 @@
 </span></code></pre></div>
 <p><strong>Action:</strong> Create the missing note or correct the link path.</p>
 <hr />
-<h2 id="step-4-automate-vault-health-in-ci">Step 4 — Automate Vault Health in CI<a class="headerlink" href="#step-4-automate-vault-health-in-ci" title="Permanent link">&para;</a></h2>
-<p>Add a vault health check to your weekly review script:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="ch">#!/bin/bash</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="c1"># vault_health.sh</span>
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>cagy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OBSIDIAN_DB</span><span class="s2">&quot;</span><span class="w"> </span>health<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>cagy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OBSIDIAN_DB</span><span class="s2">&quot;</span><span class="w"> </span>orphans
+<h2 id="step-4-visualize-note-graph">Step 4 — Visualize Note Graph<a class="headerlink" href="#step-4-visualize-note-graph" title="Permanent link">&para;</a></h2>
+<p>Render your vault note connections as a Mermaid diagram or a nested ASCII tree. You can focus on a single note to map its neighborhood.</p>
+<h3 id="renders-top-hub-connections-mermaid-format">Renders Top Hub Connections (Mermaid Format)<a class="headerlink" href="#renders-top-hub-connections-mermaid-format" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>cagy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span>~/vault.sqlite<span class="w"> </span>graph<span class="w"> </span>--format<span class="w"> </span>mermaid<span class="w"> </span>--limit<span class="w"> </span><span class="m">5</span>
 </span></code></pre></div>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">OBSIDIAN_DB</span><span class="o">=</span>~/Library/Application<span class="se">\ </span>Support/obsidian/vault_db.sqlite
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>bash<span class="w"> </span>vault_health.sh
+<p>Output:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>graph TD
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    &quot;MediationVerse Dashboard&quot; --&gt; &quot;medfit&quot;
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    &quot;MediationVerse Dashboard&quot; --&gt; &quot;medsim&quot;
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    &quot;medsim&quot; --&gt; &quot;medfit&quot;
+</span></code></pre></div></p>
+<h3 id="renders-neighborhood-indented-tree-ascii-format">Renders Neighborhood Indented Tree (ASCII Format)<a class="headerlink" href="#renders-neighborhood-indented-tree-ascii-format" title="Permanent link">&para;</a></h3>
+<p>Focus on a note to trace its outgoing link path recursively up to a custom depth:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>cagy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span>~/vault.sqlite<span class="w"> </span>graph<span class="w"> </span>--format<span class="w"> </span>ascii<span class="w"> </span>--focus<span class="w"> </span><span class="s2">&quot;MediationVerse Dashboard&quot;</span><span class="w"> </span>--depth<span class="w"> </span><span class="m">2</span>
+</span></code></pre></div></p>
+<p>Output:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>MediationVerse Dashboard
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>├── medrobust
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>├── medsim
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>│   ├── medfit
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>│   └── RMediation
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>└── RMediation
+</span></code></pre></div></p>
+<hr />
+<h2 id="step-5-find-literature-gaps">Step 5 — Find Literature Gaps<a class="headerlink" href="#step-5-find-literature-gaps" title="Permanent link">&para;</a></h2>
+<p>Identify isolated theoretical methods or disconnected applications/projects in your literature database. It classifies notes by tags or path substrings.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>cagy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span>~/vault.sqlite<span class="w"> </span>gaps<span class="w"> </span>--method-tags<span class="w"> </span><span class="s2">&quot;causal-inference,mediation,regression,assumptions&quot;</span><span class="w"> </span>--setting-tags<span class="w"> </span><span class="s2">&quot;project,data&quot;</span>
+</span></code></pre></div>
+<p>Output:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>Obsidian Vault Causal/Literature Audit Summary
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>  • Classified 223 Method notes (matching tags: causal-inference,mediation,regression,assumptions)
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>  • Classified 98 Setting/Project notes (matching tags: project,data)
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>                 Isolated Methods (No Application/Project Links)
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>┏━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━┓
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>┃ Title                   ┃ Path                     ┃ Tags                    ┃
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>┡━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━┩
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>│ Bounds of Sensitivity   │ Knowledge_Base/20_stati… │ assumptions             │
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>└─────────────────────────┴──────────────────────────┴─────────────────────────┘
+</span></code></pre></div></p>
+<hr />
+<h2 id="step-6-automate-vault-health-in-ci">Step 6 — Automate Vault Health in CI<a class="headerlink" href="#step-6-automate-vault-health-in-ci" title="Permanent link">&para;</a></h2>
+<p>Add a vault health check to your weekly review script:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="ch">#!/bin/bash</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="c1"># vault_health.sh</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>cagy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OBSIDIAN_DB</span><span class="s2">&quot;</span><span class="w"> </span>health<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>cagy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OBSIDIAN_DB</span><span class="s2">&quot;</span><span class="w"> </span>orphans<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>cagy<span class="w"> </span>obs<span class="w"> </span>--db-path<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OBSIDIAN_DB</span><span class="s2">&quot;</span><span class="w"> </span>gaps
+</span></code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">OBSIDIAN_DB</span><span class="o">=</span>~/Library/Application<span class="se">\ </span>Support/obsidian/vault_db.sqlite
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>bash<span class="w"> </span>vault_health.sh
 </span></code></pre></div>
 <hr />
 <h2 id="whats-next">✅ What's Next<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h2>
