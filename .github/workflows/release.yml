@@ -63,3 +63,5 @@ jobs:
       auto_merge: true
     secrets:
       tap_token: ${{ secrets.HOMEBREW_TAP_GITHUB_TOKEN }}
+      app_id: ${{ secrets.APP_ID }}
+      app_private_key: ${{ secrets.APP_PRIVATE_KEY }}
