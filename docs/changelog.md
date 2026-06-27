@@ -8,6 +8,14 @@ All notable changes to `agy-cli`. Format follows [Keep a Changelog](https://keep
 
 ---
 
+## [0.2.1] — 2026-06-27
+
+### Changed
+- Renamed CLI entrypoint command from `agy` to `cagy` to avoid conflicts with Google's Antigravity CLI.
+- Read version dynamically from package metadata to prevent stale CLI version reports.
+
+---
+
 ## [0.2.0] — 2026-06-27
 
 ### Added
