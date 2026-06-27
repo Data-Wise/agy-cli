@@ -43,7 +43,7 @@ Plugins extend the core capabilities of `agy` by adding system-level tools.
 
 *   **`agy-obs` (Obsidian Knowledge Bridge):**
     *   Integrates directly with the SQLite database of [obsidian-cli-ops](file:///Users/dt/projects/dev-tools/obsidian-cli-ops).
-    *   Allows `agy` to run semantic note lookups, identify duplicate research notes, and find gaps in statistical literature.
+    *   Allows `cagy` to run semantic note lookups, identify duplicate research notes, and find gaps in statistical literature.
 *   **`agy-rforge` (R Package Harness):**
     *   Exposes in-process commands to execute `devtools::check()`, `devtools::test()`, and resolve package dependencies.
     *   Automates Roxygen2 documentation validation.
@@ -112,5 +112,5 @@ sequenceDiagram
 *   **The Optimization:** Use `git worktree` templates prepopulated with R and Python environments. This reduces agent startup time from $~30$ seconds to under $3$ seconds, matching `flow-cli` sub-10ms response expectations.
 
 ### 🔄 Bidirectional Session Sync
-*   **The Pattern:** The user works in `flow-cli` (`work medrobust`) and then starts `agy`.
+*   **The Pattern:** The user works in `flow-cli` (`work medrobust`) and then starts `cagy`.
 *   **The Optimization:** `agy` reads `~/.atlas/sessions.yaml` on startup. It automatically starts in the context of the user's active session, matching the current project scope and loading the correct `CLAUDE.md`.

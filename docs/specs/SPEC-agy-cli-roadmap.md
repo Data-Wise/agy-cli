@@ -44,10 +44,10 @@ gantt
 *   **Goal:** Implement the math validation routines and DAG compilers.
 *   **Tasks:**
     *   [x] **R Process Bridge:** Create an in-process subprocess wrapper to spawn R sessions and load `tidyverse`, `ggdag`, and `dagitty`.
-    *   [x] **Assumption Verifier (`agy eval`):** Write algorithms to verify:
+    *   [x] **Assumption Verifier (`cagy eval`):** Write algorithms to verify:
         *   **Positivity:** Parse dataset columns to verify non-zero probabilities: $0 < P(W=1|X) < 1$.
         *   **Exchangeability:** Check that the backdoor path is blocked: $Y(w) \perp\!\!\perp W \mid X$.
-    *   [x] **DAG Compiler (`agy dag`):** Convert string descriptions (e.g., `W -> Y, X -> W, X -> Y`) into `dagitty` formatting and render ASCII visualization in terminal.
+    *   [x] **DAG Compiler (`cagy dag`):** Convert string descriptions (e.g., `W -> Y, X -> W, X -> Y`) into `dagitty` formatting and render ASCII visualization in terminal.
 
 ### Phase 3: Plugin Integrations (In-Process Spreads)
 *   **Goal:** Integrate workspace tracking and knowledge graphs.

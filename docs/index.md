@@ -3,7 +3,7 @@
 <div class="hero-badges" markdown>
 [![Build](https://github.com/Data-Wise/agy-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/Data-Wise/agy-cli/actions/workflows/ci.yml)
 [![Docs](https://github.com/Data-Wise/agy-cli/actions/workflows/docs.yml/badge.svg)](https://data-wise.github.io/agy-cli/)
-[![Version](https://img.shields.io/badge/version-0.1.0-22c55e?logo=semver&logoColor=white)](https://github.com/Data-Wise/agy-cli/releases)
+[![Version](https://img.shields.io/badge/version-0.2.1-22c55e?logo=semver&logoColor=white)](https://github.com/Data-Wise/agy-cli/releases)
 [![Python](https://img.shields.io/badge/python-3.12%2B-4f46e5?logo=python&logoColor=white)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-MIT-7c3aed)](https://github.com/Data-Wise/agy-cli/blob/main/LICENSE)
 [![Homebrew](https://img.shields.io/badge/homebrew-data--wise%2Ftap-f97316?logo=homebrew&logoColor=white)](https://github.com/Data-Wise/homebrew-tap)
@@ -31,7 +31,7 @@
     ```bash
     brew tap data-wise/tap
     brew install agy
-    agy status
+    cagy status
     ```
 
 === "Source / uv"
@@ -40,7 +40,7 @@
     git clone git@github.com:Data-Wise/agy-cli.git
     cd agy-cli
     uv sync --all-extras
-    uv run agy status
+    uv run cagy status
     ```
 
 ---
@@ -56,7 +56,7 @@
     Verify Positivity, Backdoor Exchangeability, and SUTVA. Supports propensity score matching and IPW weighting.
 
     ```bash
-    agy eval study_design.yaml --method matching
+    cagy eval study_design.yaml --method matching
     ```
 
 -   :material-graph:{ .lg } **DAG Compiler**
@@ -66,7 +66,7 @@
     Compile edge-notation DAG strings to ready-to-run `ggdag`/`dagitty` R code.
 
     ```bash
-    agy dag "W -> Y, X -> W, X -> Y" \
+    cagy dag "W -> Y, X -> W, X -> Y" \
         -t W -y Y -o dag.R
     ```
 
@@ -77,7 +77,7 @@
     Query your local Obsidian SQLite graph — find orphan notes, hub nodes by PageRank, and broken links.
 
     ```bash
-    agy obs --db-path ~/vault.sqlite hubs \
+    cagy obs --db-path ~/vault.sqlite hubs \
         --sort pagerank --limit 10
     ```
 
@@ -88,7 +88,7 @@
     Run `devtools::check`, `devtools::test`, and `devtools::document` directly from the CLI.
 
     ```bash
-    agy rforge --pkg-dir ./mypackage check
+    cagy rforge --pkg-dir ./mypackage check
     ```
 
 </div>

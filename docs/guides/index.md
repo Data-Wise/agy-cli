@@ -6,7 +6,7 @@
 
     ---
 
-    Full CLI flags, options, and exit codes for every `agy` subcommand.
+    Full CLI flags, options, and exit codes for every `cagy` subcommand.
 
     [:octicons-arrow-right-24: View Reference](commands.md)
 

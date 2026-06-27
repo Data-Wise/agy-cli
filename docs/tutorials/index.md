@@ -1,6 +1,6 @@
 # Tutorials
 
-Step-by-step walkthroughs from zero to full causal research workflows with `agy`. Each tutorial is self-contained — start anywhere, no dead ends.
+Step-by-step walkthroughs from zero to full causal research workflows with `cagy`. Each tutorial is self-contained — start anywhere, no dead ends.
 
 <div class="grid cards" markdown>
 
@@ -8,7 +8,7 @@ Step-by-step walkthroughs from zero to full causal research workflows with `agy`
 
     ---
 
-    Install `agy`, verify your environment, run your first command. ~5 min.
+    Install `cagy`, verify your environment, run your first command. ~5 min.
 
     [:octicons-arrow-right-24: Start here](01-getting-started.md)
 
