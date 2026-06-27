@@ -16,7 +16,7 @@ Step-by-step walkthroughs from zero to full causal research workflows with `agy`
 
     ---
 
-    `agy eval` — verify Positivity, Exchangeability, SUTVA. Fix balance with matching or IPW weighting.
+    `cagy eval` — verify Positivity, Exchangeability, SUTVA. Fix balance with matching or IPW weighting.
 
     [:octicons-arrow-right-24: Run eval](02-causal-assumptions.md)
 

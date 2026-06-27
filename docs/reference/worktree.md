@@ -1,16 +1,16 @@
 # Worktree Workflow
 
-**BLUF:** `agy worktree` automates git worktrees for context-isolated feature development — each feature gets its own working directory off `dev`, no stashing, no context switching.
+**BLUF:** `cagy worktree` automates git worktrees for context-isolated feature development — each feature gets its own working directory off `dev`, no stashing, no context switching.
 
 ---
 
 ## Why Worktrees?
 
-| Without worktrees | With `agy worktree` |
+| Without worktrees | With `cagy worktree` |
 |---|---|
 | `git stash` before switching tasks | Each feature lives in its own directory |
 | Risk of mixing unrelated changes | Branches are strictly isolated |
-| Manual branch + directory setup | One command: `agy worktree add <name>` |
+| Manual branch + directory setup | One command: `cagy worktree add <name>` |
 | Easy to lose where you were | Named directories make context obvious |
 
 ---
@@ -34,7 +34,7 @@ Each worktree maps to a persistent directory **adjacent** to the main repo, with
 ### Add a worktree
 
 ```bash
-agy worktree add balance-smd
+cagy worktree add balance-smd
 ```
 
 Output:
@@ -56,7 +56,7 @@ Output:
 ### List active worktrees
 
 ```bash
-agy worktree list
+cagy worktree list
 ```
 
 Output:
@@ -76,7 +76,7 @@ Output:
 When a feature is merged, clean up:
 
 ```bash
-agy worktree remove balance-smd
+cagy worktree remove balance-smd
 ```
 
 ```
@@ -91,7 +91,7 @@ This decommissions the directory **and** deletes the local tracking branch.
 
 ```bash
 # 1. Start new feature
-agy worktree add my-feature
+cagy worktree add my-feature
 
 # 2. Switch to isolated directory
 cd ../agy-cli-my-feature
@@ -103,7 +103,7 @@ git add . && git commit -m "feat: add my-feature"
 git push origin feature-my-feature
 
 # 5. After merge, clean up
-agy worktree remove my-feature
+cagy worktree remove my-feature
 ```
 
 ---

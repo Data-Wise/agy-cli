@@ -1,6 +1,6 @@
 # Tutorial 2 · Verify Causal Assumptions
 
-**Goal:** Use `agy eval` to check Positivity, Backdoor Exchangeability, SUTVA, and Covariate Balance — with optional propensity score adjustment.
+**Goal:** Use `cagy eval` to check Positivity, Backdoor Exchangeability, SUTVA, and Covariate Balance — with optional propensity score adjustment.
 
 ---
 
@@ -46,7 +46,7 @@ sutva_responses:
 ## Step 2 — Run Baseline `eval`
 
 ```bash
-agy eval study_design.yaml --non-interactive
+cagy eval study_design.yaml --non-interactive
 ```
 
 Expected console output:
@@ -72,7 +72,7 @@ Checking Covariate Balance (Standardized Mean Difference)...
 When baseline SMD flags imbalance, re-run with `--method matching`:
 
 ```bash
-agy eval study_design.yaml --method matching --non-interactive
+cagy eval study_design.yaml --method matching --non-interactive
 ```
 
 The engine fits a logistic propensity model $\hat{e}(X) = P(W=1 \mid X)$, performs 1:1 nearest-neighbour matching, then re-computes SMD on the matched sample.
@@ -94,7 +94,7 @@ Output shows a **pre/post SMD comparison table**:
 For regression-based workflows, use inverse probability weighting instead:
 
 ```bash
-agy eval study_design.yaml --method weighting --non-interactive
+cagy eval study_design.yaml --method weighting --non-interactive
 ```
 
 The IPW estimator:

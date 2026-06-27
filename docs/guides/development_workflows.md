@@ -14,12 +14,12 @@ dev (integration)      ← Staging + planning branch
 feature/* (worktrees)  ← All feature development
 ```
 
-Use `agy worktree` to manage feature branches:
+Use `cagy worktree` to manage feature branches:
 
 ```bash
-agy worktree add my-feature     # creates feature/my-feature off dev
-agy worktree list               # see active worktrees
-agy worktree remove my-feature  # clean up after merge
+cagy worktree add my-feature     # creates feature/my-feature off dev
+cagy worktree list               # see active worktrees
+cagy worktree remove my-feature  # clean up after merge
 ```
 
 See [Worktree Workflow](../reference/worktree.md) for the full guide.

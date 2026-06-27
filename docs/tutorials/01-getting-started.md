@@ -29,7 +29,7 @@
 ## Step 2 — Verify Installation
 
 ```bash
-agy status
+cagy status
 ```
 
 Expected output:
@@ -56,7 +56,7 @@ covariates: [age, sex, income]
 Then run:
 
 ```bash
-agy eval study_design.yaml
+cagy eval study_design.yaml
 ```
 
 `agy` will output assumption check results for **Positivity**, **Exchangeability**, and **SUTVA**.
@@ -66,7 +66,7 @@ agy eval study_design.yaml
 ## Step 4 — Explore the CLI
 
 ```bash
-agy --help
+cagy --help
 ```
 
 ---

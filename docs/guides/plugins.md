@@ -1,12 +1,12 @@
 # Tutorial 5 · Obsidian Vault Audit
 
-**Goal:** Use `agy obs` to query your local Obsidian SQLite graph — find orphan notes, hub nodes by PageRank, and broken internal links.
+**Goal:** Use `cagy obs` to query your local Obsidian SQLite graph — find orphan notes, hub nodes by PageRank, and broken internal links.
 
 ---
 
 ## Background
 
-When you enable the Obsidian [Local REST API](https://github.com/coddingtonbear/obsidian-local-rest-api) or the built-in **Obsidian Sync**, the app writes a SQLite database (`vault_db.sqlite`) that `agy obs` queries directly.
+When you enable the Obsidian [Local REST API](https://github.com/coddingtonbear/obsidian-local-rest-api) or the built-in **Obsidian Sync**, the app writes a SQLite database (`vault_db.sqlite`) that `cagy obs` queries directly.
 
 The graph is modelled as a directed network $G = (V, E)$ where:
 
@@ -22,7 +22,7 @@ The graph is modelled as a directed network $G = (V, E)$ where:
 Orphans have $k_{in} = 0$ **and** $k_{out} = 0$ — no connections at all.
 
 ```bash
-agy obs --db-path ~/Library/Application\ Support/obsidian/vault_db.sqlite orphans
+cagy obs --db-path ~/Library/Application\ Support/obsidian/vault_db.sqlite orphans
 ```
 
 Output:
@@ -43,7 +43,7 @@ Output:
 Hubs are high-centrality nodes. Sort by `pagerank` (default), `in_degree`, `out_degree`, or `total_degree`.
 
 ```bash
-agy obs --db-path ~/vault.sqlite hubs --sort pagerank --limit 10
+cagy obs --db-path ~/vault.sqlite hubs --sort pagerank --limit 10
 ```
 
 Output:
@@ -66,7 +66,7 @@ Output:
 Broken links are `[[wikilinks]]` pointing to notes that don't exist.
 
 ```bash
-agy obs --db-path ~/vault.sqlite health
+cagy obs --db-path ~/vault.sqlite health
 ```
 
 **Healthy vault:**
@@ -95,8 +95,8 @@ Add a vault health check to your weekly review script:
 ```bash
 #!/bin/bash
 # vault_health.sh
-agy obs --db-path "$OBSIDIAN_DB" health && \
-agy obs --db-path "$OBSIDIAN_DB" orphans
+cagy obs --db-path "$OBSIDIAN_DB" health && \
+cagy obs --db-path "$OBSIDIAN_DB" orphans
 ```
 
 ```bash

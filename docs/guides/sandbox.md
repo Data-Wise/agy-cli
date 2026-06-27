@@ -6,7 +6,7 @@
 
 ## What Gets Generated
 
-A single `agy sandbox generate` call creates a complete self-contained test environment:
+A single `cagy sandbox generate` call creates a complete self-contained test environment:
 
 ```text
 ./my-sandbox/
@@ -23,7 +23,7 @@ A single `agy sandbox generate` call creates a complete self-contained test envi
 ## Step 1 — Generate a Clean Vault
 
 ```bash
-agy sandbox generate ./test-vault
+cagy sandbox generate ./test-vault
 ```
 
 Output:
@@ -50,13 +50,13 @@ Output:
 Inject Positivity, Exchangeability, and SUTVA violations for negative testing:
 
 ```bash
-agy sandbox generate ./test-vault-violations --violations
+cagy sandbox generate ./test-vault-violations --violations
 ```
 
 Then run eval on it to confirm the engine catches them:
 
 ```bash
-agy eval ./test-vault-violations/study_design.yaml --non-interactive
+cagy eval ./test-vault-violations/study_design.yaml --non-interactive
 ```
 
 Expected: all three assumption checks **fail** with violation details.
@@ -89,14 +89,14 @@ def test_positivity_violation_detected(violation_vault):
 
 ---
 
-## Step 4 — Combine with `agy obs`
+## Step 4 — Combine with `cagy obs`
 
 The generated `vault_db.sqlite` is a valid Obsidian SQLite database — immediately auditable:
 
 ```bash
-agy obs --db-path ./test-vault/vault_db.sqlite health
-agy obs --db-path ./test-vault/vault_db.sqlite orphans
-agy obs --db-path ./test-vault/vault_db.sqlite hubs --sort pagerank
+cagy obs --db-path ./test-vault/vault_db.sqlite health
+cagy obs --db-path ./test-vault/vault_db.sqlite orphans
+cagy obs --db-path ./test-vault/vault_db.sqlite hubs --sort pagerank
 ```
 
 ---

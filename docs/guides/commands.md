@@ -17,7 +17,7 @@ agy [OPTIONS] COMMAND [ARGS]...
 ## 1. `status`
 Show the baseline status of the `agy-cli` engine.
 ```bash
-agy status
+cagy status
 ```
 
 ---
@@ -25,7 +25,7 @@ agy status
 ## 2. `eval`
 Concurrently evaluate observational study causal assumptions (Positivity, Exchangeability, SUTVA, and Covariate Balance).
 ```bash
-agy eval [STUDY_DESIGN_FILE] [OPTIONS]
+cagy eval [STUDY_DESIGN_FILE] [OPTIONS]
 ```
 
 ### Options
@@ -40,12 +40,12 @@ agy eval [STUDY_DESIGN_FILE] [OPTIONS]
 ### Examples
 Validate assumptions using inline settings:
 ```bash
-agy eval -t W -o Y -c X -d ./data.csv -g "X -> W, X -> Y, W -> Y" --non-interactive
+cagy eval -t W -o Y -c X -d ./data.csv -g "X -> W, X -> Y, W -> Y" --non-interactive
 ```
 
 Evaluate covariate balance after 1:1 propensity score matching:
 ```bash
-agy eval -t W -o Y -c X -d ./data.csv -g "X -> W, X -> Y, W -> Y" --non-interactive --method matching
+cagy eval -t W -o Y -c X -d ./data.csv -g "X -> W, X -> Y, W -> Y" --non-interactive --method matching
 ```
 
 ---
@@ -53,7 +53,7 @@ agy eval -t W -o Y -c X -d ./data.csv -g "X -> W, X -> Y, W -> Y" --non-interact
 ## 3. `dag`
 Compile textual DAG descriptions to R code.
 ```bash
-agy dag <DAG_STRING> [OPTIONS]
+cagy dag <DAG_STRING> [OPTIONS]
 ```
 
 ### Options
@@ -64,7 +64,7 @@ agy dag <DAG_STRING> [OPTIONS]
 ### Examples
 Generate and compile to an R file:
 ```bash
-agy dag "W -> Y, X -> W, X -> Y" -t W -y Y -o my_dag.R
+cagy dag "W -> Y, X -> W, X -> Y" -t W -y Y -o my_dag.R
 ```
 
 ---
@@ -72,7 +72,7 @@ agy dag "W -> Y, X -> W, X -> Y" -t W -y Y -o my_dag.R
 ## 4. `obs` (Obsidian Bridge)
 Directly query SQLite databases indexing local Obsidian vaults.
 ```bash
-agy obs --db-path <DB_PATH> COMMAND [ARGS]...
+cagy obs --db-path <DB_PATH> COMMAND [ARGS]...
 ```
 
 ### Subcommands
@@ -86,7 +86,7 @@ agy obs --db-path <DB_PATH> COMMAND [ARGS]...
 ## 5. `atlas` (Atlas Bridge)
 Bridge CLI workspace sessions with the Atlas state synchronizer.
 ```bash
-agy atlas --sessions-path <SESSIONS_YAML> --registry-path <REGISTRY_YAML> COMMAND [ARGS]...
+cagy atlas --sessions-path <SESSIONS_YAML> --registry-path <REGISTRY_YAML> COMMAND [ARGS]...
 ```
 
 ### Subcommands
@@ -104,7 +104,7 @@ agy atlas --sessions-path <SESSIONS_YAML> --registry-path <REGISTRY_YAML> COMMAN
 ## 6. `sandbox` (Sandbox Vaults)
 Generate isolated sandbox vault environments containing mock data, notes, and configs.
 ```bash
-agy sandbox generate <VAULT_PATH> [OPTIONS]
+cagy sandbox generate <VAULT_PATH> [OPTIONS]
 ```
 
 ### Options
@@ -112,7 +112,7 @@ agy sandbox generate <VAULT_PATH> [OPTIONS]
 
 ### Examples
 ```bash
-agy sandbox generate ./my-sandbox-dir --violations
+cagy sandbox generate ./my-sandbox-dir --violations
 ```
 
 ---
@@ -120,7 +120,7 @@ agy sandbox generate ./my-sandbox-dir --violations
 ## 7. `worktree` (Git Worktree Isolation)
 Automate persistent git worktrees for clean context-isolated development.
 ```bash
-agy worktree COMMAND [ARGS]...
+cagy worktree COMMAND [ARGS]...
 ```
 
 ### Subcommands
@@ -133,7 +133,7 @@ agy worktree COMMAND [ARGS]...
 ## 8. `rforge` (R Package Bridge)
 Directly check, test, and document R packages using an in-process R bridge.
 ```bash
-agy rforge [OPTIONS] COMMAND [ARGS]...
+cagy rforge [OPTIONS] COMMAND [ARGS]...
 ```
 
 ### Options

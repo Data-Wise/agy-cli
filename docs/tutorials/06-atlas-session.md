@@ -1,6 +1,6 @@
 # Tutorial 5 · Atlas Session Sync
 
-**Goal:** Use `agy atlas` to start work sessions, track breadcrumbs, and review your activity trail — an ADHD-friendly context log for long research workflows.
+**Goal:** Use `cagy atlas` to start work sessions, track breadcrumbs, and review your activity trail — an ADHD-friendly context log for long research workflows.
 
 ---
 
@@ -26,7 +26,7 @@ Atlas uses two YAML files you point to at runtime:
 Generate both with a sandbox:
 
 ```bash
-agy sandbox generate ./atlas-test
+cagy sandbox generate ./atlas-test
 # → creates atlas/sessions.yaml + atlas/registry.yaml
 ```
 
@@ -45,7 +45,7 @@ Or create them manually — both start as empty YAML files (`{}`).
 ## Step 1 — Start a Session
 
 ```bash
-agy atlas --sessions-path ~/atlas/sessions.yaml \
+cagy atlas --sessions-path ~/atlas/sessions.yaml \
     start-session \
     --project "mediation-study" \
     --task "Fit propensity model" \
@@ -65,7 +65,7 @@ Output:
 Mid-work, check elapsed time and current task:
 
 ```bash
-agy atlas --sessions-path ~/atlas/sessions.yaml status
+cagy atlas --sessions-path ~/atlas/sessions.yaml status
 ```
 
 Output:
@@ -86,14 +86,14 @@ Output:
 Log a breadcrumb after each meaningful action:
 
 ```bash
-agy atlas --registry-path ~/atlas/registry.yaml \
+cagy atlas --registry-path ~/atlas/registry.yaml \
     log-crumb "Ran eval on RCT dataset — positivity passed" \
     --type command \
     --project mediation-study
 ```
 
 ```bash
-agy atlas --registry-path ~/atlas/registry.yaml \
+cagy atlas --registry-path ~/atlas/registry.yaml \
     log-crumb "Found SMD > 0.1 for income — switching to matching" \
     --type note \
     --project mediation-study
@@ -106,7 +106,7 @@ Breadcrumb `--type` options: `command`, `note`, `file`, `decision`.
 ## Step 4 — Review the Trail
 
 ```bash
-agy atlas --registry-path ~/atlas/registry.yaml trail --limit 10
+cagy atlas --registry-path ~/atlas/registry.yaml trail --limit 10
 ```
 
 Output:

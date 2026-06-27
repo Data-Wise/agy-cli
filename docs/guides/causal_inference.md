@@ -1,6 +1,6 @@
 # Causal Inference Assumptions Verification
 
-To draw causal inferences from observational data, three primary assumptions must hold: **Positivity**, **Exchangeability**, and **SUTVA**. The `agy eval` command automates checking these assumptions.
+To draw causal inferences from observational data, three primary assumptions must hold: **Positivity**, **Exchangeability**, and **SUTVA**. The `cagy eval` command automates checking these assumptions.
 
 ---
 
@@ -35,17 +35,17 @@ The treatment assignment of any unit $i$ does not affect the potential outcome o
 $$Y_i(W) = Y_i(W_i)$$
 
 ### Verification Protocol
-Because SUTVA cannot be verified purely from data matrices, `agy eval` uses structured survey questionnaire profiles (`sutva_responses` inside the design file) or prompts the user interactively in the terminal to evaluate:
+Because SUTVA cannot be verified purely from data matrices, `cagy eval` uses structured survey questionnaire profiles (`sutva_responses` inside the design file) or prompts the user interactively in the terminal to evaluate:
 *   **Interference/Spillover:** Social, geographical, or resource contacts between units.
 *   **Treatment Variation:** Multiple unmeasured dosages or quality variations.
 
 ---
 
-## 💻 R Compiler Integration (`agy dag`)
+## 💻 R Compiler Integration (`cagy dag`)
 
 You can compile textual DAG descriptions (e.g. `X -> W, X -> Y, W -> Y`) to clean R scripts using:
 ```bash
-agy dag "X -> W, X -> Y, W -> Y" -t W -y Y -o my_dag.R
+cagy dag "X -> W, X -> Y, W -> Y" -t W -y Y -o my_dag.R
 ```
 This compiles to the following R structure:
 ```R

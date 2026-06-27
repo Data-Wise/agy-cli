@@ -1,6 +1,6 @@
 # Tutorial 7 · R Package Harness
 
-**Goal:** Use `agy rforge` to run `devtools::check`, `devtools::test`, and `devtools::document` directly from the CLI — without opening RStudio.
+**Goal:** Use `cagy rforge` to run `devtools::check`, `devtools::test`, and `devtools::document` directly from the CLI — without opening RStudio.
 
 ---
 
@@ -16,7 +16,7 @@
 Generate/update `.Rd` help files and `NAMESPACE` from `#'` comments:
 
 ```bash
-agy rforge --pkg-dir ./my_r_package document
+cagy rforge --pkg-dir ./my_r_package document
 ```
 
 **R equivalent:** `devtools::document()`
@@ -35,7 +35,7 @@ Compiling Roxygen2 documentation...
 Execute the test suite in `tests/testthat/`:
 
 ```bash
-agy rforge --pkg-dir ./my_r_package test
+cagy rforge --pkg-dir ./my_r_package test
 ```
 
 **R equivalent:** `devtools::test()`
@@ -58,7 +58,7 @@ Running package unit tests...
 Full CRAN-readiness check (skips re-documenting for speed):
 
 ```bash
-agy rforge --pkg-dir ./my_r_package check
+cagy rforge --pkg-dir ./my_r_package check
 ```
 
 **R equivalent:** `devtools::check(document = FALSE)`
@@ -81,9 +81,9 @@ Running package check...
 Chain all three in sequence for a complete validation run:
 
 ```bash
-agy rforge --pkg-dir ./my_r_package document && \
-agy rforge --pkg-dir ./my_r_package test && \
-agy rforge --pkg-dir ./my_r_package check
+cagy rforge --pkg-dir ./my_r_package document && \
+cagy rforge --pkg-dir ./my_r_package test && \
+cagy rforge --pkg-dir ./my_r_package check
 ```
 
 ---

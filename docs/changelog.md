@@ -31,27 +31,27 @@ All notable changes to `agy-cli`. Format follows [Keep a Changelog](https://keep
 ## [0.1.0] — 2024-06-01
 
 ### Added
-- `agy eval` — concurrent causal assumption validator (Positivity, Exchangeability, SUTVA, Covariate Balance)
+- `cagy eval` — concurrent causal assumption validator (Positivity, Exchangeability, SUTVA, Covariate Balance)
   - `--method matching` — 1:1 propensity score matching with pre/post SMD table
   - `--method weighting` — IPW reweighting
   - Auto-saves Markdown audit report after every run
-- `agy dag` — compile edge-notation DAG strings to `ggdag`/`dagitty` R code
-- `agy obs` — Obsidian SQLite graph bridge
+- `cagy dag` — compile edge-notation DAG strings to `ggdag`/`dagitty` R code
+- `cagy obs` — Obsidian SQLite graph bridge
   - `orphans` — notes with $k_{in} = 0$, $k_{out} = 0$
   - `hubs` — high-centrality notes by PageRank / degree
   - `health` — broken internal wikilinks
-- `agy atlas` — Atlas session synchronizer
+- `cagy atlas` — Atlas session synchronizer
   - `start-session` — named work context (project + task + description)
   - `status` — elapsed duration of active session
   - `trail` — ordered breadcrumb history
   - `log-crumb` — append timestamped activity entry
-- `agy rforge` — R package devtools bridge
+- `cagy rforge` — R package devtools bridge
   - `check` — `devtools::check(document = FALSE)`
   - `test` — `devtools::test()`
   - `document` — `devtools::document()`
-- `agy sandbox generate` — isolated test vault with mock SQLite, CSV, and YAML
+- `cagy sandbox generate` — isolated test vault with mock SQLite, CSV, and YAML
   - `--violations` — inject Positivity, Exchangeability, and SUTVA violations
-- `agy worktree` — git worktree lifecycle manager
+- `cagy worktree` — git worktree lifecycle manager
   - `add` / `list` / `remove`
 - Rotating error log at `~/.config/obs/obs.log` (5 MB, 3 backups)
 - `AGY_LOG_FILE` environment variable override

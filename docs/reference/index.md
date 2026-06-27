@@ -50,5 +50,5 @@ Technical reference documentation for `agy-cli`.
 
 ```bash
 export AGY_LOG_FILE=./logs/agy.log
-agy eval study_design.yaml
+cagy eval study_design.yaml
 ```

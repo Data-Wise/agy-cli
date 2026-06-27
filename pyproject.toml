@@ -35,7 +35,7 @@ docs = [
 ]
 
 [project.scripts]
-agy = "agy.cli:main"
+cagy = "agy.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

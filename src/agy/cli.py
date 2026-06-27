@@ -68,7 +68,7 @@ console = Console()
 @click.group()
 @click.version_option(version=__version__)
 def main():
-    """agy - Antigravity CLI workflow engine."""
+    """cagy - Causal Antigravity CLI workflow engine."""
     pass
 
 
@@ -606,7 +606,7 @@ def worktree_add(name):
             f"[bold]Name:[/bold] {res['name']}\n"
             f"[bold]Branch:[/bold] {res['branch']}\n"
             f"[bold]Path:[/bold] {res['path']}\n\n"
-            f"[dim]Run 'cd {res['path']} && agy' to begin feature development.[/dim]"
+            f"[dim]Run 'cd {res['path']} && cagy' to begin feature development.[/dim]"
         )
         console.print(Panel(panel_content, title="Worktree Manager", border_style="green"))
     except Exception as e:

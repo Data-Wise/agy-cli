@@ -14,7 +14,7 @@
 
     ---
 
-    Positivity, Backdoor Exchangeability, and SUTVA — math + `agy eval` protocol.
+    Positivity, Backdoor Exchangeability, and SUTVA — math + `cagy eval` protocol.
 
     [:octicons-arrow-right-24: Read Guide](causal_inference.md)
 

@@ -1,11 +1,11 @@
-.TH AGY 1 "June 2026" "agy-cli v0.3.0" "User Commands"
+.TH CAGY 1 "June 2026" "agy-cli v0.3.0" "User Commands"
 .SH NAME
-agy \- Antigravity CLI workflow engine
+cagy \- Antigravity CLI workflow engine
 .SH SYNOPSIS
-.B agy
+.B cagy
 [\fIOPTIONS\fR] \fICOMMAND\fR [\fIARGS\fR]...
 .SH DESCRIPTION
-.B agy
+.B cagy
 is the core command-line workflow engine for Antigravity (Gemini CLI), optimized for stats researchers working on causal inference and managing Obsidian/Atlas subprojects. It provides concurrent assumption validation (Positivity, Exchangeability, SUTVA, and Covariate Balance), git worktree management with virtualenv dependency caching, and bidirectional Atlas session tracking.
 .SH OPTIONS
 .TP
@@ -119,28 +119,28 @@ Default parent directory for isolated git worktrees.
 Run concurrent validation on study assumptions:
 .RS
 .nf
-agy eval -t W -o Y -c X -d ./data.csv -g "X -> W, X -> Y, W -> Y" --non-interactive
+cagy eval -t W -o Y -c X -d ./data.csv -g "X -> W, X -> Y, W -> Y" --non-interactive
 .fi
 .RE
 .PP
 Compile DAG to R script:
 .RS
 .nf
-agy dag "W -> Y, X -> W, X -> Y" -t W -y Y -o my_dag.R
+cagy dag "W -> Y, X -> W, X -> Y" -t W -y Y -o my_dag.R
 .fi
 .RE
 .PP
 Start active session tracking in Atlas:
 .RS
 .nf
-agy atlas start-session --project agy-cli --task "man alignment" --desc "Rewriting agy.1 man page"
+cagy atlas start-session --project agy-cli --task "man alignment" --desc "Rewriting agy.1 man page"
 .fi
 .RE
 .PP
 Add a new feature worktree:
 .RS
 .nf
-agy worktree add feature-docs
+cagy worktree add feature-docs
 .fi
 .RE
 .SH SEE ALSO

@@ -75,7 +75,7 @@ When raw covariate balance is violated, we can adjust using one of the following
 ### 1. Unadjusted (Baseline) Evaluation
 To evaluate raw covariate balance:
 ```bash
-agy eval -t W -o Y -c X -d ./data.csv -g "X -> W, X -> Y, W -> Y" --non-interactive
+cagy eval -t W -o Y -c X -d ./data.csv -g "X -> W, X -> Y, W -> Y" --non-interactive
 ```
 The CLI prints the unadjusted $SMD$ table:
 ```text
@@ -92,7 +92,7 @@ Checking Covariate Balance (Standardized Mean Difference)...
 ### 2. Propensity Score Matching Evaluation
 To check balance on matched subgroups:
 ```bash
-agy eval -t W -o Y -c X -d ./data.csv -g "X -> W, X -> Y, W -> Y" --non-interactive --method matching
+cagy eval -t W -o Y -c X -d ./data.csv -g "X -> W, X -> Y, W -> Y" --non-interactive --method matching
 ```
 The CLI output compares before and after adjustment:
 ```text
@@ -109,7 +109,7 @@ Checking Covariate Balance (Standardized Mean Difference)...
 ### 3. Inverse Probability Weighting Evaluation
 To check balance on the weighted sample:
 ```bash
-agy eval -t W -o Y -c X -d ./data.csv -g "X -> W, X -> Y, W -> Y" --non-interactive --method weighting
+cagy eval -t W -o Y -c X -d ./data.csv -g "X -> W, X -> Y, W -> Y" --non-interactive --method weighting
 ```
 The CLI output displays the weighted comparison:
 ```text
