@@ -4,9 +4,15 @@ import yaml
 import os
 import sys
 import networkx as nx
+from importlib.metadata import version, PackageNotFoundError
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
+
+try:
+    __version__ = version("agy-cli")
+except PackageNotFoundError:
+    __version__ = "dev"
 
 from agy.core.dag_compiler import (
     parse_dag_string,
@@ -60,7 +66,7 @@ console = Console()
 
 
 @click.group()
-@click.version_option(version="0.1.0")
+@click.version_option(version=__version__)
 def main():
     """agy - Antigravity CLI workflow engine."""
     pass
