@@ -120,7 +120,7 @@ class ObsidianBridge:
                 cursor = conn.execute("SELECT id, title, path FROM notes")
                 notes = [dict(row) for row in cursor.fetchall()]
                 note_map = {n["id"]: n for n in notes}
-                
+
                 # Fetch all internal/valid links
                 cursor = conn.execute(
                     "SELECT source_note_id, target_note_id FROM links WHERE link_type != 'broken' AND target_note_id IS NOT NULL"
@@ -131,8 +131,8 @@ class ObsidianBridge:
                 adj = {}
                 for n in notes:
                     adj[n["id"]] = set()
-                for l in links:
-                    src, tgt = l["source_note_id"], l["target_note_id"]
+                for link in links:
+                    src, tgt = link["source_note_id"], link["target_note_id"]
                     if src in adj and tgt in adj:
                         adj[src].add(tgt)
                         adj[tgt].add(src)
@@ -145,13 +145,18 @@ class ObsidianBridge:
                     focus_lower = focus.lower()
                     # First try exact match
                     for nid, n in note_map.items():
-                        if (n.get("title") or "").lower() == focus_lower or (n.get("path") or "").lower() == focus_lower:
+                        if (n.get("title") or "").lower() == focus_lower or (
+                            n.get("path") or ""
+                        ).lower() == focus_lower:
                             focus_id = nid
                             break
                     # Fallback to substring
                     if not focus_id:
                         for nid, n in note_map.items():
-                            if focus_lower in (n.get("title") or "").lower() or focus_lower in (n.get("path") or "").lower():
+                            if (
+                                focus_lower in (n.get("title") or "").lower()
+                                or focus_lower in (n.get("path") or "").lower()
+                            ):
                                 focus_id = nid
                                 break
 
@@ -169,13 +174,14 @@ class ObsidianBridge:
                                 if neighbor not in visited:
                                     visited.add(neighbor)
                                     queue.append((neighbor, curr_depth + 1))
-                    
+
                     focus_node = note_map[focus_id]
                 else:
                     # No focus note: select top `limit` hubs sorted by PageRank
                     try:
                         cursor = conn.execute(
-                            "SELECT note_id FROM graph_metrics ORDER BY pagerank DESC LIMIT ?", (limit,)
+                            "SELECT note_id FROM graph_metrics ORDER BY pagerank DESC LIMIT ?",
+                            (limit,),
                         )
                         selected_note_ids = {row["note_id"] for row in cursor.fetchall()}
                     except sqlite3.OperationalError:
@@ -184,35 +190,41 @@ class ObsidianBridge:
                         degrees = {}
                         for n in notes:
                             degrees[n["id"]] = 0
-                        for l in links:
-                            src, tgt = l["source_note_id"], l["target_note_id"]
-                            if src in degrees: degrees[src] += 1
-                            if tgt in degrees: degrees[tgt] += 1
+                        for link in links:
+                            src, tgt = link["source_note_id"], link["target_note_id"]
+                            if src in degrees:
+                                degrees[src] += 1
+                            if tgt in degrees:
+                                degrees[tgt] += 1
                         sorted_ids = sorted(degrees.keys(), key=lambda k: degrees[k], reverse=True)
                         selected_note_ids = set(sorted_ids[:limit])
-                    
+
                     focus_node = None
 
                 # Construct nodes list and edges list
                 result_nodes = [note_map[nid] for nid in selected_note_ids if nid in note_map]
                 result_edges = []
-                for l in links:
-                    src, tgt = l["source_note_id"], l["target_note_id"]
+                for link in links:
+                    src, tgt = link["source_note_id"], link["target_note_id"]
                     if src in selected_note_ids and tgt in selected_note_ids:
-                        result_edges.append({
-                            "source_title": note_map[src]["title"],
-                            "target_title": note_map[tgt]["title"]
-                        })
+                        result_edges.append(
+                            {
+                                "source_title": note_map[src]["title"],
+                                "target_title": note_map[tgt]["title"],
+                            }
+                        )
 
-                return {
-                    "nodes": result_nodes,
-                    "edges": result_edges,
-                    "focus_node": focus_node
-                }
+                return {"nodes": result_nodes, "edges": result_edges, "focus_node": focus_node}
         except FileNotFoundError:
             return {"nodes": [], "edges": [], "focus_node": None}
 
-    def get_literature_gaps(self, method_tags: List[str], setting_tags: List[str], method_path: str = None, setting_path: str = None) -> Dict[str, Any]:
+    def get_literature_gaps(
+        self,
+        method_tags: List[str],
+        setting_tags: List[str],
+        method_path: str = None,
+        setting_path: str = None,
+    ) -> Dict[str, Any]:
         """
         Classifies notes as either Methods or Settings/Applications and
         identifies those that are isolated (have no links between methods and settings).
@@ -232,7 +244,6 @@ class ObsidianBridge:
                 except sqlite3.OperationalError:
                     cursor = conn.execute("SELECT id, title, path, tags FROM notes")
                     notes = [dict(row) for row in cursor.fetchall()]
-                note_map = {n["id"]: n for n in notes}
 
                 cursor = conn.execute(
                     "SELECT source_note_id, target_note_id FROM links WHERE link_type != 'broken' AND target_note_id IS NOT NULL"
@@ -243,8 +254,8 @@ class ObsidianBridge:
                 adj = {}
                 for n in notes:
                     adj[n["id"]] = set()
-                for l in links:
-                    src, tgt = l["source_note_id"], l["target_note_id"]
+                for link in links:
+                    src, tgt = link["source_note_id"], link["target_note_id"]
                     if src in adj and tgt in adj:
                         adj[src].add(tgt)
                         adj[tgt].add(src)
@@ -320,12 +331,12 @@ class ObsidianBridge:
                     "methods_count": len(methods),
                     "settings_count": len(settings),
                     "isolated_methods": isolated_methods,
-                    "isolated_settings": isolated_settings
+                    "isolated_settings": isolated_settings,
                 }
         except FileNotFoundError:
             return {
                 "methods_count": 0,
                 "settings_count": 0,
                 "isolated_methods": [],
-                "isolated_settings": []
+                "isolated_settings": [],
             }

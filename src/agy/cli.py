@@ -444,12 +444,11 @@ def obs_health(ctx):
 @obs_group.command(name="graph")
 @click.option("--focus", "-f", type=str, help="Focus note title or path to traverse from.")
 @click.option("--depth", "-d", type=int, default=2, help="Traversal depth from focus note.")
-@click.option("--limit", "-l", type=int, default=30, help="Maximum hub notes to include when not focusing.")
 @click.option(
-    "--format",
-    type=click.Choice(["mermaid", "ascii"]),
-    default="mermaid",
-    help="Output format."
+    "--limit", "-l", type=int, default=30, help="Maximum hub notes to include when not focusing."
+)
+@click.option(
+    "--format", type=click.Choice(["mermaid", "ascii"]), default="mermaid", help="Output format."
 )
 @click.option("--out-file", "-o", type=click.Path(), help="Path to write the graph visualization.")
 @click.pass_context
@@ -478,7 +477,7 @@ def obs_graph(ctx, focus, depth, limit, format, out_file):
             if edge_key not in seen_edges:
                 seen_edges.add(edge_key)
                 lines.append(f'    "{s}" --> "{t}"')
-        
+
         # Ensure all selected nodes are listed to show orphans if any
         for n in nodes:
             title = n["title"] or "Untitled"
@@ -494,7 +493,7 @@ def obs_graph(ctx, focus, depth, limit, format, out_file):
     else:
         old_stdout = sys.stdout
         sys.stdout = mystdout = io.StringIO()
-        
+
         # Build adjacency mapping
         adj = {}
         for n in nodes:
@@ -505,13 +504,14 @@ def obs_graph(ctx, focus, depth, limit, format, out_file):
                 adj[s].append(t)
 
         visited = set()
+
         def dfs(curr, prefix=""):
             if curr in visited:
                 return
             visited.add(curr)
             children = adj.get(curr, [])
             for i, child in enumerate(children):
-                is_last = (i == len(children) - 1)
+                is_last = i == len(children) - 1
                 branch = "└── " if is_last else "├── "
                 print(f"{prefix}{branch}{child}")
                 next_prefix = prefix + ("    " if is_last else "│   ")
@@ -527,7 +527,7 @@ def obs_graph(ctx, focus, depth, limit, format, out_file):
                     if adj.get(title) or not any(title in children for children in adj.values()):
                         print(title)
                         dfs(title)
-        
+
         sys.stdout = old_stdout
         output_str = mystdout.getvalue()
 
@@ -540,7 +540,9 @@ def obs_graph(ctx, focus, depth, limit, format, out_file):
             console.print(f"[bold red]Failed to write out-file:[/bold red] {e}")
     else:
         if format == "mermaid":
-            console.print(Panel(output_str, title="Mermaid Graph Visualization", border_style="cyan"))
+            console.print(
+                Panel(output_str, title="Mermaid Graph Visualization", border_style="cyan")
+            )
         else:
             console.print(Panel(output_str, title="ASCII Graph Tree", border_style="cyan"))
 
@@ -550,13 +552,13 @@ def obs_graph(ctx, focus, depth, limit, format, out_file):
     "--method-tags",
     "-m",
     default="causal-inference,mediation,regression,assumptions,MLE",
-    help="Comma-separated list of tags to identify Method notes."
+    help="Comma-separated list of tags to identify Method notes.",
 )
 @click.option(
     "--setting-tags",
     "-s",
     default="project,data,application",
-    help="Comma-separated list of tags to identify Setting/Project notes."
+    help="Comma-separated list of tags to identify Setting/Project notes.",
 )
 @click.option("--method-path", type=str, help="Relative path substring to filter Method notes.")
 @click.option("--setting-path", type=str, help="Relative path substring to filter Setting notes.")
@@ -568,10 +570,7 @@ def obs_gaps(ctx, method_tags, setting_tags, method_path, setting_path):
     s_tags = [t.strip() for t in setting_tags.split(",") if t.strip()]
 
     res = bridge.get_literature_gaps(
-        method_tags=m_tags,
-        setting_tags=s_tags,
-        method_path=method_path,
-        setting_path=setting_path
+        method_tags=m_tags, setting_tags=s_tags, method_path=method_path, setting_path=setting_path
     )
 
     console.print(
@@ -581,7 +580,11 @@ def obs_gaps(ctx, method_tags, setting_tags, method_path, setting_path):
     )
 
     # 1. Table for isolated methods
-    table_m = Table(title="Isolated Methods (No Application/Project Links)", show_header=True, header_style="bold red")
+    table_m = Table(
+        title="Isolated Methods (No Application/Project Links)",
+        show_header=True,
+        header_style="bold red",
+    )
     table_m.add_column("Title", style="cyan")
     table_m.add_column("Path", style="magenta")
     table_m.add_column("Tags", style="green")
@@ -590,7 +593,11 @@ def obs_gaps(ctx, method_tags, setting_tags, method_path, setting_path):
         table_m.add_row(m.get("title") or "Untitled", m.get("path") or "", m.get("tags") or "")
 
     # 2. Table for isolated settings
-    table_s = Table(title="Isolated Settings/Projects (No Method Links)", show_header=True, header_style="bold red")
+    table_s = Table(
+        title="Isolated Settings/Projects (No Method Links)",
+        show_header=True,
+        header_style="bold red",
+    )
     table_s.add_column("Title", style="magenta")
     table_s.add_column("Path", style="cyan")
     table_s.add_column("Tags", style="green")
@@ -601,14 +608,18 @@ def obs_gaps(ctx, method_tags, setting_tags, method_path, setting_path):
     if res["isolated_methods"]:
         console.print(table_m)
     else:
-        console.print("[green]✔ No isolated Method notes found. All methods are linked to applications.[/green]")
+        console.print(
+            "[green]✔ No isolated Method notes found. All methods are linked to applications.[/green]"
+        )
 
     console.print()
 
     if res["isolated_settings"]:
         console.print(table_s)
     else:
-        console.print("[green]✔ No isolated Setting/Project notes found. All projects are linked to methods.[/green]")
+        console.print(
+            "[green]✔ No isolated Setting/Project notes found. All projects are linked to methods.[/green]"
+        )
 
 
 @main.group(name="atlas")
