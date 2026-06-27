@@ -6,6 +6,10 @@ All notable changes to `agy-cli`. Format follows [Keep a Changelog](https://keep
 
 ## [Unreleased]
 
+---
+
+## [0.3.0] — 2026-06-27
+
 ### Added
 - Obsidian graph visualization command (`cagy obs graph`) to output subgraphs in Mermaid or ASCII tree structures.
 - Literature gap finder command (`cagy obs gaps`) to discover isolated methodological concepts and unconnected project/setting notes.

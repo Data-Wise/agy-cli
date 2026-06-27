@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "agy-cli"
-version = "0.2.1"
+version = "0.3.0"
 description = "Antigravity (agy) CLI engine for R stats, causal inference, and workspace management"
 readme = "README.md"
 license = {text = "MIT"}
