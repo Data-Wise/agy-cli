@@ -6,6 +6,10 @@ All notable changes to `agy-cli`. Format follows [Keep a Changelog](https://keep
 
 ## [Unreleased]
 
+---
+
+## [0.2.0] — 2026-06-27
+
 ### Added
 - Atlas Session Sync tutorial (Tutorial 6)
 - Obsidian Vault Audit tutorial (Tutorial 5) with graph theory background
@@ -13,6 +17,9 @@ All notable changes to `agy-cli`. Format follows [Keep a Changelog](https://keep
 - Worktree reference page with lifecycle diagram
 - Custom 404 page
 - γ favicon and logo
+- Full MkDocs site redesign with Material theme, custom CSS, and 8 tutorials
+- CI/CD workflow for automated docs deployment to GitHub Pages
+- Homebrew tap integration with automated release pipeline
 
 ### Changed
 - Home page feature grid now showcases `obs` and `rforge` (replacing `balance`/`sandbox`)
